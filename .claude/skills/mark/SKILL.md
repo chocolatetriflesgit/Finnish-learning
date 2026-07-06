@@ -16,6 +16,8 @@ In order of preference:
 
 Sanity-check the `date`/`worksheet` fields against `tutor/progress.json`'s latest assigned entry; if they don't match, ask which worksheet he means.
 
+**Guest sheets**: if the answers file's `worksheet` title names someone other than Malcolm (guest worksheets carry the guest's name), mark it with the same care — feedback addressed to that person, warm and specific — but **do not update errors.json, vocab.json or progress.json**. Guest work never touches Malcolm's tracking.
+
 Also read `tutor/syllabus.json` (for the error-tag taxonomy), `tutor/errors.json`, `tutor/vocab.json`, `tutor/progress.json`.
 
 ## 2. Mark

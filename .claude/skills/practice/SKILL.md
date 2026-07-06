@@ -77,6 +77,16 @@ Fix anything uncertain or replace the item. An answer key that teaches a wrong f
 5. Add the new worksheet to `index.html`: insert a `<li>` link directly below the `__WORKSHEETS__` comment marker (newest first), matching the existing entries' format — name = "D.M.YYYY — Harjoitus", note = level + focus.
 6. If the repo has a git remote, offer to commit and push (`git add -A; git commit; git push`) so the GitHub Pages site picks up the new worksheet — pushing makes it available on his phone and shareable.
 
+## Guest worksheets (someone who isn't Malcolm)
+
+When the arguments name another person or say "guest" ("/practice for Hannah, lesson 0", "guest sheet for my partner"), switch to guest mode:
+
+- Ask, if not given, for their name and which lesson they've completed (0 for a total beginner — then the sheet uses lesson 0–1 material only and leans on English instructions).
+- Compose the same six-exercise worksheet, but: constrain to lessons 0..their level; personalise to **their** name and neutral themes (drop Malcolm's bio — no London, no insinööri, no gym, unless Malcolm says otherwise); speak-answer accepted answers use their name.
+- `meta.title`: "Harjoitus — <Name> — <date>"; file: `tutor/worksheets/YYYY-MM-DD-<name, lowercase>.html`; the index.html entry shows their name.
+- **Do not read or write progress.json / errors.json / vocab.json** — guest sheets are stateless. The answer-key verification pass is still mandatory.
+- If a guest becomes a regular, offer to set up their own tracked profile under `tutor/people/<name>/` (same file shapes as Malcolm's) — a later upgrade, not the default.
+
 ## 5. Sign off
 
 Tell Malcolm briefly (2–4 sentences): what today's worksheet covers, which weak spots it targets, the new words, and the loop reminder — *do it in the browser, hit "Export answers", then run /mark*. If the mic is blocked when opening the file directly, `serve.cmd` in the project root serves it over localhost where the mic always works.
