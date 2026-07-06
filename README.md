@@ -34,6 +34,10 @@ The 🎤 buttons use your browser's built-in speech recognition (Finnish). **Chr
 | `tutor/worksheets/` | Your generated worksheets, one per day |
 | `serve.cmd` / `serve.ps1` | Local server, only needed for mic-over-file:// problems |
 
+## On the web (GitHub Pages)
+
+The repo doubles as a website: `index.html` lists the course, workbook and all worksheets. With GitHub Pages enabled (Settings → Pages → deploy from `main`, root), everything is reachable at `https://<username>.github.io/<repo>/` — shareable links, phone practice, and the 🎤 mic works there without any setup (proper HTTPS). After `/practice` generates a new worksheet, commit and push to put it on the site.
+
 ## Ideas for later (deliberately not in v1)
 
 Dedicated grammar-drill mode · full spaced-repetition scheduling for vocab · listening exercises via text-to-speech · publishing worksheets to GitHub Pages to practise from a phone. Ask Claude Code for any of these when you want them — the state files are already designed for it.

@@ -65,6 +65,8 @@ Fix anything uncertain or replace the item. An answer key that teaches a wrong f
 2. Write it to `tutor/worksheets/YYYY-MM-DD.html` (today's date; if it exists, use `YYYY-MM-DD-2.html`).
 3. Open it: `Start-Process "<absolute path to the file>"` (PowerShell).
 4. Append to `progress.json` history: `{"date": "...", "worksheet": "tutor/worksheets/....html", "status": "assigned", "focus": [...], "new_vocab": ["word — gloss", ...]}` and save.
+5. Add the new worksheet to `index.html`: insert a `<li>` link directly below the `__WORKSHEETS__` comment marker (newest first), matching the existing entries' format — name = "D.M.YYYY — Harjoitus", note = level + focus.
+6. If the repo has a git remote, offer to commit and push (`git add -A; git commit; git push`) so the GitHub Pages site picks up the new worksheet — pushing makes it available on his phone and shareable.
 
 ## 5. Sign off
 
