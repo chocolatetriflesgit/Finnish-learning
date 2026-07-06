@@ -84,6 +84,11 @@ button.mic:hover{background:#47307A}
 button.mic.listening{background:#B03030;animation:pulse 1.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
 button.mic:disabled{background:#9AA3B2;cursor:not-allowed}
+button.listen{font-family:var(--sans);font-weight:600;font-size:.85rem;color:var(--blue-deep);background:#fff;border:1px solid var(--rule);border-radius:8px;padding:.45rem .8rem;cursor:pointer}
+button.listen:hover{background:var(--panel)}
+button.listen.playing{background:var(--panel);color:var(--blue);border-color:var(--blue)}
+button.listen:disabled{color:#9AA3B2;cursor:not-allowed}
+.speak-tip{font-family:var(--sans);font-size:.74rem;color:var(--ink-soft);margin:.15rem 0 0}
 .transcript{font-family:var(--sans);font-size:.88rem;color:var(--ink-soft);min-height:1.2em;flex:1 1 12rem}
 .transcript .heard{color:var(--ink);font-family:var(--serif);font-size:.95rem}
 .speak-verdict{font-family:var(--sans);font-weight:700}
@@ -262,6 +267,29 @@ function norm(s){
 
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let activeRec = null;
+
+/* text-to-speech: play a Finnish model of how an item should sound */
+const SS = window.speechSynthesis || null;
+if(SS){ try{ SS.getVoices(); }catch(e){} }   // nudge async voice loading
+function pickFiVoice(){
+  if(!SS) return null;
+  const vs = SS.getVoices() || [];
+  return vs.find(v => /fi[-_]?fi/i.test(v.lang)) || vs.find(v => /^fi/i.test(v.lang)) || null;
+}
+function speakExample(text, btn){
+  if(!SS) return;
+  try{ SS.cancel(); }catch(e){}
+  const u = new SpeechSynthesisUtterance(text);
+  const v = pickFiVoice();
+  if(v) u.voice = v;
+  u.lang = "fi-FI"; u.rate = 0.88; u.pitch = 1;
+  if(btn){
+    u.onstart = function(){ btn.classList.add("playing"); btn.textContent = "🔊 …"; };
+    const done = function(){ btn.classList.remove("playing"); btn.textContent = "🔊 Kuuntele"; };
+    u.onend = done; u.onerror = done;
+  }
+  SS.speak(u);
+}
 
 const app = document.getElementById("app");
 const state = {};          // exId -> {right:[], total, scoreEl}
@@ -467,7 +495,8 @@ function renderSpeakRead(ex, card, head){
         wordDiff(tgt, item.target, alts[0] || "");
         return {ok: !!hit, best: alts[0] || ""};
       },
-      expected: item.target
+      expected: item.target,
+      example: item.target
     });
     exportItems.push({exercise: ex.id, title: ex.title, type: "speak-read", idx: idx+1,
       question: "Read aloud: " + item.target, expected: item.target, get: st.get});
@@ -494,7 +523,8 @@ function renderSpeakAnswer(ex, card, head){
         return {ok: !!hit, best: hit || alts[0] || ""};
       },
       expected: item.d || item.a[0],
-      typedAccept: item.a
+      typedAccept: item.a,
+      example: item.d || item.a[0]
     });
     exportItems.push({exercise: ex.id, title: ex.title, type: "speak-answer", idx: idx+1,
       question: item.q, expected: item.d || item.a[0], get: st.get});
@@ -508,12 +538,24 @@ function speechControls(wrap, ex, idx, opts){
   controls.className = "speak-controls";
   const mic = document.createElement("button");
   mic.type = "button"; mic.className = "mic"; mic.textContent = "🎤 Puhu";
-  const tr = document.createElement("span");
-  tr.className = "transcript"; tr.setAttribute("aria-live","polite");
+  controls.appendChild(mic);
+  if(SS && opts.example){
+    const listenBtn = document.createElement("button");
+    listenBtn.type = "button"; listenBtn.className = "listen"; listenBtn.textContent = "🔊 Kuuntele";
+    listenBtn.title = "Hear how it should sound";
+    listenBtn.addEventListener("click", function(){ speakExample(opts.example, listenBtn); });
+    controls.appendChild(listenBtn);
+  }
   const verdict = document.createElement("span");
   verdict.className = "speak-verdict";
-  controls.appendChild(mic); controls.appendChild(verdict); controls.appendChild(tr);
+  const tr = document.createElement("span");
+  tr.className = "transcript"; tr.setAttribute("aria-live","polite");
+  controls.appendChild(verdict); controls.appendChild(tr);
   wrap.appendChild(controls);
+  const tip = document.createElement("div");
+  tip.className = "speak-tip";
+  tip.textContent = SR ? "Tap 🎤 Puhu, say it, then tap ● Lopeta when you’ve finished — it waits for you." : "";
+  wrap.appendChild(tip);
 
   const errEl = document.createElement("div"); errEl.className = "speak-err";
   wrap.appendChild(errEl);
@@ -577,48 +619,68 @@ function speechControls(wrap, ex, idx, opts){
     typedWrap.classList.add("on");
     typedToggle.style.display = "none";
   } else {
+    let myTimer = null;
+    const MAX_LISTEN_MS = 25000;  // safety auto-stop; recognition keeps listening across pauses until then
+    function resetMic(){ mic.classList.remove("listening"); mic.textContent = "🎤 Puhu"; }
     mic.addEventListener("click", function(){
-      if(activeRec){ try{ activeRec.abort(); }catch(e){} }
+      // if THIS item is already listening, a second tap stops and scores it
+      if(activeRec && activeRec.__mine === mic){ try{ activeRec.stop(); }catch(e){} return; }
+      // otherwise stop any other item that's listening (without scoring it), then start here
+      if(activeRec){ activeRec._abort = true; try{ activeRec.abort(); }catch(e){} }
       errEl.textContent = "";
       const r = new SR();
+      r.__mine = mic;
       activeRec = r;
-      r.lang = "fi-FI"; r.interimResults = true; r.maxAlternatives = 5;
-      mic.classList.add("listening"); mic.textContent = "● Kuuntelen…";
+      r.lang = "fi-FI"; r.continuous = true; r.interimResults = true; r.maxAlternatives = 5;
+      mic.classList.add("listening"); mic.textContent = "● Lopeta";
       tr.textContent = "";
-      let finals = [];
+      const segments = [];   // one entry per finalised chunk: [bestAlt, alt2, ...]
       r.onresult = function(e){
-        let interim = "", alts = [];
+        const segs = []; let interim = "";
         for(let i = 0; i < e.results.length; i++){
           if(e.results[i].isFinal){
-            for(let j = 0; j < e.results[i].length; j++) alts.push(e.results[i][j].transcript.trim());
+            const a = [];
+            for(let j = 0; j < e.results[i].length; j++) a.push(e.results[i][j].transcript.trim());
+            segs.push(a);
           } else {
             interim += e.results[i][0].transcript;
           }
         }
-        if(interim) tr.innerHTML = '<span class="heard">' + esc(interim) + '…</span>';
-        if(alts.length) finals = alts;
+        segments.length = 0;
+        for(let k = 0; k < segs.length; k++) segments.push(segs[k]);
+        const committed = segs.map(function(s){ return s[0]; }).join(" ");
+        tr.innerHTML = '<span class="heard">' + esc((committed + " " + interim).trim()) + '…</span>';
       };
       r.onerror = function(e){
         const msgs = {
           "not-allowed": "Microphone blocked on this page — use “or type it” instead. (On your own computer: allow the mic in site settings, or run serve.cmd and open the http://localhost link.)",
           "service-not-allowed": "Speech service blocked on this page — use “or type it” instead. (On your own computer, serve.cmd + the http://localhost link usually fixes this.)",
           "language-not-supported": "This browser’s speech service doesn’t support Finnish — try Google Chrome.",
-          "no-speech": "Didn’t hear anything — try again closer to the mic.",
+          "no-speech": "Didn’t hear anything — tap 🎤 Puhu and try again, closer to the mic.",
           "network": "The speech service needs an internet connection.",
           "audio-capture": "No microphone found."
         };
-        errEl.textContent = msgs[e.error] || ("Speech error: " + e.error);
+        if(e.error !== "no-speech") errEl.textContent = msgs[e.error] || ("Speech error: " + e.error);
       };
       r.onend = function(){
-        mic.classList.remove("listening"); mic.textContent = "🎤 Puhu";
-        activeRec = null;
-        if(finals.length){
-          rec.transcript = finals[0]; rec.alts = finals; rec.overridden = false;
-          const res = opts.judge(finals);
+        clearTimeout(myTimer);
+        resetMic();
+        if(activeRec === r) activeRec = null;
+        if(r._abort) return;   // interrupted by another item — don't score
+        const full = segments.map(function(s){ return s[0]; }).join(" ").trim();
+        const candidates = [];
+        const push = function(c){ if(c && candidates.indexOf(c) < 0) candidates.push(c); };
+        push(full);
+        segments.forEach(function(s){ s.forEach(push); });
+        if(candidates.length){
+          rec.transcript = full || candidates[0]; rec.alts = candidates; rec.overridden = false;
+          const res = opts.judge(candidates);
           setResult(res.ok, res.best, false);
         }
       };
-      try { r.start(); } catch(e){ errEl.textContent = "Could not start the microphone: " + e.message; }
+      myTimer = setTimeout(function(){ try{ r.stop(); }catch(e){} }, MAX_LISTEN_MS);
+      try { r.start(); }
+      catch(e){ errEl.textContent = "Could not start the microphone: " + e.message; resetMic(); if(activeRec === r) activeRec = null; }
     });
   }
 
