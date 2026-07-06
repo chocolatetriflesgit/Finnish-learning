@@ -37,6 +37,7 @@ The 🎤 buttons use your browser's built-in speech recognition (Finnish). **Chr
 | `tutor/template.html` | Worksheet shell (don't edit casually — worksheets are stamped from it) |
 | `tutor/worksheets/` | Your generated worksheets, one per day |
 | `serve.cmd` / `serve.ps1` | Local server, only needed for mic-over-file:// problems |
+| `.claude/skills/` | The tutor's engine (`/practice`, `/mark`, `/puhutaan`) **plus two reusable playbooks** — `speech-web` (browser voice features, no API keys) and `language-authoring` (trustworthy exercises and answer keys, any language) — that any Claude Code user can borrow for their own language projects |
 
 ## On the web (GitHub Pages)
 
