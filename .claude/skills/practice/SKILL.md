@@ -40,7 +40,16 @@ The exact payload schema is documented in the comment block at the top of `tutor
 
 ```js
 const PAYLOAD = {
-  meta: {title: "Harjoitus — <date>", date: "YYYY-MM-DD", level: "Lessons 0–N", focus: ["partitive-use", "past-tense"]},
+  meta: {
+    title: "Harjoitus — <date>", date: "YYYY-MM-DD", level: "Lessons 0–N", focus: ["partitive-use", "past-tense"],
+    vocab: {                               // renders as the worksheet's opening Sanasto box
+      words: ["sana — gloss", ...],        // today's NEW words (also glossed inline where used)
+      phrases: ["fraasi — gloss", ...],    // optional
+      verbs: {note: "one-line pattern reminder", rows: [{v: "tehdä — do", f: "teen · hän tekee"}]}
+      // include a verbs row for EVERY gradating or irregular verb the worksheet uses
+      // (verify each form in the second pass, same as answer keys)
+    }
+  },
   exercises: [ {id: "1", title: "...", type: "...", instr: "...", ...} ]
 };
 ```

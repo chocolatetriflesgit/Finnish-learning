@@ -104,6 +104,23 @@ button.mic:disabled{background:#9AA3B2;cursor:not-allowed}
 .exportbar button:hover{filter:brightness(.92)}
 .exportbar button.secondary{background:#fff;color:var(--blue-deep);border:1px solid var(--rule)}
 .exportbar .status{font-size:.74rem;color:var(--ink-soft);background:var(--paper);padding:.2rem .45rem;border-radius:6px;max-width:14rem}
+.vocabbox{background:var(--panel);border:1px solid var(--rule);border-radius:var(--radius);padding:.7rem .95rem;margin:0 0 1.3rem;font-family:var(--sans)}
+.vocabbox .vhead{font-weight:600;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-deep);margin:0 0 .35rem}
+.vocabbox .vwords{margin:0 0 .1rem;font-size:.89rem;line-height:1.75;color:var(--ink);font-family:var(--serif)}
+.vocabbox .vwords b{color:var(--blue-deep);font-weight:600}
+.vocabbox .ven{color:var(--ink-soft)}
+.vocabbox .sep{color:#B9C2CF}
+details.vconj{margin-top:.6rem;border-top:1px dashed var(--rule);padding-top:.5rem}
+details.vconj summary{cursor:pointer;list-style:none;font-weight:600;font-size:.78rem;color:var(--blue)}
+details.vconj summary::-webkit-details-marker{display:none}
+details.vconj summary::before{content:"▸ "}
+details.vconj[open] summary::before{content:"▾ "}
+details.vconj .vnote{font-size:.8rem;color:var(--ink-soft);margin:.4rem 0 .1rem}
+details.vconj table{border-collapse:collapse;width:100%;font-size:.86rem;margin-top:.35rem;font-family:var(--serif)}
+details.vconj th{font-family:var(--sans);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;color:var(--ink-soft);padding:.25rem .5rem;border-bottom:1px solid var(--rule)}
+details.vconj td{padding:.32rem .5rem;border-bottom:1px solid var(--rule);vertical-align:top}
+details.vconj tr:last-child td{border-bottom:none}
+details.vconj td:first-child{white-space:nowrap;font-weight:600;color:var(--blue-deep)}
 @media print{.charbar,.exportbar,button.check,.showsol,button.mic{display:none!important}}
 </style>
 </head>
@@ -178,6 +195,8 @@ function init(){
   const chips = document.getElementById("hd-focus");
   (meta.focus || []).forEach(f => { const s = document.createElement("span"); s.textContent = f; chips.appendChild(s); });
 
+  renderMetaVocab(meta.vocab);
+
   if(!SR){
     document.getElementById("speech-notice").innerHTML =
       '<div class="notice">🎤 Speech recognition isn’t available in this browser — speaking items switch to typed answers. Chrome or Edge recommended.</div>';
@@ -185,6 +204,39 @@ function init(){
 
   (PAYLOAD.exercises || []).forEach(renderExercise);
   updateScores();
+}
+
+/* opening vocab box: meta.vocab = {words:[ "fi — en", ...], phrases:[...], verbs:{note, rows:[{v,f}]}} */
+function fmtVocabWord(s){
+  const i = s.indexOf(" — ");
+  if(i < 0) return "<b>" + esc(s) + "</b>";
+  return "<b>" + esc(s.slice(0, i)) + "</b> <span class=\"ven\">" + esc(s.slice(i + 3)) + "</span>";
+}
+function renderMetaVocab(v){
+  if(!v || (!(v.words||[]).length && !(v.phrases||[]).length && !(v.verbs && (v.verbs.rows||[]).length))) return;
+  const box = document.createElement("div");
+  box.className = "vocabbox";
+  let h = "";
+  if((v.words||[]).length){
+    h += '<div class="vhead">Sanasto · today’s words</div><p class="vwords">' +
+         v.words.map(fmtVocabWord).join('<span class="sep"> · </span>') + "</p>";
+  }
+  if((v.phrases||[]).length){
+    h += '<div class="vhead">Fraasit · phrases</div><p class="vwords">' +
+         v.phrases.map(fmtVocabWord).join('<span class="sep"> · </span>') + "</p>";
+  }
+  box.innerHTML = h;
+  if(v.verbs && (v.verbs.rows||[]).length){
+    const det = document.createElement("details");
+    det.className = "vconj";
+    det.innerHTML = "<summary>Taivutus · conjugation of the tricky ones</summary>" +
+      (v.verbs.note ? '<p class="vnote">' + esc(v.verbs.note) + "</p>" : "") +
+      "<table><thead><tr><th>Verb</th><th>Forms</th></tr></thead><tbody>" +
+      v.verbs.rows.map(function(r){ return "<tr><td>" + esc(r.v) + "</td><td>" + esc(r.f) + "</td></tr>"; }).join("") +
+      "</tbody></table>";
+    box.appendChild(det);
+  }
+  app.appendChild(box);
 }
 
 function renderExercise(ex){

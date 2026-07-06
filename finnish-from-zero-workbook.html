@@ -89,6 +89,24 @@ details.model[open]{background:var(--panel)}
 .charbar button{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--blue-deep);background:#fff;border:1px solid var(--rule);border-radius:9px;width:2.6rem;height:2.6rem;cursor:pointer;box-shadow:0 2px 8px rgba(13,47,92,.12)}
 .charbar button:hover{background:var(--panel)}
 .charbar .lbl{align-self:center;font-family:var(--sans);font-size:.68rem;color:var(--ink-soft);background:var(--paper);padding:.2rem .4rem;border-radius:6px}
+.vocabbox{background:var(--panel);border:1px solid var(--rule);border-radius:var(--radius);padding:.7rem .95rem;margin:.9rem 0 1.3rem;font-family:var(--sans)}
+.vocabbox .vhead{font-weight:600;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-deep);margin:0 0 .35rem}
+.vocabbox .vhead + .vwords + .vhead{margin-top:.55rem}
+.vocabbox .vwords{margin:0;font-size:.89rem;line-height:1.75;color:var(--ink);font-family:var(--serif)}
+.vocabbox .vwords b{color:var(--blue-deep);font-weight:600}
+.vocabbox .ven{color:var(--ink-soft)}
+.vocabbox .sep{color:#B9C2CF}
+details.vconj{margin-top:.6rem;border-top:1px dashed var(--rule);padding-top:.5rem}
+details.vconj summary{cursor:pointer;list-style:none;font-weight:600;font-size:.78rem;color:var(--blue)}
+details.vconj summary::-webkit-details-marker{display:none}
+details.vconj summary::before{content:"▸ "}
+details.vconj[open] summary::before{content:"▾ "}
+details.vconj .vnote{font-size:.8rem;color:var(--ink-soft);margin:.4rem 0 .1rem}
+details.vconj table{border-collapse:collapse;width:100%;font-size:.86rem;margin-top:.35rem;font-family:var(--serif)}
+details.vconj th{font-family:var(--sans);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;color:var(--ink-soft);padding:.25rem .5rem;border-bottom:1px solid var(--rule)}
+details.vconj td{padding:.32rem .5rem;border-bottom:1px solid var(--rule);vertical-align:top}
+details.vconj tr:last-child td{border-bottom:none}
+details.vconj td:first-child{white-space:nowrap;font-weight:600;color:var(--blue-deep)}
 @media print{nav.side,details.mobilenav,.charbar,button.check,.showsol{display:none!important}.wrap{display:block}main{max-width:none}}
 </style>
 </head>
@@ -117,6 +135,170 @@ details.model[open]{background:var(--panel)}
   <button type="button" data-ch="å">å</button>
 </div>
 <script>
+// Per-lesson vocabulary summaries. Word/phrase lists are generated from tutor/syllabus.json;
+// VERBS holds hand-checked conjugation tables for the verbs whose forms aren't guessable.
+const VOCAB = {
+ l0: {words: ["kala — fish", "talo — house", "kuka — who", "kukka — flower", "kyllä — yes", "äiti — mother", "tuli — fire", "tuuli — wind", "tulli — customs", "muta — mud", "mutta — but", "tapaan — I meet", "tapan — I kill", "tili — account", "tiili — brick", "mato — worm", "matto — rug", "sauna — sauna", "metsä — forest"], phrases: []},
+ l1: {words: ["hei / moi / terve — hi, hello", "hyvää huomenta — good morning", "hyvää päivää — good day", "hyvää iltaa — good evening", "hyvää yötä — good night", "näkemiin — goodbye (formal)", "hei hei / moi moi — bye", "nähdään! — see you!", "kiitos (paljon) — thank you (very much)", "ole hyvä — here you are / you're welcome", "anteeksi — sorry / excuse me", "tervetuloa — welcome", "kyllä / joo — yes", "ei — no", "ihan — quite, pretty", "no — well, so"], phrases: ["Mitä kuuluu? — How are you?", "Kiitos, hyvää. — Fine, thanks.", "Entä sinulle? — And you?", "hauska tutustua — nice to meet you"]},
+ l2: {words: ["nimi — name", "maa — country", "kieli — language", "englanti — English (language)", "suomi — Finnish (language)", "ruotsi — Swedish (language)", "englantilainen — English (person)", "suomalainen — Finnish (person)", "britti — Brit", "ammatti — profession", "opettaja — teacher", "opiskelija — student", "insinööri — engineer", "johtaja — manager, director", "virkamies — civil servant", "vähän — a little"], phrases: ["Mikä sinun nimesi on? — What is your name?", "Kuka sinä olet? — Who are you?", "Mistä olet kotoisin? — Where are you from?", "Olen kotoisin Englannista. — I'm from England.", "Puhun englantia ja vähän suomea. — I speak English and a little Finnish.", "Asun Lontoossa. — I live in London."]},
+ l3: {words: ["puhua — to speak", "sanoa — to say", "asua — to live (reside)", "kysyä — to ask", "istua — to sit", "maksaa — to pay, to cost", "ostaa — to buy", "katsoa — to watch, look", "rakastaa — to love", "odottaa — to wait", "lukea — to read", "kirjoittaa — to write", "antaa — to give", "ottaa — to take", "ymmärtää — to understand", "tietää — to know (a fact)", "muistaa — to remember", "unohtaa — to forget", "auttaa — to help", "laittaa — to put; to prepare (food)", "paljon — a lot", "leipä — bread", "televisio — television"], phrases: ["En ymmärrä. — I don't understand.", "Voitko puhua hitaammin? — Can you speak more slowly?", "Voitko toistaa? — Can you repeat?", "Mitä X tarkoittaa? — What does X mean?", "Anteeksi, en puhu hyvin suomea. — Sorry, I don't speak Finnish well.", "Puhutko englantia? — Do you speak English?"]},
+ l4: {words: ["kahvi — coffee", "tee — tea", "maito — milk", "vesi — water", "mehu — juice", "olut — beer", "pulla — sweet bun", "korvapuusti — cinnamon bun", "leipä — bread", "voileipä — sandwich", "euro — euro", "sentti — cent", "kuitti — receipt", "kortilla — by card", "käteisellä — in cash"], phrases: ["Saisinko…? — Could I have…?", "Mitä saisi olla? — What would you like?", "Tuleeko muuta? — Anything else?", "Ei muuta, kiitos. — Nothing else, thanks.", "Paljonko se maksaa? — How much does it cost?", "Kuinka paljon se maksaa? — How much does it cost? (= paljonko)", "Se tekee… — That comes to… (a total; tehdä of sums)", "Käykö kortti? — Do you take card?", "Hyvää päivän jatkoa! — Have a good rest of the day!"]},
+ l5: {words: ["kauppa — shop", "kukka — flower", "tyttö — girl", "jalka — foot, leg", "katu — street", "ilta — evening", "lampi — pond", "parta — beard", "hammas — tooth", "opas — guide", "matka — trip", "posti — post (office)", "pankki — bank", "pöytä — table", "kaupunki — city, town", "ranta — beach", "apu — help", "tukka — hair", "silta — bridge", "nukkua — to sleep"], phrases: []},
+ l6: {words: ["kahvila — café", "ravintola — restaurant", "kirjasto — library", "koulu — school", "kirkko — church", "museo — museum", "puisto — park", "asema — station", "pysäkki — (bus/tram) stop", "tori — market square", "apteekki — pharmacy", "sairaala — hospital", "hotelli — hotel", "keskusta — city centre", "bussi — bus", "juna — train", "metro — metro", "ratikka / raitiovaunu — tram", "auto — car", "pyörä — bike", "kävellen — on foot", "koti — home", "työ — work", "laukku — bag", "tuoli — chair", "kissa — cat", "mennä — to go (met early; formalised in L9)", "tulla — to come (met early; formalised in L9)"], phrases: ["Missä sinä asut? — Where do you live?", "Mihin menet? — Where are you going?", "Millä menet töihin? — How (by what) do you go to work?"]},
+ l7: {words: ["perhe — family", "äiti — mother", "isä — father", "vanhemmat — parents", "veli — brother", "sisko — sister", "poika — boy; son", "tytär — daughter", "tyttö — girl", "vaimo — wife", "mies — man; husband", "puoliso — spouse, partner", "isoäiti / mummo — grandmother", "isoisä / vaari — grandfather", "ystävä — friend", "kaveri — mate, buddy", "koira — dog", "kissa — cat", "naimisissa — married", "nainen — woman", "lapsi — child", "käsi — hand", "huone — room", "puhelin — telephone", "avain — key", "ovi — door", "auki — open", "aika — time", "raha — money", "lääkäri — doctor", "iso — big", "pieni — small", "suuri — big, great"], phrases: ["Minulla on… — I have…", "Onko sinulla…? — Do you have…?", "Kenellä on…? — Who has…?", "pöydän alla — under the table", "aseman vieressä — next to the station", "ystävän kanssa — with a friend", "ilman rahaa — without money"]},
+ l8: {words: ["ruoka — food", "juoma — drink", "liha — meat", "kana — chicken", "kala — fish", "lohi — salmon", "peruna — potato", "riisi — rice", "pasta — pasta", "keitto — soup", "salaatti — salad", "kasvis / vihannes — vegetable", "hedelmä — fruit", "omena — apple", "banaani — banana", "marja — berry", "mustikka — bilberry", "juusto — cheese", "kananmuna — egg", "voi — butter", "sokeri — sugar", "suola — salt", "jälkiruoka — dessert", "herkullista! — delicious!", "lounas — lunch", "illallinen / päivällinen — dinner", "aamupala — breakfast", "vegaani — vegan", "kasvissyöjä — vegetarian", "lasku — the bill", "juoda — to drink (formalised in L9)", "syödä — to eat (formalised in L9)"], phrases: ["Mitä suosittelet? — What do you recommend?", "Ottaisin… — I would take…", "Vesi riittää, kiitos. — Water is fine, thanks.", "Saisinko laskun? — Could I have the bill?", "erikseen vai yhdessä — separately or together"]},
+ l9: {words: ["syödä — to eat", "juoda — to drink", "voida — can, to be able", "saada — to get", "tehdä — to do, make", "nähdä — to see", "myydä — to sell", "viedä — to take (away)", "käydä — to visit, go (and come back)", "tulla — to come", "mennä — to go", "opiskella — to study", "nousta — to get up", "ajatella — to think", "kuunnella — to listen", "pestä — to wash", "kello — clock, o'clock", "maanantai — Monday", "tiistai — Tuesday", "keskiviikko — Wednesday", "torstai — Thursday", "perjantai — Friday", "lauantai — Saturday", "sunnuntai — Sunday", "viikonloppu — weekend", "arkisin — on weekdays", "aina — always", "usein — often", "joskus — sometimes", "harvoin — rarely", "ei koskaan — never", "aamu — morning", "päivä — day", "ilta — evening", "yö — night", "suihku — shower", "kupillinen — a cupful", "noin — about, roughly", "huomenna — tomorrow"], phrases: ["Paljonko kello on? — What time is it?", "Kello on puoli kaksi. — It's half past one.", "kymmenen yli kaksi — ten past two", "viittätoista vaille neljä — quarter to four", "käyn suihkussa — I take a shower", "menen nukkumaan — I go to sleep", "yhdeksästä viiteen — from nine to five"]},
+ l10: {words: ["haluta — to want", "tavata — to meet", "herätä — to wake up", "osata — to know how to", "pelata — to play (games)", "avata — to open", "tykätä — to like (+ elative)", "tarvita — to need", "valita — to choose", "häiritä — to disturb", "ostoskeskus — shopping centre", "myyjä — shop assistant", "asiakas — customer", "hinta — price", "ale / alennus — sale, discount", "koko — size", "sovituskoppi — fitting room", "paita — shirt", "housut — trousers", "farkut — jeans", "takki — coat, jacket", "kengät — shoes", "sukat — socks", "pipo — beanie", "hanskat — gloves", "mekko — dress", "puku — suit", "halpa — cheap", "kallis — expensive", "sopia — to fit, suit", "etsiä — to look for (+ partitive)", "luulla — to think, believe", "tuolla — over there", "punainen — red", "sininen — blue", "vihreä — green", "keltainen — yellow", "musta — black", "valkoinen — white", "harmaa — grey", "ruskea — brown", "oranssi — orange", "uusi — new", "musiikki — music"], phrases: ["Voinko auttaa? — Can I help?", "Etsin talvitakkia. — I'm looking for a winter coat.", "Mitä kokoa? — What size?", "Sopiiko? — Does it fit?", "Otan tämän. — I'll take this one.", "Se on alessa. — It's on sale."]},
+ l11: {words: ["eilen — yesterday", "toissapäivänä — the day before yesterday", "viime viikolla — last week", "viime viikonloppuna — last weekend", "viime vuonna — last year", "sitten — ago (kaksi päivää sitten)", "silloin — then, back then", "myöhään — late", "lehti — newspaper", "elokuva — film", "täydellinen — perfect", "löytää — to find", "lähteä — to leave, set off", "alkaa — to begin", "erikoinen — special", "sali — gym (käydä salilla)"], phrases: ["Mitä teit eilen? — What did you do yesterday?", "en tehnyt mitään erikoista — I didn't do anything special (negative past, L12)"]},
+ l12: {words: ["matka — trip, journey", "matkustaa — to travel", "lentokenttä — airport", "lento — flight", "lippu — ticket", "meno-paluu — return ticket", "passi — passport", "matkalaukku — suitcase", "varaus — reservation", "varata — to book", "loma — holiday", "kesäloma — summer holiday", "nähtävyys — sight, attraction", "ulkomailla — abroad", "kerta — time, occasion (kolme kertaa)", "jo — already", "vielä — yet, still", "sauna — sauna", "löyly — sauna steam", "kiuas — sauna stove", "vihta / vasta — birch whisk", "viesti — message", "kauan — long (of time)", "kuukausi — month", "vuosi — year"], phrases: ["Oletko käynyt Suomessa? — Have you been to Finland?", "Kuinka kauan olet opiskellut suomea? — How long have you studied Finnish?", "Olen asunut Lontoossa kymmenen vuotta. — I've lived in London ten years."]},
+ l13: {words: ["puuro — porridge", "raportti — report", "sähköposti — email", "soittaa — to call, ring; to play (instrument)", "tuntea — to know (a person)", "rakentaa — to build", "asunto — flat, apartment", "loppuun — to the end", "kun — when (conjunction)", "usein — often"], phrases: ["Odotan sinua. — I'm waiting for you.", "Tunnetko minut? — Do you know me?", "Luin kirjan. / Luin kirjaa. — I read the (whole) book / I was reading the book."]},
+ l14: {words: ["pitkä — tall, long", "lyhyt — short", "vanha — old", "nuori — young", "ystävällinen — friendly", "mukava — nice", "hauska — funny, fun", "ahkera — hard-working", "väsynyt — tired", "iloinen — happy", "surullinen — sad", "fiksu — smart", "kiireinen — busy", "helppo — easy", "kylmä — cold", "kuuma — hot", "yksiö — studio flat", "kaksio — one-bed flat", "kolmio — two-bed flat", "kerrostalo — apartment block", "rivitalo — terraced house", "omakotitalo — detached house", "keittiö — kitchen", "makuuhuone — bedroom", "olohuone — living room", "kylpyhuone — bathroom", "parveke — balcony", "vuokra — rent", "vuokrata — to rent", "omistaa — to own", "omistusasunto — owner-occupied flat", "muuttaa — to move (house)", "naapuri — neighbour", "taloyhtiö — housing company", "yhtiövastike — monthly maintenance charge", "tontti — plot of land", "sää — weather", "sataa — it rains", "lumi — snow (sataa lunta)", "aurinko — sun", "paistaa — to shine", "pilvistä — cloudy", "tuulista — windy", "aste — degree", "pakkanen — sub-zero cold", "kevät — spring", "kesä — summer", "syksy — autumn", "talvi — winter"], phrases: ["Millainen sää tänään on? — What's the weather like today?", "Helsinki on isompi kuin Turku. — Helsinki is bigger than Turku.", "Ulkona on kymmenen astetta pakkasta. — It's minus ten outside."]},
+ l15: {words: ["mielelläni — gladly, with pleasure", "sovittu — agreed, deal", "valitettavasti — unfortunately", "päästä — to get (somewhere), make it", "hetki — a moment", "enemmän — more", "voittaa — to win", "miljoona — a million", "ikkuna — window", "ulos — out(side)"], phrases: ["Saisinko laskun? — Could I have the bill?", "Voisitko auttaa minua? — Could you help me?", "Haluaisin varata pöydän kahdelle. — I'd like to book a table for two.", "Kävisikö viisi? — Would five work?", "Sopisiko kello neljä? — Would four o'clock suit?", "Valitettavasti en pääse huomenna. — Unfortunately I can't make it tomorrow.", "Mentäisiinkö kahville? — Shall we go for a coffee?"]},
+ l16: {words: ["risteys — junction, crossing", "silta — bridge", "lähin — nearest", "metroasema — metro station", "rautatieasema — railway station", "suoraan — straight", "eteenpäin — ahead, forward", "oikealle — to the right", "vasemmalle — to the left", "oikealla — on the right", "vasemmalla — on the left", "kääntyä — to turn", "jatkaa — to continue", "kaukana — far", "lähellä — near", "sisään — in(wards)", "alas — down", "lisää — more", "puoli — side; half"], phrases: ["Anteeksi, missä on lähin metroasema? — Excuse me, where is the nearest metro station?", "Miten pääsen rautatieasemalle? — How do I get to the railway station?", "Mene suoraan eteenpäin. — Go straight ahead.", "Käänny oikealle / vasemmalle. — Turn right / left.", "Se on kadun toisella puolella. — It's on the other side of the street.", "Tule sisään! — Come in!", "Istu alas. — Sit down.", "Ota lisää. — Take more.", "Odota hetki. — Wait a moment.", "Anna mennä! — Go for it!"]},
+ l17: {words: ["uida — to swim", "harrastaa — to do as a hobby (+ partitive)", "harrastus — hobby", "uinti — swimming", "hiihto — skiing", "valokuvaus — photography", "lukeminen — reading", "jalkapallo — football", "sähly — floorball", "lenkki — jog (käydä lenkillä)", "kuntosali / sali — gym", "treenata — to train", "treeni — a workout", "ohjelma — programme", "sarja — set", "toisto — rep", "kyykky — squat", "penkkipunnerrus / penkki — bench press", "maastaveto — deadlift", "lämmittely — warm-up", "palautuminen — recovery", "lepopäivä — rest day", "lihas — muscle", "painot — weights", "opetella — to learn (a skill)", "aikaisin — early", "jälkeen — after (+ gen)"], phrases: ["Mitä sinä harrastat? — What are your hobbies?", "Käyn salilla viisi kertaa viikossa. — I go to the gym five times a week.", "Minun täytyy mennä nyt. — I have to go now.", "Sinun ei tarvitse maksaa. — You don't have to pay.", "Osaatko uida? — Can you swim?", "Voin auttaa sinua huomenna. — I can help you tomorrow."]},
+ l18: {words: ["mä / sä — I / you (spoken)", "mun / sun — my / your (spoken)", "oon / oot — am / are (spoken)", "ei oo — isn't (spoken)", "tää / toi — this / that (spoken)", "mut — but (spoken)", "sit — then (spoken)", "niinku — like (filler)", "siis — so, I mean", "kyl — surely (spoken)", "no niin — right then / there we go / the universal phrase"], phrases: ["Emmä tiiä. — I don't know. (spoken)", "Ooksä nähny sen? — Have you seen him/her? (spoken)", "Me mennään kotiin. — We're going home. (spoken)", "Mul ei oo aikaa. — I don't have time. (spoken)"]},
+ l19: {words: ["Myydään — For sale", "Vuokrataan — To let", "Avoinna — Open (sign)", "Suljettu — Closed", "Työnnä — Push", "Vedä — Pull", "Ei sisäänkäyntiä — No entry", "Hätäuloskäynti — Emergency exit", "Paina nappia — Press the button", "tupakoida — to smoke", "taksi — taxi", "nappi — button", "hylly — shelf"], phrases: ["Mennään! — Let's go!", "Otetaanko taksi? — Shall we take a taxi?", "Nähdään maanantaina! — See you Monday!", "Täällä puhutaan suomea. — Finnish is spoken here."]},
+ l20: {words: ["työpaikka — workplace, job", "työkaveri / kollega — colleague", "esihenkilö — manager, line manager", "tiimi — team", "kokous / palaveri — meeting", "sähköposti — email", "liite — attachment", "määräaika — deadline", "hanke / projekti — programme / project", "tavoite — goal", "raportti — report", "sopimus — contract, agreement", "asiakas — client", "ministeriö — ministry", "virasto — agency, office", "etätyö — remote work", "palkka — salary", "työhaastattelu — job interview", "vastuu — responsibility", "kalenteri — calendar", "työskennellä — to work (formal)", "valmis — ready, finished"], phrases: ["Sopiiko sinulle huomenna kello kymmenen? — Does tomorrow at ten suit you?", "Palataan asiaan. — Let's come back to this.", "Laitan sen kalenteriin. — I'll put it in the calendar.", "Hyvä kysymys. — Good question.", "kiitos viestistäsi — thanks for your message", "Liitteenä on raportti. — The report is attached.", "Ystävällisin terveisin — Kind regards"]},
+ l21: {words: ["pää — head", "silmä — eye", "korva — ear", "nenä — nose", "suu — mouth", "hammas — tooth", "kurkku — throat (also cucumber)", "niska — back of neck", "selkä — back", "vatsa — stomach", "sydän — heart", "iho — skin", "flunssa — a cold", "kuume — fever", "päänsärky — headache", "yskä — cough", "kipeä — sore, ill", "terveysasema — health centre", "lääkäri — doctor", "päivystys — A&E, urgent care", "apteekki — pharmacy", "lääke — medicine", "resepti — prescription", "särkylääke — painkiller", "laastari — plaster", "jotain — some, something", "tehokas — effective", "paha — bad", "kova — hard, severe"], phrases: ["Mikä sinulla on? — What's wrong?", "Minulla on kuume. — I have a fever.", "Kurkkuni on kipeä. — My throat is sore.", "Voin huonosti. — I feel unwell.", "Haluaisin varata ajan lääkärille. — I'd like to book a doctor's appointment.", "Pikaista paranemista! — Get well soon!", "Siinä kaikki. — That's all."]},
+ l22: {words: ["uutinen / uutiset — news item / the news", "yhteiskunta — society", "hallitus — government", "eduskunta — parliament", "kaupunginvaltuusto — city council", "päättää — to decide", "ehdottaa — to propose", "laki — law", "talous — economy", "vero — tax", "korko — interest rate", "arvo — value", "asuntomarkkinat — housing market", "tontti — plot of land", "maa — land; country", "vuokrasopimus — lease", "nousta — to rise", "laskea — to fall; to count", "kasvaa — to grow", "rakentaa — to build", "työttömyys — unemployment", "järjestelmä — system", "maavero — land tax", "luoda — to create", "vähitellen — gradually", "kuukausikulut — monthly costs", "asuminen — living, housing", "vaan — but rather (after negative)", "että — that (conjunction)"], phrases: ["Minusta / Mielestäni… — In my opinion…", "Olen samaa mieltä. — I agree.", "Olen eri mieltä. — I disagree.", "Luulen, että vuokra nousee. — I think the rent will rise.", "Kaupunki, jossa asun, kasvaa nopeasti. — The city I live in is growing fast."]},
+ l23: {words: ["joten — so, therefore", "jättää — to leave (something)", "hymyillä — to smile", "melkein — almost", "olo — the feeling/state one is in", "netistä — from the internet", "valmis — ready", "kylmä — cold", "ihminen / ihmiset — person / people"], phrases: ["Voidaanko puhua suomea? Minä harjoittelen. — Can we speak Finnish? I'm practising.", "Onnea matkaan! — Good luck on the journey!"]},
+ lx: {words: ["kuka — who", "mikä — what (thing/subject)", "mitä — what (partitive: Mitä kuuluu? Mitä juot?)", "missä — where (in)", "mistä — where from", "mihin — where to", "milloin / mihin aikaan — when / at what time", "miksi — why", "miten / kuinka — how", "millä — by what (transport, instrument)", "kenellä — who has ('on whom')", "millainen — what kind of", "paljonko / kuinka paljon — how much (price of a thing: maksaa; rung-up total: tekee)", "kumpi — which of two"], phrases: []}
+};
+
+const VERBS = {
+ l2: {note:"The negative verb conjugates; the main verb stays bare.", rows:[
+  {v:"olla — to be", f:"olen, olet, on, olemme, olette, ovat"},
+  {v:"(negative)", f:"en ole, et ole, ei ole, emme ole, ette ole, eivät ole"}]},
+ l3: {note:"Starred verbs gradate: weak grade with minä/sinä/me/te, strong with hän/he — Lesson 5 explains why.", rows:[
+  {v:"lukea — read", f:"luen, luet, lukee, luemme, luette, lukevat"},
+  {v:"kirjoittaa — write", f:"kirjoitan · hän kirjoittaa"},
+  {v:"antaa — give", f:"annan · hän antaa"},
+  {v:"ottaa — take", f:"otan · hän ottaa"},
+  {v:"ymmärtää — understand", f:"ymmärrän · hän ymmärtää"},
+  {v:"tietää — know", f:"tiedän · hän tietää"},
+  {v:"odottaa — wait", f:"odotan · hän odottaa"},
+  {v:"auttaa — help", f:"autan · hän auttaa"}]},
+ l5: {note:"Verbs follow the same k/p/t pattern as nouns: strong in the infinitive and hän/he forms, weak elsewhere.", rows:[
+  {v:"nukkua — sleep", f:"nukun · hän nukkuu"},
+  {v:"lukea — read", f:"luen · hän lukee"},
+  {v:"ymmärtää — understand", f:"ymmärrän · hän ymmärtää"}]},
+ l6: {note:"mennä and tulla are type 3 verbs — formally introduced in Lesson 9.", rows:[
+  {v:"mennä — go", f:"menen · hän menee"},
+  {v:"tulla — come", f:"tulen · hän tulee"}]},
+ l9: {note:"tehdä and nähdä are the two properly irregular verbs of the course — memorise them.", rows:[
+  {v:"tehdä — do, make", f:"teen, teet, tekee, teemme, teette, tekevät"},
+  {v:"nähdä — see", f:"näen, näet, näkee, näemme, näette, näkevät"},
+  {v:"käydä — visit, go to", f:"käyn · hän käy · he käyvät"},
+  {v:"syödä — eat", f:"syön · hän syö"},
+  {v:"juoda — drink", f:"juon · hän juo"},
+  {v:"tulla — come", f:"tulen · hän tulee"},
+  {v:"mennä — go", f:"menen · hän menee"},
+  {v:"opiskella — study", f:"opiskelen · hän opiskelee"},
+  {v:"nousta — get up", f:"nousen · hän nousee"},
+  {v:"ajatella — think", f:"ajattelen · hän ajattelee"},
+  {v:"kuunnella — listen", f:"kuuntelen · hän kuuntelee"}]},
+ l10: {note:"Type 4 shows reverse gradation: weak in the infinitive, strong in the personal forms.", rows:[
+  {v:"haluta — want", f:"haluan · hän haluaa"},
+  {v:"tavata — meet", f:"tapaan · hän tapaa"},
+  {v:"herätä — wake up", f:"herään · hän herää"},
+  {v:"osata — know how to", f:"osaan · hän osaa"},
+  {v:"pelata — play", f:"pelaan · hän pelaa"},
+  {v:"avata — open", f:"avaan · hän avaa"},
+  {v:"tykätä — like", f:"tykkään · hän tykkää"},
+  {v:"tarvita — need", f:"tarvitsen · hän tarvitsee"},
+  {v:"valita — choose", f:"valitsen · hän valitsee"}]},
+ l11: {note:"The past-tense forms worth memorising outright.", rows:[
+  {v:"olla — was", f:"olin, olit, oli, olimme, olitte, olivat"},
+  {v:"tehdä", f:"tein · hän teki"},
+  {v:"nähdä", f:"näin · hän näki"},
+  {v:"käydä", f:"kävin · hän kävi"},
+  {v:"syödä", f:"söin · hän söi"},
+  {v:"juoda", f:"join · hän joi"},
+  {v:"saada", f:"sain · hän sai"},
+  {v:"antaa", f:"annoin · hän antoi"},
+  {v:"tietää", f:"tiesin · hän tiesi"},
+  {v:"löytää", f:"löysin · hän löysi"},
+  {v:"lähteä", f:"lähdin · hän lähti"},
+  {v:"tavata", f:"tapasin · hän tapasi"},
+  {v:"haluta", f:"halusin · hän halusi"}]},
+ l12: {note:"NUT-participles for the perfect and the negative past (plural -neet).", rows:[
+  {v:"olla", f:"ollut / olleet"},
+  {v:"tehdä", f:"tehnyt / tehneet"},
+  {v:"nähdä", f:"nähnyt / nähneet"},
+  {v:"tulla", f:"tullut / tulleet"},
+  {v:"mennä", f:"mennyt / menneet"},
+  {v:"syödä", f:"syönyt / syöneet"},
+  {v:"opiskella", f:"opiskellut / opiskelleet"},
+  {v:"haluta", f:"halunnut / halunneet"},
+  {v:"tavata", f:"tavannut / tavanneet"},
+  {v:"tarvita", f:"tarvinnut / tarvinneet"}]},
+ l14: {note:"Irregular comparisons — learn them as sets.", rows:[
+  {v:"hyvä — good", f:"parempi · paras"},
+  {v:"pitkä — long, tall", f:"pidempi · pisin"},
+  {v:"uusi — new", f:"uudempi · uusin"}]},
+ l15: {note:"Conditional -isi-: a final e or i drops before it.", rows:[
+  {v:"olla", f:"olisin · olisi"},
+  {v:"saada", f:"saisin · saisi"},
+  {v:"voida", f:"voisin · voisi"},
+  {v:"syödä", f:"söisin · söisi"},
+  {v:"mennä", f:"menisin · menisi"},
+  {v:"tulla", f:"tulisin · tulisi"},
+  {v:"haluta", f:"haluaisin · haluaisi"},
+  {v:"ostaa", f:"ostaisin · ostaisi"}]},
+ l16: {note:"Singular imperative = the minä-form minus -n (weak grade); negative = älä + the same form.", rows:[
+  {v:"ostaa", f:"osta! · älä osta!"},
+  {v:"tulla", f:"tule! · älä tule!"},
+  {v:"mennä", f:"mene! · älä mene!"},
+  {v:"syödä", f:"syö! · älä syö!"},
+  {v:"odottaa", f:"odota! · älä odota!"},
+  {v:"antaa", f:"anna! · älä anna!"},
+  {v:"tehdä", f:"tee! · älä tee!"}]},
+ l19: {note:"Present passive of the core verbs (type 1 turns a/ä to e).", rows:[
+  {v:"puhua", f:"puhutaan"},
+  {v:"ostaa", f:"ostetaan"},
+  {v:"antaa", f:"annetaan"},
+  {v:"syödä", f:"syödään"},
+  {v:"mennä", f:"mennään"},
+  {v:"tulla", f:"tullaan"},
+  {v:"haluta", f:"halutaan"},
+  {v:"tarvita", f:"tarvitaan"}]}
+};
+
+function escV(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function fmtWord(s){
+  var i = s.indexOf(" — ");
+  if(i < 0) return "<b>" + escV(s) + "</b>";
+  return "<b>" + escV(s.slice(0, i)) + "</b> <span class=\"ven\">" + escV(s.slice(i + 3)) + "</span>";
+}
+function renderVocab(anchor, container){
+  var v = VOCAB ? VOCAB[anchor] : null;
+  var verbs = VERBS[anchor];
+  if(!v && !verbs) return;
+  var box = document.createElement("div");
+  box.className = "vocabbox";
+  var h = "";
+  if(v && v.words && v.words.length){
+    h += '<div class="vhead">Sanasto · words in this lesson</div><p class="vwords">' +
+         v.words.map(fmtWord).join('<span class="sep"> · </span>') + "</p>";
+  }
+  if(v && v.phrases && v.phrases.length){
+    h += '<div class="vhead">Fraasit · phrases</div><p class="vwords">' +
+         v.phrases.map(fmtWord).join('<span class="sep"> · </span>') + "</p>";
+  }
+  box.innerHTML = h;
+  if(verbs && verbs.rows && verbs.rows.length){
+    var det = document.createElement("details");
+    det.className = "vconj";
+    det.innerHTML = "<summary>Taivutus · conjugation of the tricky ones</summary>" +
+      (verbs.note ? '<p class="vnote">' + escV(verbs.note) + "</p>" : "") +
+      '<table><thead><tr><th>Verb</th><th>Forms</th></tr></thead><tbody>' +
+      verbs.rows.map(function(r){ return "<tr><td>" + escV(r.v) + "</td><td>" + escV(r.f) + "</td></tr>"; }).join("") +
+      "</tbody></table>";
+    box.appendChild(det);
+  }
+  container.appendChild(box);
+}
+
 const DATA = [
 {lesson:"Lesson 0 — Sounds and spelling", anchor:"l0", ex:[
  {id:"0.1", title:"Vowel harmony: choose -ssa or -ssä", type:"check", instr:"Attach the correct form of the ending to each word.", items:[
@@ -548,6 +730,7 @@ DATA.forEach(function(lesson){
   var h2 = document.createElement("h2");
   h2.id = lesson.anchor; h2.textContent = lesson.lesson;
   app.appendChild(h2);
+  renderVocab(lesson.anchor, app);
 
   lesson.ex.forEach(function(ex){
     var card = document.createElement("section");
