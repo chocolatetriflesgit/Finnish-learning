@@ -1,0 +1,442 @@
+{
+  "course_file": "finnish-from-zero.html",
+  "target_level": "CEFR A2, touching B1 in reading",
+  "note": "Extracted from the course 2026-07-06. 'grammar' lists the error-taxonomy tags a lesson introduces; a learner who has completed lesson N is assumed to command the union of grammar+vocab of lessons 0..N. Vocab entries are 'finnish — english'. The course file itself remains the source of truth for full explanations.",
+  "error_tags": {
+    "vowel-harmony": "wrong suffix flavour (-ssa/-ssä, -ko/-kö, -lla/-llä...)",
+    "sound-length": "single vs double letters (tuli/tuuli/tulli, tapaan/tapan)",
+    "verb-type-1": "type 1 present conjugation (puhua: puhun...puhuvat)",
+    "verb-type-2": "type 2 conjugation (syödä, juoda, tehdä→teen, nähdä→näen, käydä)",
+    "verb-type-3": "type 3 conjugation (tulla, mennä, opiskella, nousta: +e)",
+    "verb-type-4": "type 4 conjugation incl. reverse gradation (haluta→haluan, tavata→tapaan)",
+    "verb-type-5-6": "type 5 -tse- (tarvita→tarvitsen, valita) and type 6 (vanheta)",
+    "negation": "negative verb en/et/ei/emme/ette/eivät + bare stem",
+    "question-formation": "-ko/-kö questions, verb fronting, answering with the verb",
+    "numbers": "number formation (-toista, -kymmentä, sata, tuhat)",
+    "gradation": "consonant gradation kk/k, pp/p, tt/t, k/–, p/v, t/d, nk/ng, nt/nn, mp/mm, lt/ll, rt/rr; reverse gradation",
+    "location-cases": "the six local cases -ssa/-sta/-Vn (illative!), -lla/-lta/-lle; koti/työ idioms; exterior towns (Tampereella)",
+    "genitive": "-n genitive incl. stem changes (mies→miehen, vesi→veden, huone→huoneen)",
+    "possession": "minulla on structure; negative minulla ei ole + partitive; possessive suffixes (kirjani)",
+    "postpositions": "genitive + alla/edessä/takana/vieressä/lähellä/kanssa; ilman + partitive",
+    "partitive-formation": "-a/-ä, -ta/-tä, -tta/-ttä; vesi→vettä, lapsi→lasta, huone→huonetta; strong grade",
+    "partitive-use": "after numbers, negation, mass/indefinite amounts, partitive verbs (rakastaa, odottaa, etsiä, harrastaa, opiskella, ajatella)",
+    "object-case": "total object (-n / nominative pl. / nominative after imperative & täytyy) vs partial object (partitive)",
+    "pronoun-accusative": "minut, sinut, hänet, meidät, teidät, heidät, kenet; partitive under negation (en tunne häntä)",
+    "past-tense": "imperfect -i- patterns (sanoin, luin, otin, annoin, söin, join, tulin, halusin, olin, tein, näin)",
+    "perfect-tense": "olla + NUT-participle (olen puhunut, syönyt, tullut, halunnut); pluperfect",
+    "negative-past": "en puhunut / emme puhuneet (plural -neet); plural object → partitive under negation",
+    "adjective-agreement": "adjective agrees with noun in case and number (isossa talossa, isot talot)",
+    "comparison": "-mpi / -in; hyvä→parempi→paras, pitkä→pidempi→pisin; kuin",
+    "conditional": "-isi- (saisinko, voisitko, haluaisin, olisiko); jos-clauses with double conditional",
+    "imperative": "sg. = minä-form minus -n (weak grade!): puhu, odota, anna; älä + same; pl. -kaa/-kää",
+    "ma-infinitive": "-maan/-massa/-masta (menen syömään, on syömässä, tulen treenaamasta)",
+    "obligation": "genitive subject + täytyy/pitää + infinitive; nominative object; negation ei tarvitse",
+    "modal-verbs": "osata (skill) vs voida (possibility) vs saada (permission)",
+    "puhekieli": "spoken forms mä/sä, oon, ei oo, se/ne for people, me mennään, toi/tää, emmä tiiä",
+    "passive": "-taan/-tään present (puhutaan, syödään, mennään), -ttiin past; general statements, let's, signs",
+    "plural-cases": "plural -i- in cases (taloissa, kaupoissa, ystäville); partitive plural (kirjoja, naisia, huoneita)",
+    "translative-essive": "-ksi becoming/purpose (johtajaksi, kylmäksi, aamupalaksi) vs -na role/state/days (opettajana, lapsena, maanantaina)",
+    "relative-joka": "joka/jonka/jota/jossa/josta/johon/jolla; että; comma before both",
+    "minen-nouns": "verb→noun with -minen (lukeminen, asuminen); cases on it (asumisesta)",
+    "time-expressions": "clock (puoli kaksi = 1:30!, yli, vaille), days -na, aamulla/illalla, arkisin, viime viikolla, sitten",
+    "word-order": "neutral SVO, no articles; flexible order misused",
+    "vocab-choice": "wrong word or unidiomatic choice",
+    "spelling": "spelling errors incl. missing ä/ö"
+  },
+  "lessons": [
+    {
+      "id": 0,
+      "title": "Sounds and spelling (Ääntäminen)",
+      "module": "Foundations",
+      "grammar": ["vowel-harmony", "sound-length"],
+      "summary": "One letter one sound; stress always first syllable; double letters change meaning; back (a,o,u) vs front (ä,ö,y) vowels, e/i neutral; suffixes come in two flavours; diphthongs.",
+      "vocab": [
+        "kala — fish", "talo — house", "kuka — who", "kukka — flower", "kyllä — yes",
+        "äiti — mother", "tuli — fire", "tuuli — wind", "tulli — customs",
+        "muta — mud", "mutta — but", "tapaan — I meet", "tapan — I kill",
+        "tili — account", "tiili — brick", "mato — worm", "matto — rug", "sauna — sauna", "metsä — forest"
+      ],
+      "phrases": []
+    },
+    {
+      "id": 1,
+      "title": "Greetings and courtesy (Tervehdykset)",
+      "module": "1 — Getting by",
+      "grammar": [],
+      "summary": "Greetings for times of day; kiitos does the work of please; ole hyvä both hands things over and answers thanks; Mitä kuuluu is a real question; comfortable silence is normal.",
+      "vocab": [
+        "hei / moi / terve — hi, hello", "hyvää huomenta — good morning", "hyvää päivää — good day",
+        "hyvää iltaa — good evening", "hyvää yötä — good night", "näkemiin — goodbye (formal)",
+        "hei hei / moi moi — bye", "nähdään! — see you!", "kiitos (paljon) — thank you (very much)",
+        "ole hyvä — here you are / you're welcome", "anteeksi — sorry / excuse me", "tervetuloa — welcome",
+        "kyllä / joo — yes", "ei — no", "ihan — quite, pretty", "no — well, so"
+      ],
+      "phrases": ["Mitä kuuluu? — How are you?", "Kiitos, hyvää. — Fine, thanks.", "Entä sinulle? — And you?", "hauska tutustua — nice to meet you"]
+    },
+    {
+      "id": 2,
+      "title": "Who are you? (olla + pronouns)",
+      "module": "1 — Getting by",
+      "grammar": ["negation", "question-formation"],
+      "summary": "minä/sinä/hän/me/te/he + olla (olen...ovat); hän is gender-neutral; pronouns often dropped; negative verb en/et/ei/emme/ette/eivät + ole; -ko/-kö yes/no questions, answer by repeating the verb.",
+      "vocab": [
+        "nimi — name", "maa — country", "kieli — language", "englanti — English (language)",
+        "suomi — Finnish (language)", "ruotsi — Swedish (language)", "englantilainen — English (person)",
+        "suomalainen — Finnish (person)", "britti — Brit", "ammatti — profession",
+        "opettaja — teacher", "opiskelija — student", "insinööri — engineer", "johtaja — manager, director",
+        "virkamies — civil servant", "vähän — a little"
+      ],
+      "phrases": [
+        "Mikä sinun nimesi on? — What is your name?", "Kuka sinä olet? — Who are you?",
+        "Mistä olet kotoisin? — Where are you from?", "Olen kotoisin Englannista. — I'm from England.",
+        "Puhun englantia ja vähän suomea. — I speak English and a little Finnish.", "Asun Lontoossa. — I live in London."
+      ]
+    },
+    {
+      "id": 3,
+      "title": "First verbs (verb type 1)",
+      "module": "1 — Getting by",
+      "grammar": ["verb-type-1", "word-order"],
+      "summary": "Type 1: stem = infinitive minus -a/-ä; endings -n -t -V(doubled) -mme -tte -vat/-vät; negation = negative verb + bare stem; SVO neutral, no articles. Starred verbs gradate (luen, odotan, annan, ymmärrän) — treated properly in L5.",
+      "vocab": [
+        "puhua — to speak", "sanoa — to say", "asua — to live (reside)", "kysyä — to ask",
+        "istua — to sit", "maksaa — to pay, to cost", "ostaa — to buy", "katsoa — to watch, look",
+        "rakastaa — to love", "odottaa — to wait", "lukea — to read", "kirjoittaa — to write",
+        "antaa — to give", "ottaa — to take", "ymmärtää — to understand", "tietää — to know (a fact)",
+        "muistaa — to remember", "unohtaa — to forget", "auttaa — to help", "laittaa — to put; to prepare (food)",
+        "paljon — a lot", "leipä — bread", "televisio — television"
+      ],
+      "phrases": [
+        "En ymmärrä. — I don't understand.", "Voitko puhua hitaammin? — Can you speak more slowly?",
+        "Voitko toistaa? — Can you repeat?", "Mitä X tarkoittaa? — What does X mean?",
+        "Anteeksi, en puhu hyvin suomea. — Sorry, I don't speak Finnish well.", "Puhutko englantia? — Do you speak English?"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Numbers, money, and your first coffee",
+      "module": "1 — Getting by",
+      "grammar": ["numbers", "partitive-use"],
+      "summary": "0-10: nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän kymmenen; teens -toista; tens -kymmentä; sata, tuhat. Numbers >1 take partitive singular (kaksi kahvia, viisi euroa). Decimal comma.",
+      "vocab": [
+        "kahvi — coffee", "tee — tea", "maito — milk", "vesi — water", "mehu — juice", "olut — beer",
+        "pulla — sweet bun", "korvapuusti — cinnamon bun", "leipä — bread", "voileipä — sandwich",
+        "euro — euro", "sentti — cent", "kuitti — receipt", "kortilla — by card", "käteisellä — in cash"
+      ],
+      "phrases": [
+        "Saisinko…? — Could I have…?", "Mitä saisi olla? — What would you like?",
+        "Tuleeko muuta? — Anything else?", "Ei muuta, kiitos. — Nothing else, thanks.",
+        "Paljonko se maksaa? — How much does it cost?", "Se tekee… — That comes to…",
+        "Käykö kortti? — Do you take card?", "Hyvää päivän jatkoa! — Have a good rest of the day!"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Consonant gradation (Astevaihtelu)",
+      "module": "2 — The case engine",
+      "grammar": ["gradation"],
+      "summary": "k/p/t weaken when the ending closes the syllable (genitive -n, -ssa, -lla...): kk→k, pp→p, tt→t, k→–, p→v, t→d, nk→ng, nt→nn, mp→mm, lt→ll, rt→rr. Strong grade survives in basic form, partitive, illative, essive. Reverse gradation: hammas→hampaan. sk/st/tk don't gradate. Verbs: type 1 strong in infinitive + hän/he forms (luen but lukee).",
+      "vocab": [
+        "kauppa — shop", "kukka — flower", "tyttö — girl", "jalka — foot, leg", "katu — street",
+        "ilta — evening", "lampi — pond", "parta — beard", "hammas — tooth", "opas — guide",
+        "matka — trip", "posti — post (office)", "pankki — bank", "pöytä — table", "kaupunki — city, town",
+        "ranta — beach", "apu — help", "tukka — hair", "silta — bridge", "nukkua — to sleep"
+      ],
+      "phrases": []
+    },
+    {
+      "id": 6,
+      "title": "The six location cases",
+      "module": "2 — The case engine",
+      "grammar": ["location-cases"],
+      "summary": "3×2 grid: inessive -ssa / elative -sta / illative -Vn,-hVn,-seen (strong grade!) versus adessive -lla / ablative -lta / allative -lle. Adessive also = instrument/transport (bussilla, kortilla); ablative/allative with people (kysyn häneltä, annan sinulle). koti: kotona/kotoa/kotiin. työ: töissä/töihin/töistä. Streets exterior (kadulla); Tampere, Rovaniemi, -joki/-mäki/-järvi towns exterior (Tampereella).",
+      "vocab": [
+        "kahvila — café", "ravintola — restaurant", "kirjasto — library", "koulu — school",
+        "kirkko — church", "museo — museum", "puisto — park", "asema — station",
+        "pysäkki — (bus/tram) stop", "tori — market square", "apteekki — pharmacy", "sairaala — hospital",
+        "hotelli — hotel", "keskusta — city centre", "bussi — bus", "juna — train", "metro — metro",
+        "ratikka / raitiovaunu — tram", "auto — car", "pyörä — bike", "kävellen — on foot",
+        "koti — home", "työ — work", "laukku — bag", "tuoli — chair", "kissa — cat", "mennä — to go (met early; formalised in L9)", "tulla — to come (met early; formalised in L9)"
+      ],
+      "phrases": ["Missä sinä asut? — Where do you live?", "Mihin menet? — Where are you going?", "Millä menet töihin? — How (by what) do you go to work?"]
+    },
+    {
+      "id": 7,
+      "title": "Having and belonging (genitive; minulla on)",
+      "module": "2 — The case engine",
+      "grammar": ["genitive", "possession", "postpositions"],
+      "summary": "Genitive -n on weak stem; stem changes: nainen→naisen, mies→miehen, lapsi→lapsen, vesi→veden, käsi→käden, kieli→kielen, pieni→pienen, suuri→suuren, huone→huoneen, perhe→perheen, puhelin→puhelimen. 'Have' = adessive + on: Minulla on koira; negative takes partitive (ei ole autoa). Possessive suffixes: minun kirjani, sinun nimesi, hänen autonsa. Postpositions take genitive: alla, edessä, takana, vieressä, lähellä, kanssa; ilman + partitive.",
+      "vocab": [
+        "perhe — family", "äiti — mother", "isä — father", "vanhemmat — parents", "veli — brother",
+        "sisko — sister", "poika — boy; son", "tytär — daughter", "tyttö — girl", "vaimo — wife",
+        "mies — man; husband", "puoliso — spouse, partner", "isoäiti / mummo — grandmother",
+        "isoisä / vaari — grandfather", "ystävä — friend", "kaveri — mate, buddy", "koira — dog",
+        "kissa — cat", "naimisissa — married", "nainen — woman", "lapsi — child", "käsi — hand",
+        "huone — room", "puhelin — telephone", "avain — key", "ovi — door", "auki — open",
+        "aika — time", "raha — money", "lääkäri — doctor", "iso — big", "pieni — small", "suuri — big, great"
+      ],
+      "phrases": ["Minulla on… — I have…", "Onko sinulla…? — Do you have…?", "Kenellä on…? — Who has…?", "pöydän alla — under the table", "aseman vieressä — next to the station", "ystävän kanssa — with a friend", "ilman rahaa — without money"]
+    },
+    {
+      "id": 8,
+      "title": "The partitive: Finland's favourite case",
+      "module": "2 — The case engine",
+      "grammar": ["partitive-formation", "partitive-use"],
+      "summary": "Formation: -a/-ä after short vowel (kahvia, taloa); -ta/-tä after long vowel/diphthong/consonant (maata, työtä, miestä, kieltä, pientä); -tta/-ttä for e-words (huonetta, perhettä); old i-words vesi→vettä, käsi→kättä, lapsi→lasta, uusi→uutta. Strong grade. Five uses: after numbers; after negation; indefinite amounts (juon kahvia vs juon kahvin); ongoing action (luen kirjaa); partitive verbs (rakastaa, odottaa, harrastaa, opiskella, pelata, ajatella).",
+      "vocab": [
+        "ruoka — food", "juoma — drink", "liha — meat", "kana — chicken", "kala — fish",
+        "lohi — salmon", "peruna — potato", "riisi — rice", "pasta — pasta", "keitto — soup",
+        "salaatti — salad", "kasvis / vihannes — vegetable", "hedelmä — fruit", "omena — apple",
+        "banaani — banana", "marja — berry", "mustikka — bilberry", "juusto — cheese",
+        "kananmuna — egg", "voi — butter", "sokeri — sugar", "suola — salt", "jälkiruoka — dessert",
+        "herkullista! — delicious!", "lounas — lunch", "illallinen / päivällinen — dinner",
+        "aamupala — breakfast", "vegaani — vegan", "kasvissyöjä — vegetarian", "lasku — the bill",
+        "juoda — to drink (formalised in L9)", "syödä — to eat (formalised in L9)"
+      ],
+      "phrases": ["Mitä suosittelet? — What do you recommend?", "Ottaisin… — I would take…", "Vesi riittää, kiitos. — Water is fine, thanks.", "Saisinko laskun? — Could I have the bill?", "erikseen vai yhdessä — separately or together"]
+    },
+    {
+      "id": 9,
+      "title": "Verb types 2 and 3; telling the time",
+      "module": "2 — The case engine",
+      "grammar": ["verb-type-2", "verb-type-3", "time-expressions"],
+      "summary": "Type 2 (-da/-dä): syön, juon, voin, saan; tehdä→teen/tekee, nähdä→näen/näkee; myydä, viedä, käydä. Type 3 (-lla/-nna/-rra/-sta): drop 2 letters + e: tulen, menen, opiskelen, nousen; ajatella→ajattelen, kuunnella→kuuntelen, pestä→pesen. Time: puoli kaksi = 1:30 (!); yli + basic, vaille + partitive; aamulla/päivällä/illalla/yöllä; days + -na (maanantaina); viikonloppuna; arkisin; aina/usein/joskus/harvoin/ei koskaan.",
+      "vocab": [
+        "syödä — to eat", "juoda — to drink", "voida — can, to be able", "saada — to get",
+        "tehdä — to do, make", "nähdä — to see", "myydä — to sell", "viedä — to take (away)",
+        "käydä — to visit, go (and come back)", "tulla — to come", "mennä — to go",
+        "opiskella — to study", "nousta — to get up", "ajatella — to think", "kuunnella — to listen",
+        "pestä — to wash", "kello — clock, o'clock", "maanantai — Monday", "tiistai — Tuesday",
+        "keskiviikko — Wednesday", "torstai — Thursday", "perjantai — Friday", "lauantai — Saturday",
+        "sunnuntai — Sunday", "viikonloppu — weekend", "arkisin — on weekdays", "aina — always",
+        "usein — often", "joskus — sometimes", "harvoin — rarely", "ei koskaan — never",
+        "aamu — morning", "päivä — day", "ilta — evening", "yö — night", "suihku — shower",
+        "kupillinen — a cupful", "noin — about, roughly", "huomenna — tomorrow"
+      ],
+      "phrases": ["Paljonko kello on? — What time is it?", "Kello on puoli kaksi. — It's half past one.", "kymmenen yli kaksi — ten past two", "viittätoista vaille neljä — quarter to four", "käyn suihkussa — I take a shower", "menen nukkumaan — I go to sleep", "yhdeksästä viiteen — from nine to five"]
+    },
+    {
+      "id": 10,
+      "title": "Verb types 4–6; shopping for clothes",
+      "module": "3 — Talking about your life",
+      "grammar": ["verb-type-4", "verb-type-5-6"],
+      "summary": "Type 4 (-ata/-ätä/-ota/-uta): drop -t-, reverse gradation strong in personal forms: haluta→haluan, tavata→tapaan, herätä→herään, osata→osaan, pelata→pelaan, avata→avaan, tykätä→tykkään. tykätä + ELATIVE (tykkään kahvista) vs rakastaa + partitive. Type 5 (-ita): +tse: tarvitsen, valitsen. Type 6 (-eta): vanhenen (recognise).",
+      "vocab": [
+        "haluta — to want", "tavata — to meet", "herätä — to wake up", "osata — to know how to",
+        "pelata — to play (games)", "avata — to open", "tykätä — to like (+ elative)",
+        "tarvita — to need", "valita — to choose", "häiritä — to disturb",
+        "ostoskeskus — shopping centre", "myyjä — shop assistant", "asiakas — customer",
+        "hinta — price", "ale / alennus — sale, discount", "koko — size", "sovituskoppi — fitting room",
+        "paita — shirt", "housut — trousers", "farkut — jeans", "takki — coat, jacket",
+        "kengät — shoes", "sukat — socks", "pipo — beanie", "hanskat — gloves", "mekko — dress",
+        "puku — suit", "halpa — cheap", "kallis — expensive", "sopia — to fit, suit",
+        "etsiä — to look for (+ partitive)", "luulla — to think, believe", "tuolla — over there",
+        "punainen — red", "sininen — blue", "vihreä — green", "keltainen — yellow", "musta — black",
+        "valkoinen — white", "harmaa — grey", "ruskea — brown", "oranssi — orange", "uusi — new", "musiikki — music"
+      ],
+      "phrases": ["Voinko auttaa? — Can I help?", "Etsin talvitakkia. — I'm looking for a winter coat.", "Mitä kokoa? — What size?", "Sopiiko? — Does it fit?", "Otan tämän. — I'll take this one.", "Se on alessa. — It's on sale."]
+    },
+    {
+      "id": 11,
+      "title": "The past tense (Imperfekti)",
+      "module": "3 — Talking about your life",
+      "grammar": ["past-tense"],
+      "summary": "Insert -i-: o/u/y/ö survive (sanoin, puhuin); e/i drop (luin, etsin); a drops (otin, muistin) or a→o in 2-syllable a-a verbs (annoin, maksoin, aloin); type 2 long vowels shorten (sain) and diphthongs shift (söin, join, vein, kävin); type 3 e→i (tulin, menin); type 4 t→s (halusin, tapasin, heräsin, pelasin); type 5 (tarvitsin). Key irregulars: olin, tein, näin, tiesin, löysin, lähdin. hän-forms: puhui, otti, söi, tuli, halusi, oli.",
+      "vocab": [
+        "eilen — yesterday", "toissapäivänä — the day before yesterday", "viime viikolla — last week",
+        "viime viikonloppuna — last weekend", "viime vuonna — last year", "sitten — ago (kaksi päivää sitten)",
+        "silloin — then, back then", "myöhään — late", "lehti — newspaper", "elokuva — film",
+        "täydellinen — perfect", "löytää — to find", "lähteä — to leave, set off", "alkaa — to begin",
+        "erikoinen — special", "sali — gym (käydä salilla)"
+      ],
+      "phrases": ["Mitä teit eilen? — What did you do yesterday?", "en tehnyt mitään erikoista — I didn't do anything special (negative past, L12)"]
+    },
+    {
+      "id": 12,
+      "title": "The perfect tense and the negative past",
+      "module": "3 — Talking about your life",
+      "grammar": ["perfect-tense", "negative-past"],
+      "summary": "Perfect = olla + NUT-participle: puhunut, ostanut, syönyt, tehnyt, nähnyt, tullut, mennyt, opiskellut, halunnut, tavannut, tarvinnut; plural -neet. Use for experiences, unfinished periods, present-relevant results; pluperfect olin syönyt. Negative past = negative verb + NUT-participle: en puhunut, emme syöneet; plural objects go partitive under negation (en ostanut lippuja).",
+      "vocab": [
+        "matka — trip, journey", "matkustaa — to travel", "lentokenttä — airport", "lento — flight",
+        "lippu — ticket", "meno-paluu — return ticket", "passi — passport", "matkalaukku — suitcase",
+        "varaus — reservation", "varata — to book", "loma — holiday", "kesäloma — summer holiday",
+        "nähtävyys — sight, attraction", "ulkomailla — abroad", "kerta — time, occasion (kolme kertaa)",
+        "jo — already", "vielä — yet, still", "sauna — sauna", "löyly — sauna steam", "kiuas — sauna stove",
+        "vihta / vasta — birch whisk", "viesti — message", "kauan — long (of time)", "kuukausi — month", "vuosi — year"
+      ],
+      "phrases": ["Oletko käynyt Suomessa? — Have you been to Finland?", "Kuinka kauan olet opiskellut suomea? — How long have you studied Finnish?", "Olen asunut Lontoossa kymmenen vuotta. — I've lived in London ten years."]
+    },
+    {
+      "id": 13,
+      "title": "The object: total or partial?",
+      "module": "3 — Talking about your life",
+      "grammar": ["object-case", "pronoun-accusative"],
+      "summary": "Total object (complete action, whole thing): genitive -n singular (luin kirjan), nominative plural (ostin kengät), nominative after imperative and täytyy (osta kirja!, täytyy ostaa liput). Partial object (partitive): ongoing (luin kirjaa), negated (en lukenut kirjaa), indefinite amount (ostin maitoa), open-ended verbs (rakastaa, odottaa, ajatella, tarvita, harrastaa, etsiä, kuunnella). Pronoun accusatives: minut, sinut, hänet, meidät, teidät, heidät, kenet; negation → partitive (en tunne häntä). Durations behave like total objects (asuin Suomessa vuoden).",
+      "vocab": [
+        "puuro — porridge", "raportti — report", "sähköposti — email", "soittaa — to call, ring; to play (instrument)",
+        "tuntea — to know (a person)", "rakentaa — to build", "asunto — flat, apartment", "loppuun — to the end",
+        "kun — when (conjunction)", "usein — often"
+      ],
+      "phrases": ["Odotan sinua. — I'm waiting for you.", "Tunnetko minut? — Do you know me?", "Luin kirjan. / Luin kirjaa. — I read the (whole) book / I was reading the book."]
+    },
+    {
+      "id": 14,
+      "title": "Describing things: adjectives, comparison, home and weather",
+      "module": "3 — Talking about your life",
+      "grammar": ["adjective-agreement", "comparison"],
+      "summary": "Adjectives agree in case and number (isossa talossa, isot talot, isoja taloja). Comparative -mpi, superlative -in; 2-syllable -a/-ä → -e- (matalampi); irregulars hyvä→parempi→paras, pitkä→pidempi→pisin, uusi→uudempi→uusin. kuin = than; yhtä...kuin = as...as. Weather expressions; seasons adessive (keväällä, kesällä, syksyllä, talvella).",
+      "vocab": [
+        "pitkä — tall, long", "lyhyt — short", "vanha — old", "nuori — young", "ystävällinen — friendly",
+        "mukava — nice", "hauska — funny, fun", "ahkera — hard-working", "väsynyt — tired",
+        "iloinen — happy", "surullinen — sad", "fiksu — smart", "kiireinen — busy", "helppo — easy",
+        "kylmä — cold", "kuuma — hot", "yksiö — studio flat", "kaksio — one-bed flat", "kolmio — two-bed flat",
+        "kerrostalo — apartment block", "rivitalo — terraced house", "omakotitalo — detached house",
+        "keittiö — kitchen", "makuuhuone — bedroom", "olohuone — living room", "kylpyhuone — bathroom",
+        "parveke — balcony", "vuokra — rent", "vuokrata — to rent", "omistaa — to own",
+        "omistusasunto — owner-occupied flat", "muuttaa — to move (house)", "naapuri — neighbour",
+        "taloyhtiö — housing company", "yhtiövastike — monthly maintenance charge", "tontti — plot of land",
+        "sää — weather", "sataa — it rains", "lumi — snow (sataa lunta)", "aurinko — sun",
+        "paistaa — to shine", "pilvistä — cloudy", "tuulista — windy", "aste — degree",
+        "pakkanen — sub-zero cold", "kevät — spring", "kesä — summer", "syksy — autumn", "talvi — winter"
+      ],
+      "phrases": ["Millainen sää tänään on? — What's the weather like today?", "Helsinki on isompi kuin Turku. — Helsinki is bigger than Turku.", "Ulkona on kymmenen astetta pakkasta. — It's minus ten outside."]
+    },
+    {
+      "id": 15,
+      "title": "The conditional: Finnish politeness technology",
+      "module": "4 — Sounding natural",
+      "grammar": ["conditional"],
+      "summary": "-isi- + personal ending; final e/i drop: olisin, saisin, voisin, söisin, menisin, tulisin, haluaisin, ostaisin. Politeness: Saisinko kahvin? Voisitko auttaa? Haluaisin varata pöydän. Olisiko sinulla hetki? Hypotheticals: jos-clause + main clause both conditional (Jos minulla olisi aikaa, matkustaisin enemmän).",
+      "vocab": [
+        "mielelläni — gladly, with pleasure", "sovittu — agreed, deal", "valitettavasti — unfortunately",
+        "päästä — to get (somewhere), make it", "hetki — a moment", "enemmän — more",
+        "voittaa — to win", "miljoona — a million", "ikkuna — window", "ulos — out(side)"
+      ],
+      "phrases": ["Saisinko laskun? — Could I have the bill?", "Voisitko auttaa minua? — Could you help me?", "Haluaisin varata pöydän kahdelle. — I'd like to book a table for two.", "Kävisikö viisi? — Would five work?", "Sopisiko kello neljä? — Would four o'clock suit?", "Valitettavasti en pääse huomenna. — Unfortunately I can't make it tomorrow.", "Mentäisiinkö kahville? — Shall we go for a coffee?"]
+    },
+    {
+      "id": 16,
+      "title": "Commands and directions (Imperatiivi)",
+      "module": "4 — Sounding natural",
+      "grammar": ["imperative"],
+      "summary": "Singular imperative = minä-form minus -n (weak grade): puhu! tule! mene! syö! ota! odota! anna! Negative: älä + same (Älä mene!). Plural/polite: infinitive stem + -kaa/-kää (tulkaa, menkää; strong grade); negative älkää menkö (recognise). Soften with 'Ole hyvä ja...' or conditional.",
+      "vocab": [
+        "risteys — junction, crossing", "silta — bridge", "lähin — nearest", "metroasema — metro station",
+        "rautatieasema — railway station", "suoraan — straight", "eteenpäin — ahead, forward",
+        "oikealle — to the right", "vasemmalle — to the left", "oikealla — on the right",
+        "vasemmalla — on the left", "kääntyä — to turn", "jatkaa — to continue", "kaukana — far",
+        "lähellä — near", "sisään — in(wards)", "alas — down", "lisää — more", "puoli — side; half"
+      ],
+      "phrases": ["Anteeksi, missä on lähin metroasema? — Excuse me, where is the nearest metro station?", "Miten pääsen rautatieasemalle? — How do I get to the railway station?", "Mene suoraan eteenpäin. — Go straight ahead.", "Käänny oikealle / vasemmalle. — Turn right / left.", "Se on kadun toisella puolella. — It's on the other side of the street.", "Tule sisään! — Come in!", "Istu alas. — Sit down.", "Ota lisää. — Take more.", "Odota hetki. — Wait a moment.", "Anna mennä! — Go for it!"]
+    },
+    {
+      "id": 17,
+      "title": "Going to do things: MA-infinitive, obligation, hobbies",
+      "module": "4 — Sounding natural",
+      "grammar": ["ma-infinitive", "obligation", "modal-verbs"],
+      "summary": "MA-infinitive on strong stem: -maan (menen syömään, tuletko uimaan), -massa (hän on syömässä), -masta (tulen treenaamasta); opetella puhumaan. Obligation: genitive subject + täytyy/pitää + infinitive, object nominative (minun täytyy mennä; meidän täytyy ostaa liput); negation sinun ei tarvitse tulla. osata = learned skill; voida = possibility; saada = permission.",
+      "vocab": [
+        "uida — to swim", "harrastaa — to do as a hobby (+ partitive)", "harrastus — hobby",
+        "uinti — swimming", "hiihto — skiing", "valokuvaus — photography", "lukeminen — reading",
+        "jalkapallo — football", "sähly — floorball", "lenkki — jog (käydä lenkillä)",
+        "kuntosali / sali — gym", "treenata — to train", "treeni — a workout", "ohjelma — programme",
+        "sarja — set", "toisto — rep", "kyykky — squat", "penkkipunnerrus / penkki — bench press",
+        "maastaveto — deadlift", "lämmittely — warm-up", "palautuminen — recovery", "lepopäivä — rest day",
+        "lihas — muscle", "painot — weights", "opetella — to learn (a skill)", "aikaisin — early", "jälkeen — after (+ gen)"
+      ],
+      "phrases": ["Mitä sinä harrastat? — What are your hobbies?", "Käyn salilla viisi kertaa viikossa. — I go to the gym five times a week.", "Minun täytyy mennä nyt. — I have to go now.", "Sinun ei tarvitse maksaa. — You don't have to pay.", "Osaatko uida? — Can you swim?", "Voin auttaa sinua huomenna. — I can help you tomorrow."]
+    },
+    {
+      "id": 18,
+      "title": "Puhekieli: how Finns actually talk",
+      "module": "4 — Sounding natural",
+      "grammar": ["puhekieli"],
+      "summary": "Systematic spoken register: mä/sä, mun/sun, mul(la) on, se/ne for people, oon/oot, ei oo, me mennään (passive as we-form), tää/nää, toi/noi, Ooksä...?, mut/sit, kakskyt, tuu tänne, emmä tiiä. Spoken numbers: yks, kaks, viis, kuus, seittemän, kaheksan, yheksän. Particles: no, niin/nii, siis, niinku, vaan, kyl, joo, joo joo, no niin. Strategy: understand puhekieli, produce standard.",
+      "vocab": [
+        "mä / sä — I / you (spoken)", "mun / sun — my / your (spoken)", "oon / oot — am / are (spoken)",
+        "ei oo — isn't (spoken)", "tää / toi — this / that (spoken)", "mut — but (spoken)",
+        "sit — then (spoken)", "niinku — like (filler)", "siis — so, I mean", "kyl — surely (spoken)",
+        "no niin — right then / there we go / the universal phrase"
+      ],
+      "phrases": ["Emmä tiiä. — I don't know. (spoken)", "Ooksä nähny sen? — Have you seen him/her? (spoken)", "Me mennään kotiin. — We're going home. (spoken)", "Mul ei oo aikaa. — I don't have time. (spoken)"]
+    },
+    {
+      "id": 19,
+      "title": "The passive, plurals in cases, reading the street",
+      "module": "4 — Sounding natural",
+      "grammar": ["passive", "plural-cases"],
+      "summary": "Passive/impersonal: type 1 minä-stem (weak) + -taan/-tään with a/ä→e (puhutaan, annetaan); other types infinitive + -daan/-laan/-taan (syödään, tullaan, mennään, halutaan, tarvitaan); past -ttiin/-tiin (puhuttiin, mentiin). Uses: general statements (Suomessa juodaan paljon kahvia), spoken we (Mennään!), signs. Plural cases: -i- before ending (taloissa, kaupoissa, autoilla, ystäville); a→o shifts (kauppa→kaupoissa); partitive plural (taloja, naisia, miehiä, huoneita, omenoita, kukkia).",
+      "vocab": [
+        "Myydään — For sale", "Vuokrataan — To let", "Avoinna — Open (sign)", "Suljettu — Closed",
+        "Työnnä — Push", "Vedä — Pull", "Ei sisäänkäyntiä — No entry", "Hätäuloskäynti — Emergency exit",
+        "Paina nappia — Press the button", "tupakoida — to smoke", "taksi — taxi", "nappi — button", "hylly — shelf"
+      ],
+      "phrases": ["Mennään! — Let's go!", "Otetaanko taksi? — Shall we take a taxi?", "Nähdään maanantaina! — See you Monday!", "Täällä puhutaan suomea. — Finnish is spoken here."]
+    },
+    {
+      "id": 20,
+      "title": "Työelämä: work, email, translative & essive",
+      "module": "5 — Wider worlds",
+      "grammar": ["translative-essive"],
+      "summary": "Translative -ksi = becoming/purpose: tulla johtajaksi, opiskella ekonomiksi, muuttua kylmäksi, aamupalaksi, saada valmiiksi. Essive -na/-nä = role/temporary state (+ days): työskennellä opettajana, lapsena, maanantaina, jouluna. Finnish work email is brisk: Hei X, ... Ystävällisin terveisin.",
+      "vocab": [
+        "työpaikka — workplace, job", "työkaveri / kollega — colleague", "esihenkilö — manager, line manager",
+        "tiimi — team", "kokous / palaveri — meeting", "sähköposti — email", "liite — attachment",
+        "määräaika — deadline", "hanke / projekti — programme / project", "tavoite — goal",
+        "raportti — report", "sopimus — contract, agreement", "asiakas — client", "ministeriö — ministry",
+        "virasto — agency, office", "etätyö — remote work", "palkka — salary", "työhaastattelu — job interview",
+        "vastuu — responsibility", "kalenteri — calendar", "työskennellä — to work (formal)", "valmis — ready, finished"
+      ],
+      "phrases": ["Sopiiko sinulle huomenna kello kymmenen? — Does tomorrow at ten suit you?", "Palataan asiaan. — Let's come back to this.", "Laitan sen kalenteriin. — I'll put it in the calendar.", "Hyvä kysymys. — Good question.", "kiitos viestistäsi — thanks for your message", "Liitteenä on raportti. — The report is attached.", "Ystävällisin terveisin — Kind regards"]
+    },
+    {
+      "id": 21,
+      "title": "Terveys: health, body, pharmacy",
+      "module": "5 — Wider worlds",
+      "grammar": [],
+      "summary": "Ailments use possession: Minulla on flunssa/kuume/päänsärky/yskä. States: kurkku on kipeä; voin huonosti; olen ollut kipeänä kolme päivää (essive). Vocabulary lesson — recycles minulla on, partitive, conditional, essive.",
+      "vocab": [
+        "pää — head", "silmä — eye", "korva — ear", "nenä — nose", "suu — mouth",
+        "hammas — tooth", "kurkku — throat (also cucumber)", "niska — back of neck", "selkä — back",
+        "vatsa — stomach", "sydän — heart", "iho — skin", "flunssa — a cold", "kuume — fever",
+        "päänsärky — headache", "yskä — cough", "kipeä — sore, ill", "terveysasema — health centre",
+        "lääkäri — doctor", "päivystys — A&E, urgent care", "apteekki — pharmacy", "lääke — medicine",
+        "resepti — prescription", "särkylääke — painkiller", "laastari — plaster", "jotain — some, something",
+        "tehokas — effective", "paha — bad", "kova — hard, severe"
+      ],
+      "phrases": ["Mikä sinulla on? — What's wrong?", "Minulla on kuume. — I have a fever.", "Kurkkuni on kipeä. — My throat is sore.", "Voin huonosti. — I feel unwell.", "Haluaisin varata ajan lääkärille. — I'd like to book a doctor's appointment.", "Pikaista paranemista! — Get well soon!", "Siinä kaikki. — That's all."]
+    },
+    {
+      "id": 22,
+      "title": "Reading the news: society, economy, joka",
+      "module": "5 — Wider worlds",
+      "grammar": ["relative-joka", "minen-nouns"],
+      "summary": "joka declines by role: joka/jonka/jota/jossa/josta/johon/jolla; plural jotka/joita/joissa. että = that (comma before both). -minen turns verbs into nouns (lukeminen, asuminen; asumisesta). Recognise-only rare cases: abessive -tta (rahatta), comitative -ine- (puolisoineen), instructive -in (omin silmin, jalan). Opinions: minusta/mielestäni + koska; samaa/eri mieltä.",
+      "vocab": [
+        "uutinen / uutiset — news item / the news", "yhteiskunta — society", "hallitus — government",
+        "eduskunta — parliament", "kaupunginvaltuusto — city council", "päättää — to decide",
+        "ehdottaa — to propose", "laki — law", "talous — economy", "vero — tax", "korko — interest rate",
+        "arvo — value", "asuntomarkkinat — housing market", "tontti — plot of land", "maa — land; country",
+        "vuokrasopimus — lease", "nousta — to rise", "laskea — to fall; to count", "kasvaa — to grow",
+        "rakentaa — to build", "työttömyys — unemployment", "järjestelmä — system", "maavero — land tax",
+        "luoda — to create", "vähitellen — gradually", "kuukausikulut — monthly costs",
+        "asuminen — living, housing", "vaan — but rather (after negative)", "että — that (conjunction)"
+      ],
+      "phrases": ["Minusta / Mielestäni… — In my opinion…", "Olen samaa mieltä. — I agree.", "Olen eri mieltä. — I disagree.", "Luulen, että vuokra nousee. — I think the rent will rise.", "Kaupunki, jossa asun, kasvaa nopeasti. — The city I live in is growing fast."]
+    },
+    {
+      "id": 23,
+      "title": "Finale: graduation text and final test",
+      "module": "5 — Wider worlds",
+      "grammar": [],
+      "summary": "Review lesson: graduation reading 'Päivä Helsingissä' + 20-item final test covering the whole course. Where next: Yle Uutiset selkosuomeksi daily, Suomen mestari 2–3, kielikahvila / tandem partner.",
+      "vocab": [
+        "joten — so, therefore", "jättää — to leave (something)", "hymyillä — to smile",
+        "melkein — almost", "olo — the feeling/state one is in", "netistä — from the internet",
+        "valmis — ready", "kylmä — cold", "ihminen / ihmiset — person / people"
+      ],
+      "phrases": ["Voidaanko puhua suomea? Minä harjoittelen. — Can we speak Finnish? I'm practising.", "Onnea matkaan! — Good luck on the journey!"]
+    }
+  ]
+}

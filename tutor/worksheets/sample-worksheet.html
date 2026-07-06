@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harjoitus — Finnish practice worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF9F5; --panel:#EDF1F8; --birch:#F2EFE8; --ink:#1C2530; --ink-soft:#4A5568;
+  --blue:#14417B; --blue-deep:#0D2F5C; --lakka:#B96A00; --green:#2E7D32; --green-soft:#E7F2E7;
+  --red-soft:#FBF3E6; --rule:#D8DCE3; --radius:10px;
+  --sans:"Jost","Futura","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.03rem;line-height:1.6}
+main{max-width:52rem;margin:0 auto;padding:0 clamp(1.2rem,4vw,3.2rem) 9rem}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--lakka);outline-offset:2px;border-radius:3px}
+
+header.hero{padding:2.6rem 0 1.2rem;border-bottom:2px solid var(--blue);margin-bottom:1.6rem}
+header.hero h1{font-family:var(--sans);font-weight:700;color:var(--blue-deep);font-size:clamp(1.7rem,4.5vw,2.4rem);line-height:1.12;margin:0 0 .3rem}
+header.hero .sub{font-family:var(--sans);color:var(--ink-soft);margin:0 0 .6rem;font-size:clamp(.92rem,2vw,1.05rem)}
+.focus-chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0 0}
+.focus-chips span{font-family:var(--sans);font-size:.74rem;font-weight:600;color:var(--blue-deep);background:var(--panel);border:1px solid var(--rule);border-radius:99px;padding:.14rem .6rem}
+#globalscore{font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--blue-deep);margin-top:.7rem}
+
+.notice{font-family:var(--sans);font-size:.85rem;background:var(--birch);border:1px solid var(--rule);border-left:4px solid var(--lakka);border-radius:0 8px 8px 0;padding:.6rem .8rem;margin:1rem 0}
+
+.excard{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--lakka);border-radius:0 var(--radius) var(--radius) 0;margin:1.2rem 0;padding:.95rem 1.05rem}
+.excard.modelcard{border-left-color:var(--blue)}
+.excard.speakcard{border-left-color:#5B3E96}
+.exhead{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;flex-wrap:wrap}
+.exhead .exid{font-family:var(--sans);font-weight:600;color:var(--lakka);letter-spacing:.02em}
+.modelcard .exhead .exid{color:var(--blue-deep)}
+.speakcard .exhead .exid{color:#5B3E96}
+.exhead .score{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--blue-deep);background:var(--panel);border-radius:99px;padding:.15rem .6rem}
+.instr{margin:.35rem 0 .7rem;color:var(--ink);font-size:.98rem}
+.gloss{font-family:var(--sans);font-size:.8rem;color:var(--ink-soft);margin:.2rem 0 .6rem}
+
+.item{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,220px) 1.6rem;gap:.5rem .7rem;align-items:center;padding:.3rem 0}
+.item.wide{grid-template-columns:1fr;gap:.25rem}
+.item.wide input{width:100%}
+.item .q{font-size:.97rem}
+input.ans{font-family:var(--serif);font-size:.97rem;padding:.4rem .55rem;border:1px solid var(--rule);border-radius:7px;background:#fff;color:var(--ink);width:100%}
+input.ans:focus{border-color:var(--blue)}
+input.ans.right{border-color:var(--green);background:var(--green-soft)}
+input.ans.wrong{border-color:var(--lakka);background:var(--red-soft)}
+.mark{font-family:var(--sans);font-weight:700;text-align:center}
+.mark.right{color:var(--green)}
+.mark.wrong{color:var(--lakka)}
+.sol{grid-column:1 / -1;font-size:.9rem;color:var(--green);padding:.05rem 0 .25rem}
+.sol .lbl{font-family:var(--sans);font-weight:600;font-size:.78rem;letter-spacing:.04em;color:var(--ink-soft);margin-right:.4rem}
+.showsol{grid-column:1 / -1;justify-self:start;font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--blue);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline}
+.checkrow{margin-top:.7rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+button.check{font-family:var(--sans);font-weight:600;font-size:.85rem;color:#fff;background:var(--blue);border:none;border-radius:8px;padding:.5rem 1rem;cursor:pointer}
+button.check:hover{background:var(--blue-deep)}
+.hint{font-family:var(--sans);font-size:.76rem;color:var(--ink-soft)}
+
+.passage-src{background:var(--birch);border-radius:8px;padding:.8rem 1rem;font-size:1rem;margin:.4rem 0 .7rem;white-space:pre-wrap}
+textarea.free{width:100%;min-height:6rem;font-family:var(--serif);font-size:.97rem;padding:.55rem .65rem;border:1px solid var(--rule);border-radius:7px;background:#fff;color:var(--ink);resize:vertical}
+details.model{margin-top:.6rem;border:1px solid var(--rule);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;background:#fff}
+details.model summary{cursor:pointer;list-style:none;font-family:var(--sans);font-weight:600;font-size:.84rem;color:var(--blue-deep);padding:.5rem .8rem}
+details.model summary::-webkit-details-marker{display:none}
+details.model summary::before{content:"▸";display:inline-block;margin-right:.5rem;transition:transform .15s ease}
+details.model[open] summary::before{transform:rotate(90deg)}
+details.model .modeltext{padding:.1rem .8rem .7rem;font-size:.95rem;white-space:pre-wrap}
+details.model[open]{background:var(--panel)}
+.model-caveat{font-family:var(--sans);font-size:.74rem;color:var(--ink-soft);padding:0 .8rem .6rem}
+
+.speak-item{border-top:1px dashed var(--rule);padding:.65rem 0 .5rem}
+.speak-item:first-of-type{border-top:none}
+.speak-target{font-size:1.02rem;margin-bottom:.15rem}
+.speak-target .w.said{color:var(--green);font-weight:600}
+.speak-target .w.missed{color:var(--lakka);text-decoration:underline dotted}
+.speak-hint{font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);margin-bottom:.35rem}
+.speak-controls{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+button.mic{font-family:var(--sans);font-weight:600;font-size:.85rem;color:#fff;background:#5B3E96;border:none;border-radius:8px;padding:.45rem .95rem;cursor:pointer}
+button.mic:hover{background:#47307A}
+button.mic.listening{background:#B03030;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+button.mic:disabled{background:#9AA3B2;cursor:not-allowed}
+.transcript{font-family:var(--sans);font-size:.88rem;color:var(--ink-soft);min-height:1.2em;flex:1 1 12rem}
+.transcript .heard{color:var(--ink);font-family:var(--serif);font-size:.95rem}
+.speak-verdict{font-family:var(--sans);font-weight:700}
+.speak-verdict.right{color:var(--green)}
+.speak-verdict.wrong{color:var(--lakka)}
+.linkbtn{font-family:var(--sans);font-size:.76rem;font-weight:600;color:var(--blue);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline}
+.speak-typed{margin-top:.4rem;display:none}
+.speak-typed.on{display:block}
+.speak-err{font-family:var(--sans);font-size:.78rem;color:#B03030;margin-top:.25rem}
+
+.charbar{position:fixed;bottom:1rem;right:1rem;display:flex;gap:.4rem;z-index:10}
+.charbar button{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--blue-deep);background:#fff;border:1px solid var(--rule);border-radius:9px;width:2.6rem;height:2.6rem;cursor:pointer;box-shadow:0 2px 8px rgba(13,47,92,.12)}
+.charbar button:hover{background:var(--panel)}
+.charbar .lbl{align-self:center;font-family:var(--sans);font-size:.68rem;color:var(--ink-soft);background:var(--paper);padding:.2rem .4rem;border-radius:6px}
+
+.exportbar{position:fixed;bottom:1rem;left:1rem;display:flex;gap:.5rem;align-items:center;z-index:10;font-family:var(--sans)}
+.exportbar button{font-family:var(--sans);font-weight:600;font-size:.84rem;color:#fff;background:var(--green);border:none;border-radius:9px;padding:.55rem 1rem;cursor:pointer;box-shadow:0 2px 8px rgba(13,47,92,.15)}
+.exportbar button:hover{filter:brightness(.92)}
+.exportbar button.secondary{background:#fff;color:var(--blue-deep);border:1px solid var(--rule)}
+.exportbar .status{font-size:.74rem;color:var(--ink-soft);background:var(--paper);padding:.2rem .45rem;border-radius:6px;max-width:14rem}
+@media print{.charbar,.exportbar,button.check,.showsol,button.mic{display:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <h1 id="hd-title">Harjoitus</h1>
+  <p class="sub" id="hd-sub"></p>
+  <div class="focus-chips" id="hd-focus"></div>
+  <div id="globalscore"></div>
+</header>
+<div id="speech-notice"></div>
+<div id="app"></div>
+</main>
+
+<div class="charbar" aria-label="Finnish characters">
+  <span class="lbl">insert:</span>
+  <button type="button" data-ch="ä">ä</button>
+  <button type="button" data-ch="ö">ö</button>
+  <button type="button" data-ch="å">å</button>
+</div>
+<div class="exportbar">
+  <button type="button" id="btn-export">Export answers ⭳</button>
+  <button type="button" id="btn-copy" class="secondary">Copy</button>
+  <span class="status" id="export-status">When done, export and run /mark</span>
+</div>
+
+<script>
+"use strict";
+/*
+ * Finnish tutor worksheet engine.
+ * The /practice skill copies this template and replaces the single PAYLOAD line
+ * below with the day's content. Exercise types:
+ *   check        — typed items auto-checked against accepted answers
+ *                  items: [{q, a:["accepted","variants"], d:"display answer", wide:1?}]
+ *   passage      — translation passage, collected for /mark
+ *                  {dir:"fi-en"|"en-fi", source:"...", model:"...", gloss:"new words..."}
+ *   speak-read   — read the Finnish sentence aloud; transcript compared to target
+ *                  items: [{target:"...", hint:"english meaning"}]
+ *   speak-answer — answer the question aloud (typed fallback available)
+ *                  items: [{q:"...", a:[...], d:"...", hint:"..."}]
+ *   free         — free writing with optional model answer
+ *                  {prompt:"...", model:"..."}
+ */
+const PAYLOAD = {
+  meta: {
+    title: "Esimerkki — sample worksheet",
+    date: "2026-07-06",
+    level: "Lessons 0–4 (sample)",
+    focus: ["numbers", "partitive-use", "verb-type-1"]
+  },
+  exercises: [
+    {
+      id: "1", type: "passage", dir: "fi-en",
+      title: "Käännä englanniksi — translate into English",
+      instr: "Read Sari's morning, then translate the whole passage into English in the box.",
+      gloss: "New here: juon — I drink (juoda) · myös — also, too",
+      source: "Hyvää huomenta! Minä olen Sari ja olen suomalainen. Istun kahvilassa ja juon kahvia. Kahvi maksaa kolme euroa. Ostan myös pullan — se maksaa kaksi euroa ja viisikymmentä senttiä. Anteeksi, puhutko englantia? Minä puhun vähän englantia ja ruotsia. Entä sinä? No, kiitos ja näkemiin!",
+      model: "Good morning! I am Sari and I am Finnish. I'm sitting in a café and drinking coffee. The coffee costs three euros. I'm also buying a bun — it costs two euros and fifty cents. Excuse me, do you speak English? I speak a little English and Swedish. And you? Well, thanks and goodbye!"
+    },
+    {
+      id: "2", type: "passage", dir: "en-fi",
+      title: "Käännä suomeksi — translate into Finnish",
+      instr: "Translate into Finnish. Everything here uses patterns from lessons 0–4.",
+      source: "Hi! I am Malcolm. I am English and I speak English and a little Finnish. I am sitting in a restaurant. Could I have a coffee and a sandwich? How much does it cost? Thank you very much, bye!",
+      model: "Hei! Minä olen Malcolm. Olen englantilainen ja puhun englantia ja vähän suomea. Istun ravintolassa. Saisinko kahvin ja voileivän? Paljonko se maksaa? Kiitos paljon, hei hei!"
+    },
+    {
+      id: "3", type: "speak-read",
+      title: "Lue ääneen — read aloud",
+      instr: "Press 🎤 and read the sentence aloud. Green words were heard correctly; dotted words weren't — try again, exaggerating double letters.",
+      items: [
+        {target: "Hyvää päivää! Mitä kuuluu?", hint: "Good day! How are you?"},
+        {target: "Kiitos, hyvää. Entä sinulle?", hint: "Fine, thanks. And you?"},
+        {target: "Kuka sinä olet?", hint: "Who are you?"},
+        {target: "Tuli, tuuli ja tulli.", hint: "Fire, wind and customs — length practice!"},
+        {target: "Saisinko kaksi kahvia ja pullan?", hint: "Could I have two coffees and a bun?"}
+      ]
+    },
+    {
+      id: "4", type: "speak-answer",
+      title: "Vastaa ääneen — answer aloud",
+      instr: "Answer each question out loud in Finnish (or use “or type it”).",
+      items: [
+        {q: "Mikä sinun nimesi on?", hint: "Say: Minä olen … / Olen …",
+         a: ["minä olen malcolm", "olen malcolm", "nimeni on malcolm", "malcolm"], d: "Minä olen Malcolm."},
+        {q: "Puhutko suomea?", hint: "Yes — a little!",
+         a: ["puhun vähän", "puhun vähän suomea", "kyllä puhun vähän", "joo puhun vähän", "kyllä puhun vähän suomea"], d: "Puhun vähän (suomea)."},
+        {q: "Paljonko on kaksi plus kolme?", hint: "Answer with the Finnish number.",
+         a: ["viisi", "se on viisi"], d: "viisi"},
+        {q: "Someone thanks you. What do you say?", hint: "Lesson 1 courtesy.",
+         a: ["ole hyvä"], d: "Ole hyvä."}
+      ]
+    },
+    {
+      id: "5", type: "check",
+      title: "Numerot ja partitiivi — numbers and the counting rule",
+      instr: "Write the numbers in words; put the bracketed noun in the form the number demands (Lesson 4).",
+      items: [
+        {q: "3 (in words)", a: ["kolme"]},
+        {q: "8", a: ["kahdeksan"]},
+        {q: "15", a: ["viisitoista"]},
+        {q: "72", a: ["seitsemänkymmentäkaksi"]},
+        {q: "kaksi (kahvi)", a: ["kahvia"]},
+        {q: "viisi (euro)", a: ["euroa"]},
+        {q: "kolme (olut)", a: ["olutta"]},
+        {q: "yksi (pulla)", a: ["pulla"]}
+      ]
+    },
+    {
+      id: "6", type: "free",
+      title: "Vapaa kirjoitus — introduce yourself",
+      instr: "Write three or four sentences: your name, nationality, and which languages you speak.",
+      prompt: "Kuka sinä olet? Kirjoita 3–4 lausetta.",
+      model: "Minä olen Malcolm. Olen englantilainen ja olen kotoisin Lontoosta. Puhun englantia ja vähän suomea."
+    }
+  ]
+};
+
+function norm(s){
+  return String(s).toLowerCase().normalize("NFC")
+    .replace(/[’‘`´]/g,"'")
+    .replace(/[—–]/g," ")
+    .replace(/[.,!?…;:"()]/g," ")
+    .replace(/\s+/g," ").trim();
+}
+
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let activeRec = null;
+
+const app = document.getElementById("app");
+const state = {};          // exId -> {right:[], total, scoreEl}
+const exportItems = [];    // registry of everything /mark needs
+
+function init(){
+  if(!PAYLOAD){
+    app.innerHTML = '<div class="notice">This is the blank worksheet template. Run <strong>/practice</strong> in Claude Code to generate today’s worksheet.</div>';
+    document.getElementById("hd-sub").textContent = "Template — no content loaded";
+    return;
+  }
+  const meta = PAYLOAD.meta || {};
+  document.getElementById("hd-title").textContent = meta.title || "Harjoitus";
+  document.title = (meta.title || "Harjoitus") + " — Finnish practice";
+  document.getElementById("hd-sub").textContent = [meta.date, meta.level].filter(Boolean).join(" · ");
+  const chips = document.getElementById("hd-focus");
+  (meta.focus || []).forEach(f => { const s = document.createElement("span"); s.textContent = f; chips.appendChild(s); });
+
+  if(!SR){
+    document.getElementById("speech-notice").innerHTML =
+      '<div class="notice">🎤 Speech recognition isn’t available in this browser — speaking items switch to typed answers. Chrome or Edge recommended.</div>';
+  }
+
+  (PAYLOAD.exercises || []).forEach(renderExercise);
+  updateScores();
+}
+
+function renderExercise(ex){
+  const card = document.createElement("section");
+  card.className = "excard" + (ex.type === "passage" || ex.type === "free" ? " modelcard" : "") +
+                   (ex.type === "speak-read" || ex.type === "speak-answer" ? " speakcard" : "");
+  const head = document.createElement("div");
+  head.className = "exhead";
+  head.innerHTML = '<span class="exid">Harjoitus ' + esc(ex.id) + ' · ' + esc(ex.title) + '</span>';
+  card.appendChild(head);
+  const instr = document.createElement("p");
+  instr.className = "instr"; instr.textContent = ex.instr || "";
+  card.appendChild(instr);
+  if(ex.gloss){
+    const g = document.createElement("p"); g.className = "gloss"; g.textContent = "📖 " + ex.gloss;
+    card.appendChild(g);
+  }
+
+  if(ex.type === "check") renderCheck(ex, card, head);
+  else if(ex.type === "passage") renderPassage(ex, card);
+  else if(ex.type === "speak-read") renderSpeakRead(ex, card, head);
+  else if(ex.type === "speak-answer") renderSpeakAnswer(ex, card, head);
+  else if(ex.type === "free") renderFree(ex, card);
+
+  app.appendChild(card);
+}
+
+/* ---------- typed check exercises (same behaviour as the workbook) ---------- */
+function renderCheck(ex, card, head){
+  addScore(ex, head, ex.items.length);
+  ex.items.forEach(function(item, idx){
+    const row = document.createElement("div");
+    row.className = "item" + (item.wide ? " wide" : "");
+    const q = document.createElement("div");
+    q.className = "q"; q.textContent = item.q;
+    row.appendChild(q);
+    const input = document.createElement("input");
+    input.className = "ans"; input.type = "text";
+    input.autocapitalize = "off"; input.autocomplete = "off"; input.spellcheck = false;
+    input.setAttribute("aria-label", "Answer for " + ex.id + " item " + (idx+1));
+    row.appendChild(input);
+    const mark = document.createElement("span");
+    mark.className = "mark"; mark.setAttribute("aria-live","polite");
+    row.appendChild(mark);
+    const sol = document.createElement("div");
+    const showBtn = document.createElement("button");
+    showBtn.type = "button"; showBtn.className = "showsol"; showBtn.textContent = "Show answer";
+    showBtn.style.display = "none";
+    showBtn.addEventListener("click", function(){
+      sol.className = "sol";
+      sol.innerHTML = '<span class="lbl">Oikea vastaus:</span>' + esc(item.d || item.a[0]);
+      showBtn.style.display = "none";
+    });
+    row.appendChild(showBtn);
+    row.appendChild(sol);
+
+    function checkItem(){
+      const v = norm(input.value);
+      if(!v) return;
+      const ok = item.a.some(function(ans){ return norm(ans) === v; });
+      input.classList.toggle("right", ok);
+      input.classList.toggle("wrong", !ok);
+      mark.textContent = ok ? "✓" : "✗";
+      mark.className = "mark " + (ok ? "right" : "wrong");
+      showBtn.style.display = ok ? "none" : "inline";
+      if(ok){ sol.className = ""; sol.innerHTML = ""; }
+      state[ex.id].right[idx] = ok;
+      updateScores();
+    }
+    input.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); checkItem(); } });
+    input.addEventListener("blur", function(){ if(input.value.trim()) checkItem(); });
+    row._check = checkItem;
+    card.appendChild(row);
+
+    exportItems.push({exercise: ex.id, title: ex.title, type: "check", idx: idx+1,
+      question: item.q, expected: item.d || item.a[0],
+      get: function(){ return {given: input.value, auto: state[ex.id].right[idx] === true ? "right" : (input.value.trim() ? "wrong" : "blank")}; }});
+  });
+  addCheckAll(card);
+}
+
+/* ---------- translation passages (marked by /mark, not auto-checked) ---------- */
+function renderPassage(ex, card){
+  const src = document.createElement("div");
+  src.className = "passage-src"; src.textContent = ex.source;
+  card.appendChild(src);
+  const ta = document.createElement("textarea");
+  ta.className = "free";
+  ta.placeholder = ex.dir === "fi-en" ? "Your English translation…" : "Käännöksesi suomeksi…";
+  ta.spellcheck = (ex.dir === "fi-en");
+  card.appendChild(ta);
+  if(ex.model){
+    const det = document.createElement("details");
+    det.className = "model";
+    det.innerHTML = '<summary>Show one model translation</summary><div class="modeltext">' + esc(ex.model) +
+      '</div><div class="model-caveat">A model, not the only correct answer — /mark judges your version properly.</div>';
+    card.appendChild(det);
+  }
+  exportItems.push({exercise: ex.id, title: ex.title, type: "passage", dir: ex.dir,
+    question: ex.source, expected: ex.model || "",
+    get: function(){ return {given: ta.value, auto: null}; }});
+}
+
+/* ---------- free writing ---------- */
+function renderFree(ex, card){
+  if(ex.prompt){
+    const p = document.createElement("div");
+    p.className = "passage-src"; p.textContent = ex.prompt;
+    card.appendChild(p);
+  }
+  const ta = document.createElement("textarea");
+  ta.className = "free"; ta.placeholder = "Kirjoita tähän…";
+  ta.spellcheck = false;
+  card.appendChild(ta);
+  if(ex.model){
+    const det = document.createElement("details");
+    det.className = "model";
+    det.innerHTML = '<summary>Show model answer</summary><div class="modeltext">' + esc(ex.model) + '</div>';
+    card.appendChild(det);
+  }
+  exportItems.push({exercise: ex.id, title: ex.title, type: "free",
+    question: ex.prompt || ex.instr, expected: ex.model || "",
+    get: function(){ return {given: ta.value, auto: null}; }});
+}
+
+/* ---------- speaking: read aloud ---------- */
+function renderSpeakRead(ex, card, head){
+  addScore(ex, head, ex.items.length);
+  ex.items.forEach(function(item, idx){
+    const wrap = document.createElement("div");
+    wrap.className = "speak-item";
+    const tgt = document.createElement("div");
+    tgt.className = "speak-target";
+    tgt.innerHTML = item.target.split(/\s+/).map(function(w){ return '<span class="w">' + esc(w) + '</span>'; }).join(" ");
+    wrap.appendChild(tgt);
+    if(item.hint){
+      const h = document.createElement("div"); h.className = "speak-hint"; h.textContent = item.hint;
+      wrap.appendChild(h);
+    }
+    const st = speechControls(wrap, ex, idx, {
+      judge: function(alts){
+        const hit = alts.find(function(t){ return norm(t) === norm(item.target); });
+        wordDiff(tgt, item.target, alts[0] || "");
+        return {ok: !!hit, best: alts[0] || ""};
+      },
+      expected: item.target
+    });
+    exportItems.push({exercise: ex.id, title: ex.title, type: "speak-read", idx: idx+1,
+      question: "Read aloud: " + item.target, expected: item.target, get: st.get});
+    card.appendChild(wrap);
+  });
+}
+
+/* ---------- speaking: answer a question ---------- */
+function renderSpeakAnswer(ex, card, head){
+  addScore(ex, head, ex.items.length);
+  ex.items.forEach(function(item, idx){
+    const wrap = document.createElement("div");
+    wrap.className = "speak-item";
+    const q = document.createElement("div");
+    q.className = "speak-target"; q.textContent = item.q;
+    wrap.appendChild(q);
+    if(item.hint){
+      const h = document.createElement("div"); h.className = "speak-hint"; h.textContent = item.hint;
+      wrap.appendChild(h);
+    }
+    const st = speechControls(wrap, ex, idx, {
+      judge: function(alts){
+        const hit = alts.find(function(t){ return item.a.some(function(ans){ return norm(ans) === norm(t); }); });
+        return {ok: !!hit, best: hit || alts[0] || ""};
+      },
+      expected: item.d || item.a[0],
+      typedAccept: item.a
+    });
+    exportItems.push({exercise: ex.id, title: ex.title, type: "speak-answer", idx: idx+1,
+      question: item.q, expected: item.d || item.a[0], get: st.get});
+    card.appendChild(wrap);
+  });
+}
+
+/* shared mic + transcript + typed-fallback controls for one speaking item */
+function speechControls(wrap, ex, idx, opts){
+  const controls = document.createElement("div");
+  controls.className = "speak-controls";
+  const mic = document.createElement("button");
+  mic.type = "button"; mic.className = "mic"; mic.textContent = "🎤 Puhu";
+  const tr = document.createElement("span");
+  tr.className = "transcript"; tr.setAttribute("aria-live","polite");
+  const verdict = document.createElement("span");
+  verdict.className = "speak-verdict";
+  controls.appendChild(mic); controls.appendChild(verdict); controls.appendChild(tr);
+  wrap.appendChild(controls);
+
+  const errEl = document.createElement("div"); errEl.className = "speak-err";
+  wrap.appendChild(errEl);
+
+  const override = document.createElement("button");
+  override.type = "button"; override.className = "linkbtn";
+  override.textContent = "The recogniser misheard me — mark as correct";
+  override.style.display = "none";
+  wrap.appendChild(override);
+
+  // typed fallback
+  const typedWrap = document.createElement("div");
+  typedWrap.className = "speak-typed";
+  const typedInput = document.createElement("input");
+  typedInput.className = "ans"; typedInput.type = "text";
+  typedInput.placeholder = "Type your answer instead…";
+  typedInput.autocapitalize = "off"; typedInput.autocomplete = "off"; typedInput.spellcheck = false;
+  typedWrap.appendChild(typedInput);
+  wrap.appendChild(typedWrap);
+  const typedToggle = document.createElement("button");
+  typedToggle.type = "button"; typedToggle.className = "linkbtn"; typedToggle.textContent = "or type it";
+  controls.appendChild(typedToggle);
+
+  const rec = {transcript: "", alts: [], result: null, overridden: false, typed: ""};
+
+  function setResult(ok, best, viaTyped){
+    rec.result = ok ? "right" : "wrong";
+    verdict.textContent = ok ? "✓" : "✗";
+    verdict.className = "speak-verdict " + (ok ? "right" : "wrong");
+    override.style.display = (!ok && !viaTyped) ? "inline" : "none";
+    if(!viaTyped){
+      tr.innerHTML = 'heard: <span class="heard">“' + esc(best || "…") + '”</span>' +
+        (!ok && opts.expected ? ' <span style="color:var(--ink-soft)">· expected: ' + esc(opts.expected) + '</span>' : "");
+    }
+    state[ex.id].right[idx] = ok;
+    updateScores();
+  }
+
+  override.addEventListener("click", function(){
+    rec.overridden = true;
+    setResult(true, rec.transcript, false);
+    override.style.display = "none";
+  });
+
+  typedToggle.addEventListener("click", function(){ typedWrap.classList.toggle("on"); typedInput.focus(); });
+  function checkTyped(){
+    const v = norm(typedInput.value);
+    if(!v) return;
+    rec.typed = typedInput.value;
+    const accept = opts.typedAccept || [opts.expected];
+    const ok = accept.some(function(a){ return norm(a) === v; });
+    typedInput.classList.toggle("right", ok);
+    typedInput.classList.toggle("wrong", !ok);
+    setResult(ok, typedInput.value, true);
+  }
+  typedInput.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); checkTyped(); } });
+  typedInput.addEventListener("blur", function(){ if(typedInput.value.trim()) checkTyped(); });
+
+  if(!SR){
+    mic.disabled = true;
+    typedWrap.classList.add("on");
+    typedToggle.style.display = "none";
+  } else {
+    mic.addEventListener("click", function(){
+      if(activeRec){ try{ activeRec.abort(); }catch(e){} }
+      errEl.textContent = "";
+      const r = new SR();
+      activeRec = r;
+      r.lang = "fi-FI"; r.interimResults = true; r.maxAlternatives = 5;
+      mic.classList.add("listening"); mic.textContent = "● Kuuntelen…";
+      tr.textContent = "";
+      let finals = [];
+      r.onresult = function(e){
+        let interim = "", alts = [];
+        for(let i = 0; i < e.results.length; i++){
+          if(e.results[i].isFinal){
+            for(let j = 0; j < e.results[i].length; j++) alts.push(e.results[i][j].transcript.trim());
+          } else {
+            interim += e.results[i][0].transcript;
+          }
+        }
+        if(interim) tr.innerHTML = '<span class="heard">' + esc(interim) + '…</span>';
+        if(alts.length) finals = alts;
+      };
+      r.onerror = function(e){
+        const msgs = {
+          "not-allowed": "Microphone blocked on this page — use “or type it” instead. (On your own computer: allow the mic in site settings, or run serve.cmd and open the http://localhost link.)",
+          "service-not-allowed": "Speech service blocked on this page — use “or type it” instead. (On your own computer, serve.cmd + the http://localhost link usually fixes this.)",
+          "language-not-supported": "This browser’s speech service doesn’t support Finnish — try Google Chrome.",
+          "no-speech": "Didn’t hear anything — try again closer to the mic.",
+          "network": "The speech service needs an internet connection.",
+          "audio-capture": "No microphone found."
+        };
+        errEl.textContent = msgs[e.error] || ("Speech error: " + e.error);
+      };
+      r.onend = function(){
+        mic.classList.remove("listening"); mic.textContent = "🎤 Puhu";
+        activeRec = null;
+        if(finals.length){
+          rec.transcript = finals[0]; rec.alts = finals; rec.overridden = false;
+          const res = opts.judge(finals);
+          setResult(res.ok, res.best, false);
+        }
+      };
+      try { r.start(); } catch(e){ errEl.textContent = "Could not start the microphone: " + e.message; }
+    });
+  }
+
+  return { get: function(){
+    return {given: rec.typed || rec.transcript, transcript: rec.transcript, alternatives: rec.alts,
+            typed: rec.typed || null, overridden: rec.overridden,
+            auto: rec.result || "blank"};
+  }};
+}
+
+/* colour the target words by whether they were heard (position-tolerant) */
+function wordDiff(tgtEl, target, heard){
+  const heardWords = norm(heard).split(" ").filter(Boolean);
+  const spans = tgtEl.querySelectorAll(".w");
+  const used = new Array(heardWords.length).fill(false);
+  target.split(/\s+/).forEach(function(w, i){
+    const nw = norm(w);
+    let found = -1;
+    for(let j = 0; j < heardWords.length; j++){
+      if(!used[j] && heardWords[j] === nw){ found = j; break; }
+    }
+    if(spans[i]){
+      spans[i].classList.remove("said","missed");
+      spans[i].classList.add(found >= 0 ? "said" : "missed");
+      if(found >= 0) used[found] = true;
+    }
+  });
+}
+
+/* ---------- scoring, chrome, export ---------- */
+function addScore(ex, head, total){
+  const score = document.createElement("span");
+  score.className = "score"; score.textContent = "0 / " + total;
+  head.appendChild(score);
+  state[ex.id] = {right: new Array(total).fill(false), total: total, scoreEl: score};
+}
+
+function addCheckAll(card){
+  const cr = document.createElement("div");
+  cr.className = "checkrow";
+  const btn = document.createElement("button");
+  btn.type = "button"; btn.className = "check"; btn.textContent = "Check all";
+  btn.addEventListener("click", function(){
+    card.querySelectorAll(".item").forEach(function(r){ if(r._check) r._check(); });
+  });
+  cr.appendChild(btn);
+  const hint = document.createElement("span");
+  hint.className = "hint"; hint.textContent = "Enter checks one answer · capitalisation and final punctuation are ignored";
+  cr.appendChild(hint);
+  card.appendChild(cr);
+}
+
+function updateScores(){
+  let g = 0, t = 0;
+  Object.keys(state).forEach(function(k){
+    const s = state[k];
+    const n = s.right.filter(Boolean).length;
+    s.scoreEl.textContent = n + " / " + s.total;
+    g += n; t += s.total;
+  });
+  document.getElementById("globalscore").textContent =
+    t ? (g + " / " + t + " auto-checked items correct · passages and free writing are marked by /mark") : "";
+}
+
+function collectAnswers(){
+  const meta = (PAYLOAD && PAYLOAD.meta) || {};
+  let g = 0, t = 0;
+  Object.keys(state).forEach(function(k){ g += state[k].right.filter(Boolean).length; t += state[k].total; });
+  return {
+    kind: "suomi-answers",
+    worksheet: meta.title || document.title,
+    date: meta.date || new Date().toISOString().slice(0,10),
+    exported_at: new Date().toISOString(),
+    level: meta.level || "", focus: meta.focus || [],
+    auto_score: {right: g, total: t},
+    items: exportItems.map(function(it){
+      const dyn = it.get();
+      const base = {exercise: it.exercise, title: it.title, type: it.type};
+      if(it.idx) base.item = it.idx;
+      if(it.dir) base.direction = it.dir;
+      base.question = it.question; base.expected = it.expected;
+      return Object.assign(base, dyn);
+    })
+  };
+}
+
+document.getElementById("btn-export").addEventListener("click", function(){
+  const data = collectAnswers();
+  const name = "suomi-answers-" + (data.date || "today") + ".json";
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 5000);
+  document.getElementById("export-status").textContent = "Saved " + name + " (Downloads) — now run /mark";
+});
+
+document.getElementById("btn-copy").addEventListener("click", function(){
+  const text = JSON.stringify(collectAnswers(), null, 2);
+  (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function(){
+    document.getElementById("export-status").textContent = "Copied — paste into /mark";
+  }, function(){
+    document.getElementById("export-status").textContent = "Copy failed — use Export instead";
+  });
+});
+
+/* special character insertion (from the workbook) */
+let lastInput = null;
+document.addEventListener("focusin", function(e){
+  if(e.target.matches("input.ans, textarea.free")) lastInput = e.target;
+});
+document.querySelectorAll(".charbar button").forEach(function(b){
+  b.addEventListener("mousedown", function(e){ e.preventDefault(); });
+  b.addEventListener("click", function(){
+    if(!lastInput) return;
+    const ch = b.dataset.ch;
+    const start = lastInput.selectionStart, end = lastInput.selectionEnd;
+    lastInput.value = lastInput.value.slice(0, start) + ch + lastInput.value.slice(end);
+    lastInput.focus();
+    lastInput.setSelectionRange(start + 1, start + 1);
+  });
+});
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+
+init();
+</script>
+</body>
+</html>

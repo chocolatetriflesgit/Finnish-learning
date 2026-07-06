@@ -1,0 +1,15 @@
+{
+  "completed_through": 2,
+  "current_lesson": 3,
+  "started": "2026-07-06",
+  "history": [
+    {
+      "date": "2026-07-06",
+      "worksheet": "tutor/worksheets/2026-07-06.html",
+      "status": "assigned",
+      "focus": ["negation", "question-formation", "verb-type-1"],
+      "new_vocab": ["mutta — but", "nyt — now", "myös — also"],
+      "notes": "First worksheet. Self-reported shaky: verb endings (olla). Lessons 0-2 productive; lesson 3 (type 1 verbs) is next."
+    }
+  ]
+}

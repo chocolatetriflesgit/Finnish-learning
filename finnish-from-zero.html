@@ -1,0 +1,2852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suomea alusta alkaen — Finnish from Zero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF9F5;
+  --panel:#EDF1F8;
+  --birch:#F2EFE8;
+  --ink:#1C2530;
+  --ink-soft:#4A5568;
+  --blue:#14417B;
+  --blue-deep:#0D2F5C;
+  --lakka:#B96A00;
+  --rule:#D8DCE3;
+  --radius:10px;
+  --sans:"Jost","Futura","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:1.06rem;line-height:1.65;
+}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--lakka);outline-offset:2px;border-radius:3px}
+
+/* ---------- layout ---------- */
+.wrap{display:grid;grid-template-columns:280px minmax(0,1fr);max-width:1200px;margin:0 auto}
+main{padding:0 clamp(1.2rem,4vw,3.5rem) 4rem;max-width:50rem}
+
+/* ---------- sidebar ---------- */
+nav.side{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  padding:1.6rem 1.2rem 2rem;border-right:1px solid var(--rule);
+  font-family:var(--sans);background:var(--paper);
+}
+nav.side .brand{font-weight:600;font-size:1.02rem;color:var(--blue-deep);letter-spacing:.02em;margin-bottom:.15rem}
+nav.side .brand-sub{font-size:.8rem;color:var(--ink-soft);margin-bottom:1.1rem}
+nav.side a{display:block;text-decoration:none;border-radius:6px;line-height:1.35}
+nav.side a.nav-module{
+  margin-top:1.05rem;padding:.28rem .5rem;color:var(--blue-deep);
+  font-weight:600;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+}
+nav.side a.nav-lesson{padding:.22rem .5rem .22rem .9rem;color:var(--ink-soft);font-size:.86rem}
+nav.side a:hover{background:var(--panel);color:var(--blue-deep)}
+.answer-toggle{
+  margin-top:1.4rem;width:100%;padding:.5rem .6rem;cursor:pointer;
+  font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.04em;
+  color:var(--blue-deep);background:var(--panel);border:1px solid var(--rule);border-radius:8px;
+}
+.answer-toggle:hover{background:#E2E9F4}
+
+/* mobile nav */
+details.mobilenav{display:none}
+@media (max-width:940px){
+  .wrap{grid-template-columns:1fr}
+  nav.side{display:none}
+  details.mobilenav{
+    display:block;position:sticky;top:0;z-index:5;
+    background:var(--paper);border-bottom:1px solid var(--rule);
+    padding:.6rem clamp(1.2rem,4vw,2rem);font-family:var(--sans);
+  }
+  details.mobilenav summary{cursor:pointer;font-weight:600;color:var(--blue-deep);font-size:.95rem;list-style:none}
+  details.mobilenav summary::before{content:"☰  "}
+  details.mobilenav nav{max-height:60vh;overflow-y:auto;padding:.6rem 0}
+  details.mobilenav a{display:block;text-decoration:none;padding:.25rem .4rem;border-radius:6px;color:var(--ink-soft);font-size:.9rem}
+  details.mobilenav a.nav-module{color:var(--blue-deep);font-weight:600;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;margin-top:.7rem}
+  details.mobilenav .answer-toggle{margin:.8rem 0 .4rem}
+}
+
+/* ---------- hero ---------- */
+header.hero{padding:3.2rem 0 1.4rem;border-bottom:2px solid var(--blue);margin-bottom:2.2rem}
+header.hero h1{
+  font-family:var(--sans);font-weight:700;color:var(--blue-deep);
+  font-size:clamp(1.9rem,4.5vw,2.9rem);line-height:1.12;margin:0 0 .35rem;letter-spacing:-.01em;
+}
+header.hero .subtitle{font-family:var(--sans);font-weight:400;color:var(--ink-soft);font-size:clamp(1rem,2vw,1.2rem);margin:0 0 1.6rem}
+.vowels{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap;font-family:var(--sans);font-weight:600;font-size:clamp(1.15rem,2.6vw,1.6rem)}
+.vowels .back{color:var(--blue)}
+.vowels .neutral{color:#8A93A2}
+.vowels .front{color:var(--lakka)}
+.vowels .dot{color:var(--rule);font-weight:400}
+.vowels-caption{font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);letter-spacing:.05em;margin-top:.3rem}
+
+/* ---------- headings ---------- */
+h1,h2,h3{font-family:var(--sans);color:var(--blue-deep);line-height:1.2;scroll-margin-top:4.5rem}
+h1{ /* module headers */
+  font-size:.95rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--paper);background:var(--blue);border-radius:var(--radius);
+  padding:.85rem 1.1rem;margin:3.5rem 0 1.6rem;
+}
+h2{font-size:1.65rem;font-weight:600;margin:3rem 0 .9rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+h3{font-size:1.08rem;font-weight:600;margin:1.9rem 0 .55rem}
+p{margin:.75rem 0}
+hr{border:none;border-top:1px solid var(--rule);margin:2.4rem 0}
+li{margin:.3rem 0}
+em{color:inherit}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto;margin:1.1rem 0;border:1px solid var(--rule);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th{
+  font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.05em;
+  text-align:left;color:var(--blue-deep);background:var(--panel);
+  padding:.55rem .8rem;border-bottom:2px solid var(--blue);white-space:nowrap;
+}
+td{padding:.5rem .8rem;border-bottom:1px solid var(--rule);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--birch)}
+tbody tr:last-child td{border-bottom:none}
+
+/* ---------- exercises & answers ---------- */
+p.exercise{
+  background:var(--birch);border-left:4px solid var(--lakka);border-radius:0 var(--radius) var(--radius) 0;
+  padding:.85rem 1rem;margin:1.5rem 0 .4rem;
+}
+p.exercise > strong:first-child{font-family:var(--sans);color:var(--lakka);letter-spacing:.02em}
+details.answers, main details:not(.mobilenav){
+  border:1px solid var(--rule);border-left:4px solid var(--blue);
+  border-radius:0 var(--radius) var(--radius) 0;background:#fff;
+  margin:.4rem 0 1.6rem;padding:0;
+}
+main details summary{
+  cursor:pointer;list-style:none;user-select:none;
+  font-family:var(--sans);font-weight:600;font-size:.86rem;color:var(--blue-deep);
+  padding:.6rem .95rem;
+}
+main details summary::-webkit-details-marker{display:none}
+main details summary::before{content:"▸";display:inline-block;margin-right:.5rem;color:var(--blue);transition:transform .15s ease}
+main details[open] summary::before{transform:rotate(90deg)}
+main details summary em{font-style:normal}
+main details > *:not(summary){margin:0;padding:.15rem .95rem .8rem;font-size:.97rem;color:var(--ink)}
+main details[open]{background:var(--panel)}
+
+/* ---------- print ---------- */
+@media print{
+  nav.side,details.mobilenav,.answer-toggle{display:none!important}
+  .wrap{display:block}
+  main{max-width:none;padding:0}
+  body{background:#fff;color:#000;font-size:10.5pt}
+  h1{background:none;color:#000;border:2px solid #000;padding:.4rem .8rem}
+  h2,h3{color:#000}
+  main details{border-left-color:#000}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<details class="mobilenav">
+  <summary>Contents</summary>
+  <nav>
+<a class="nav-lesson" href="#how-to-use-this-course">How to use this course</a>
+<a class="nav-lesson" href="#lesson-0-sounds-and-spelling-ääntäminen">0 · Sounds and spelling (Ääntäminen)</a>
+<a class="nav-module" href="#module-1-getting-by-lessons-1-4">MODULE 1 — Getting by (Lessons 1–4)</a>
+<a class="nav-lesson" href="#lesson-1-greetings-and-courtesy-tervehdykset">1 · Greetings and courtesy (Tervehdykset)</a>
+<a class="nav-lesson" href="#lesson-2-who-are-you-olla-pronouns">2 · Who are you? (olla + pronouns)</a>
+<a class="nav-lesson" href="#lesson-3-first-verbs-verb-type-1">3 · First verbs (Verb type 1)</a>
+<a class="nav-lesson" href="#lesson-4-numbers-money-and-your-first-coffee">4 · Numbers, money, and your first coffee</a>
+<a class="nav-module" href="#module-2-the-case-engine-lessons-5-9">MODULE 2 — The case engine (Lessons 5–9)</a>
+<a class="nav-lesson" href="#lesson-5-consonant-gradation-astevaihtelu">5 · Consonant gradation (Astevaihtelu)</a>
+<a class="nav-lesson" href="#lesson-6-where-where-from-where-to-the-six-location-cases">6 · Where? Where from? Where to? (The six lo…</a>
+<a class="nav-lesson" href="#lesson-7-having-and-belonging-genitive-minulla-on">7 · Having and belonging (Genitive; minulla…</a>
+<a class="nav-lesson" href="#lesson-8-the-partitive-finland-s-favourite-case">8 · The partitive: Finland's favourite case</a>
+<a class="nav-lesson" href="#lesson-9-verb-types-2-and-3-telling-the-time">9 · Verb types 2 and 3; telling the time</a>
+<a class="nav-module" href="#module-3-talking-about-your-life-lessons-10-14">MODULE 3 — Talking about your life (Lessons 10–14)</a>
+<a class="nav-lesson" href="#lesson-10-verb-types-4-6-shopping-for-clothes">10 · Verb types 4–6; shopping for clothes</a>
+<a class="nav-lesson" href="#lesson-11-the-past-tense-imperfekti">11 · The past tense (Imperfekti)</a>
+<a class="nav-lesson" href="#lesson-12-the-perfect-tense-and-the-negative-past">12 · The perfect tense and the negative past</a>
+<a class="nav-lesson" href="#lesson-13-the-object-total-or-partial">13 · The object: total or partial?</a>
+<a class="nav-lesson" href="#lesson-14-describing-things-adjectives-comparison-home-and-weather">14 · Describing things: adjectives, comparis…</a>
+<a class="nav-module" href="#module-4-sounding-natural-lessons-15-19">MODULE 4 — Sounding natural (Lessons 15–19)</a>
+<a class="nav-lesson" href="#lesson-15-the-conditional-finnish-politeness-technology">15 · The conditional: Finnish politeness tec…</a>
+<a class="nav-lesson" href="#lesson-16-commands-and-directions-imperatiivi">16 · Commands and directions (Imperatiivi)</a>
+<a class="nav-lesson" href="#lesson-17-going-to-do-things-the-ma-infinitive-obligation-and-hobbies">17 · Going to do things: the MA-infinitive,…</a>
+<a class="nav-lesson" href="#lesson-18-puhekieli-how-finns-actually-talk">18 · Puhekieli: how Finns actually talk</a>
+<a class="nav-lesson" href="#lesson-19-the-passive-plurals-in-cases-and-reading-the-street">19 · The passive, plurals in cases, and read…</a>
+<a class="nav-module" href="#module-5-wider-worlds-lessons-20-23">MODULE 5 — Wider worlds (Lessons 20–23)</a>
+<a class="nav-lesson" href="#lesson-20-työelämä-work-email-and-two-new-cases">20 · Työelämä: work, email, and two new cases</a>
+<a class="nav-lesson" href="#lesson-21-terveys-health-body-pharmacy">21 · Terveys: health, body, pharmacy</a>
+<a class="nav-lesson" href="#lesson-22-reading-the-news-society-economy-and-the-last-cases">22 · Reading the news: society, economy — an…</a>
+<a class="nav-lesson" href="#lesson-23-finale-the-graduation-text-the-final-test-and-where-next">23 · Finale: the graduation text, the final…</a>
+<a class="nav-module" href="#appendices">Appendices</a>
+<a class="nav-lesson" href="#appendix-a-the-fifteen-cases-one-table">A · The fifteen cases, one table</a>
+<a class="nav-lesson" href="#appendix-b-verb-types-at-a-glance">B · Verb types at a glance</a>
+<a class="nav-lesson" href="#appendix-c-consonant-gradation-quick-card">C · Consonant gradation quick card</a>
+<a class="nav-lesson" href="#appendix-d-numbers-and-time-quick-card">D · Numbers and time quick card</a>
+<a class="nav-lesson" href="#appendix-e-puhekieli-cheat-card">E · Puhekieli cheat card</a>
+<a class="nav-lesson" href="#appendix-f-answer-key">F · Answer key</a>
+<a class="nav-lesson" href="#appendix-g-resources-for-the-road-ahead">G · Resources for the road ahead</a>
+  <button class="answer-toggle" type="button">Show all answers</button>
+  </nav>
+</details>
+
+<div class="wrap">
+<nav class="side" aria-label="Course contents">
+  <div class="brand">Suomea alusta alkaen</div>
+  <div class="brand-sub">Finnish from Zero · 24 lessons · A1 → A2+</div>
+<a class="nav-lesson" href="#how-to-use-this-course">How to use this course</a>
+<a class="nav-lesson" href="#lesson-0-sounds-and-spelling-ääntäminen">0 · Sounds and spelling (Ääntäminen)</a>
+<a class="nav-module" href="#module-1-getting-by-lessons-1-4">MODULE 1 — Getting by (Lessons 1–4)</a>
+<a class="nav-lesson" href="#lesson-1-greetings-and-courtesy-tervehdykset">1 · Greetings and courtesy (Tervehdykset)</a>
+<a class="nav-lesson" href="#lesson-2-who-are-you-olla-pronouns">2 · Who are you? (olla + pronouns)</a>
+<a class="nav-lesson" href="#lesson-3-first-verbs-verb-type-1">3 · First verbs (Verb type 1)</a>
+<a class="nav-lesson" href="#lesson-4-numbers-money-and-your-first-coffee">4 · Numbers, money, and your first coffee</a>
+<a class="nav-module" href="#module-2-the-case-engine-lessons-5-9">MODULE 2 — The case engine (Lessons 5–9)</a>
+<a class="nav-lesson" href="#lesson-5-consonant-gradation-astevaihtelu">5 · Consonant gradation (Astevaihtelu)</a>
+<a class="nav-lesson" href="#lesson-6-where-where-from-where-to-the-six-location-cases">6 · Where? Where from? Where to? (The six lo…</a>
+<a class="nav-lesson" href="#lesson-7-having-and-belonging-genitive-minulla-on">7 · Having and belonging (Genitive; minulla…</a>
+<a class="nav-lesson" href="#lesson-8-the-partitive-finland-s-favourite-case">8 · The partitive: Finland's favourite case</a>
+<a class="nav-lesson" href="#lesson-9-verb-types-2-and-3-telling-the-time">9 · Verb types 2 and 3; telling the time</a>
+<a class="nav-module" href="#module-3-talking-about-your-life-lessons-10-14">MODULE 3 — Talking about your life (Lessons 10–14)</a>
+<a class="nav-lesson" href="#lesson-10-verb-types-4-6-shopping-for-clothes">10 · Verb types 4–6; shopping for clothes</a>
+<a class="nav-lesson" href="#lesson-11-the-past-tense-imperfekti">11 · The past tense (Imperfekti)</a>
+<a class="nav-lesson" href="#lesson-12-the-perfect-tense-and-the-negative-past">12 · The perfect tense and the negative past</a>
+<a class="nav-lesson" href="#lesson-13-the-object-total-or-partial">13 · The object: total or partial?</a>
+<a class="nav-lesson" href="#lesson-14-describing-things-adjectives-comparison-home-and-weather">14 · Describing things: adjectives, comparis…</a>
+<a class="nav-module" href="#module-4-sounding-natural-lessons-15-19">MODULE 4 — Sounding natural (Lessons 15–19)</a>
+<a class="nav-lesson" href="#lesson-15-the-conditional-finnish-politeness-technology">15 · The conditional: Finnish politeness tec…</a>
+<a class="nav-lesson" href="#lesson-16-commands-and-directions-imperatiivi">16 · Commands and directions (Imperatiivi)</a>
+<a class="nav-lesson" href="#lesson-17-going-to-do-things-the-ma-infinitive-obligation-and-hobbies">17 · Going to do things: the MA-infinitive,…</a>
+<a class="nav-lesson" href="#lesson-18-puhekieli-how-finns-actually-talk">18 · Puhekieli: how Finns actually talk</a>
+<a class="nav-lesson" href="#lesson-19-the-passive-plurals-in-cases-and-reading-the-street">19 · The passive, plurals in cases, and read…</a>
+<a class="nav-module" href="#module-5-wider-worlds-lessons-20-23">MODULE 5 — Wider worlds (Lessons 20–23)</a>
+<a class="nav-lesson" href="#lesson-20-työelämä-work-email-and-two-new-cases">20 · Työelämä: work, email, and two new cases</a>
+<a class="nav-lesson" href="#lesson-21-terveys-health-body-pharmacy">21 · Terveys: health, body, pharmacy</a>
+<a class="nav-lesson" href="#lesson-22-reading-the-news-society-economy-and-the-last-cases">22 · Reading the news: society, economy — an…</a>
+<a class="nav-lesson" href="#lesson-23-finale-the-graduation-text-the-final-test-and-where-next">23 · Finale: the graduation text, the final…</a>
+<a class="nav-module" href="#appendices">Appendices</a>
+<a class="nav-lesson" href="#appendix-a-the-fifteen-cases-one-table">A · The fifteen cases, one table</a>
+<a class="nav-lesson" href="#appendix-b-verb-types-at-a-glance">B · Verb types at a glance</a>
+<a class="nav-lesson" href="#appendix-c-consonant-gradation-quick-card">C · Consonant gradation quick card</a>
+<a class="nav-lesson" href="#appendix-d-numbers-and-time-quick-card">D · Numbers and time quick card</a>
+<a class="nav-lesson" href="#appendix-e-puhekieli-cheat-card">E · Puhekieli cheat card</a>
+<a class="nav-lesson" href="#appendix-f-answer-key">F · Answer key</a>
+<a class="nav-lesson" href="#appendix-g-resources-for-the-road-ahead">G · Resources for the road ahead</a>
+  <button class="answer-toggle" type="button">Show all answers</button>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>Suomea alusta alkaen</h1>
+  <p class="subtitle">Finnish from Zero — a complete self-study course. Twenty-four lessons, all fifteen cases, six verb types, and every answer one click away.</p>
+  <div class="vowels" aria-hidden="true">
+    <span class="back">a&nbsp;o&nbsp;u</span><span class="dot">·</span><span class="neutral">e&nbsp;i</span><span class="dot">·</span><span class="front">ä&nbsp;ö&nbsp;y</span>
+  </div>
+  <div class="vowels-caption">back · neutral · front — vowel harmony, the first rule you'll learn</div>
+</header>
+
+<p>A complete self-study course: 24 lessons in five modules, taking you from your first "hei" to reading simple news texts about work, housing and the economy. All fifteen grammatical cases are covered, six verb types, four tenses, and roughly 600 words of vocabulary. By the end you should be solidly at CEFR A2, with a foot in the door of B1.</p>
+<h2 id="how-to-use-this-course">How to use this course</h2>
+<p>Work through the lessons in order — Finnish grammar is cumulative and later lessons assume everything before them. A realistic pace is two to three lessons a week at 45–60 minutes each, which puts the whole course at three to four months. Do every exercise on paper or aloud before revealing the answers — each exercise has a collapsible <em>Vastaukset</em> (answers) panel directly beneath it, and Appendix F keeps the full key in one place for printing. Say everything out loud: Finnish spelling is completely phonetic, so reading aloud <em>is</em> pronunciation practice.</p>
+<p>Two habits will multiply your progress. First, put every vocabulary table into a spaced-repetition app (Anki or similar) and review daily. Second, from Module 2 onwards, listen to <strong>Yle Uutiset selkosuomeksi</strong> (Yle's news in simplified Finnish, free online with text and audio) — even five minutes a day trains your ear.</p>
+<p>A note on registers: written/standard Finnish (<em>kirjakieli</em>) and everyday spoken Finnish (<em>puhekieli</em>) differ noticeably. This course teaches standard Finnish first because all grammar builds on it, then gives you a full spoken-language survival kit in Lesson 19. Don't panic when real Finns sound different from your textbook — Lesson 19 explains exactly how.</p>
+<hr />
+<h2 id="lesson-0-sounds-and-spelling-ääntäminen">Lesson 0 — Sounds and spelling (Ääntäminen)</h2>
+<p>Finnish is one of the most learner-friendly languages in the world to <em>pronounce</em>: one letter, one sound, always. If you can spell it, you can say it. Master this lesson properly and you will never need pronunciation guides again.</p>
+<h3 id="the-vowels">The vowels</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Sounds like</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>"a" in <em>father</em> (short)</td>
+<td>kala — fish</td>
+</tr>
+<tr>
+<td>e</td>
+<td>"e" in <em>pet</em></td>
+<td>meno — going</td>
+</tr>
+<tr>
+<td>i</td>
+<td>"i" in <em>pin</em></td>
+<td>kivi — stone</td>
+</tr>
+<tr>
+<td>o</td>
+<td>"o" in <em>pot</em> (pure, no glide)</td>
+<td>talo — house</td>
+</tr>
+<tr>
+<td>u</td>
+<td>"oo" in <em>put</em></td>
+<td>kuka — who</td>
+</tr>
+<tr>
+<td>y</td>
+<td>German ü / French <em>tu</em> (say "ee" with rounded lips)</td>
+<td>kyllä — yes</td>
+</tr>
+<tr>
+<td>ä</td>
+<td>"a" in <em>cat</em></td>
+<td>äiti — mother</td>
+</tr>
+<tr>
+<td>ö</td>
+<td>German ö (say "e" with rounded lips)</td>
+<td>söi — ate</td>
+</tr>
+</tbody>
+</table></div>
+<p>The consonants are close to English with three notes: <strong>j</strong> is always English "y" (ja = "ya"), <strong>r</strong> is rolled, and <strong>h</strong> is always pronounced, even before consonants (<em>vihko</em>). The letters b, c, f, q, w, x, z appear only in loanwords.</p>
+<h3 id="length-is-everything">Length is everything</h3>
+<p>Double letters are held roughly twice as long, and length changes meaning:</p>
+<ul>
+<li><strong>tuli</strong> (fire) — <strong>tuuli</strong> (wind) — <strong>tulli</strong> (customs)</li>
+<li><strong>muta</strong> (mud) — <strong>muuta</strong> (other, partitive) — <strong>mutta</strong> (but)</li>
+<li><strong>tapaan</strong> (I meet) — <strong>tapan</strong> (I kill). Worth getting right before meeting anyone.</li>
+</ul>
+<h3 id="stress">Stress</h3>
+<p>Always, without exception, on the <strong>first syllable</strong>. HEL-sin-ki, MU-sta-mä-ki, RA-vin-to-la.</p>
+<h3 id="vowel-harmony">Vowel harmony</h3>
+<p>Finnish words contain either <strong>back vowels</strong> (a, o, u) or <strong>front vowels</strong> (ä, ö, y) — never both (e and i are neutral and mix with either). Every suffix therefore comes in two flavours and you pick the one that matches the word:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Suffix</th>
+<th>Back word</th>
+<th>Front word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-ssa / -ssä (in)</td>
+<td>talossa (in the house)</td>
+<td>metsässä (in the forest)</td>
+</tr>
+<tr>
+<td>-ko / -kö (question)</td>
+<td>onko? (is it?)</td>
+<td>syökö? (does he eat?)</td>
+</tr>
+<tr>
+<td>-lla / -llä (on)</td>
+<td>pöydällä? no — pöytä is front: pöydällä has ä because of ä in pöytä</td>
+<td>tuolilla (on the chair — i and u… u is back, so -lla)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rule of thumb: scan the word for a, o or u. If you find one, use the a-form of the suffix; otherwise the ä-form. Compound words harmonise by their <strong>last</strong> part: <em>kirjakauppa</em> → <em>kirjakaupassa</em>.</p>
+<h3 id="diphthongs">Diphthongs</h3>
+<p>Vowel pairs pronounced as a glide within one syllable: ai, ei, oi, ui, yi, äi, öi, au, ou, eu, iu, äy, öy, ie, uo, yö. So <em>sauna</em> = SOW-na (and yes, <em>sauna</em> is the one word Finnish has given English).</p>
+<p class="exercise"><strong>Harjoitus 0.1</strong> — Choose the correct suffix form:
+1. koulu + ssa/ssä (school) 2. kylä + ssa/ssä (village) 3. ravintola + ssa/ssä (restaurant) 4. työ + ssa/ssä (work) 5. Helsinki + ssa/ssä</p>
+<details>
+<summary><em>Vastaukset — show answers (0.1)</em></summary>
+<p>1 koulussa 2 kylässä 3 ravintolassa 4 työssä 5 Helsingissä (nk→ng!).</p>
+</details>
+<p class="exercise"><strong>Harjoitus 0.2</strong> — Read these aloud, exaggerating length differences: <em>kuka / kukka · tili / tiili · mato / matto · isä / issä? (not a word — good, you noticed) · vara / varaa · katos / kaatos? (only katos is a word).</em> Then say: <em>Hyvää päivää! Kiitos paljon. Näkemiin.</em></p>
+<details>
+<summary><em>Vastaukset — show answers (0.2)</em></summary>
+<p>Practice only — check length pairs against Lesson 0.</p>
+</details>
+<hr />
+<h1 id="module-1-getting-by-lessons-1-4">MODULE 1 — Getting by (Lessons 1–4)</h1>
+<p><em>Goal: survive first contact. Greet, introduce yourself, count, and buy a coffee.</em></p>
+<hr />
+<h2 id="lesson-1-greetings-and-courtesy-tervehdykset">Lesson 1 — Greetings and courtesy (Tervehdykset)</h2>
+<h3 id="vocabulary">Vocabulary</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hei / moi / terve</td>
+<td>hi, hello (moi is casual)</td>
+</tr>
+<tr>
+<td>hyvää huomenta / huomenta</td>
+<td>good morning</td>
+</tr>
+<tr>
+<td>hyvää päivää</td>
+<td>good day (formal-ish hello)</td>
+</tr>
+<tr>
+<td>hyvää iltaa</td>
+<td>good evening</td>
+</tr>
+<tr>
+<td>hyvää yötä</td>
+<td>good night</td>
+</tr>
+<tr>
+<td>näkemiin</td>
+<td>goodbye (formal)</td>
+</tr>
+<tr>
+<td>hei hei / moi moi</td>
+<td>bye</td>
+</tr>
+<tr>
+<td>nähdään!</td>
+<td>see you!</td>
+</tr>
+<tr>
+<td>kiitos (paljon)</td>
+<td>thank you (very much)</td>
+</tr>
+<tr>
+<td>ole hyvä</td>
+<td>here you are / you're welcome</td>
+</tr>
+<tr>
+<td>anteeksi</td>
+<td>sorry / excuse me</td>
+</tr>
+<tr>
+<td>tervetuloa</td>
+<td>welcome</td>
+</tr>
+<tr>
+<td>kyllä / joo</td>
+<td>yes (joo is casual)</td>
+</tr>
+<tr>
+<td>ei</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Mitä kuuluu?</td>
+<td>How are you?</td>
+</tr>
+<tr>
+<td>Kiitos, hyvää.</td>
+<td>Fine, thanks.</td>
+</tr>
+<tr>
+<td>Entä sinulle?</td>
+<td>And you?</td>
+</tr>
+<tr>
+<td>hauska tutustua</td>
+<td>nice to meet you</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="notes">Notes</h3>
+<p>Finnish has <strong>no single word for "please."</strong> Politeness lives in <em>kiitos</em>, in tone, and later in the conditional mood (Lesson 15's <em>saisinko</em> — "could I get"). <em>Ole hyvä</em> does double duty: it's what you say when handing something over, and it's the reply to <em>kiitos</em>. And <em>Mitä kuuluu?</em> is a real question, not a ritual — Finns typically only ask when they're prepared to hear an actual answer. Comfortable silence is normal in Finland; nobody is being rude.</p>
+<h3 id="dialogue">Dialogue</h3>
+<p>— Huomenta!
+— Huomenta! Mitä kuuluu?
+— Kiitos, hyvää. Entä sinulle?
+— Ihan hyvää, kiitos.
+— No, nähdään!
+— Joo, hei hei!</p>
+<p>(<em>ihan</em> = quite/pretty; <em>no</em> = well/so, the all-purpose Finnish sentence-starter.)</p>
+<p class="exercise"><strong>Harjoitus 1.1</strong> — What do you say when: 1. entering a shop at 10 a.m. 2. leaving a meeting (formally) 3. someone hands you coffee 4. you bump into someone 5. someone thanks you 6. parting from a friend?</p>
+<details>
+<summary><em>Vastaukset — show answers (1.1)</em></summary>
+<p>1 hyvää päivää (or huomenta) 2 näkemiin 3 kiitos 4 anteeksi 5 ole hyvä 6 hei hei / moi moi / nähdään.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 1.2</strong> — Fill in the dialogue:
+— Hyvää päivää!
+— <strong><em>_</em>_ ! Mitä </strong><strong><em>_ ?
+— </em></strong><strong><em> , hyvää. Entä </em></strong><strong><em> ?
+— Ihan hyvää. No, </em></strong>___ !</p>
+<details>
+<summary><em>Vastaukset — show answers (1.2)</em></summary>
+<p>Hyvää päivää — kuuluu — Kiitos — sinulle — nähdään (or hei hei).</p>
+</details>
+<hr />
+<h2 id="lesson-2-who-are-you-olla-pronouns">Lesson 2 — Who are you? (olla + pronouns)</h2>
+<h3 id="the-pronouns-and-the-verb-olla-to-be">The pronouns and the verb <em>olla</em> (to be)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Pronoun</th>
+<th></th>
+<th>olla</th>
+<th>negative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minä</td>
+<td>I</td>
+<td>olen</td>
+<td>en ole</td>
+</tr>
+<tr>
+<td>sinä</td>
+<td>you (sg.)</td>
+<td>olet</td>
+<td>et ole</td>
+</tr>
+<tr>
+<td>hän</td>
+<td>he/she</td>
+<td>on</td>
+<td>ei ole</td>
+</tr>
+<tr>
+<td>me</td>
+<td>we</td>
+<td>olemme</td>
+<td>emme ole</td>
+</tr>
+<tr>
+<td>te</td>
+<td>you (pl. / polite)</td>
+<td>olette</td>
+<td>ette ole</td>
+</tr>
+<tr>
+<td>he</td>
+<td>they</td>
+<td>ovat</td>
+<td>eivät ole</td>
+</tr>
+</tbody>
+</table></div>
+<p>Three things to absorb early. <strong>Hän is gender-neutral</strong> — Finnish has no he/she distinction at all. <strong>Se</strong> (it) and <strong>ne</strong> (they, things) are used for objects — and, in spoken Finnish, for people too, which is not rude (Lesson 19). And because verb endings show the person, <strong>minä/sinä are often dropped</strong>: <em>Olen Anna</em> is complete.</p>
+<p>Negation uses a <strong>negative verb</strong> (en, et, ei, emme, ette, eivät) that conjugates, followed by the bare verb: <em>en ole</em> — I am not.</p>
+<h3 id="questions">Questions</h3>
+<p>Yes/no questions attach <strong>-ko/-kö</strong> to the verb, which moves to the front: <em>Oletko sinä Anna?</em> — Are you Anna? <em>Onko hän suomalainen?</em> — Is he/she Finnish? Answer with the verb: <em>Olen. / En ole.</em> (Finns answer yes/no questions by repeating the verb rather than with a bare <em>kyllä</em>.)</p>
+<h3 id="vocabulary_1">Vocabulary</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nimi</td>
+<td>name</td>
+</tr>
+<tr>
+<td>Mikä sinun nimesi on?</td>
+<td>What is your name?</td>
+</tr>
+<tr>
+<td>Kuka sinä olet?</td>
+<td>Who are you?</td>
+</tr>
+<tr>
+<td>maa</td>
+<td>country</td>
+</tr>
+<tr>
+<td>kieli</td>
+<td>language</td>
+</tr>
+<tr>
+<td>englanti / suomi / ruotsi</td>
+<td>English / Finnish / Swedish</td>
+</tr>
+<tr>
+<td>englantilainen / suomalainen</td>
+<td>English (person) / Finnish (person)</td>
+</tr>
+<tr>
+<td>britti</td>
+<td>Brit</td>
+</tr>
+<tr>
+<td>Mistä olet kotoisin?</td>
+<td>Where are you from?</td>
+</tr>
+<tr>
+<td>Olen kotoisin Englannista.</td>
+<td>I'm from England.</td>
+</tr>
+<tr>
+<td>Puhun englantia ja vähän suomea.</td>
+<td>I speak English and a little Finnish.</td>
+</tr>
+<tr>
+<td>ammatti</td>
+<td>profession</td>
+</tr>
+<tr>
+<td>opettaja / opiskelija</td>
+<td>teacher / student</td>
+</tr>
+<tr>
+<td>insinööri / johtaja</td>
+<td>engineer / manager, director</td>
+</tr>
+<tr>
+<td>virkamies</td>
+<td>civil servant</td>
+</tr>
+<tr>
+<td>Asun Lontoossa.</td>
+<td>I live in London.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Learn <em>Mistä olet kotoisin</em>, <em>puhun suomea</em> and <em>asun Lontoossa</em> as fixed chunks for now — the endings (-sta, -a, -ssa) are cases you'll meet properly in Module 2. Languages after <em>puhua</em> take the partitive: <em>puhun suomea, englantia, ranskaa</em>.</p>
+<h3 id="dialogue_1">Dialogue</h3>
+<p>— Hei! Minä olen Sari. Kuka sinä olet?
+— Hei, hauska tutustua. Olen Malcolm.
+— Oletko sinä englantilainen?
+— Olen. Olen kotoisin Lontoosta. Entä sinä?
+— Minä olen suomalainen, Helsingistä. Puhutko suomea?
+— Puhun vähän!</p>
+<p class="exercise"><strong>Harjoitus 2.1</strong> — Conjugate: 1. Me ___ (olla) opiskelijoita. 2. ___ (olla, sinä) insinööri? 3. Hän ei ___ (olla) kotona. 4. He ___ (olla) suomalaisia. 5. Minä ___ (olla) britti.</p>
+<details>
+<summary><em>Vastaukset — show answers (2.1)</em></summary>
+<p>1 olemme 2 Oletko 3 ole 4 ovat 5 olen.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 2.2</strong> — Turn into questions with -ko/-kö: 1. Sinä olet opettaja. 2. Hän on kotoisin Ruotsista. 3. Te olette Annan ystäviä. 4. Se on hyvä.</p>
+<details>
+<summary><em>Vastaukset — show answers (2.2)</em></summary>
+<p>1 Oletko sinä opettaja? 2 Onko hän kotoisin Ruotsista? 3 Oletteko te Annan ystäviä? 4 Onko se hyvä?.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 2.3</strong> — Write your own four-sentence introduction: name, nationality, where you're from, which languages you speak. (Model answer in key.)</p>
+<details>
+<summary><em>Vastaukset — show answers (2.3)</em></summary>
+<p>Model: <em>Minä olen Malcolm. Olen englantilainen ja olen kotoisin Lontoosta. Puhun englantia ja vähän suomea.</em></p>
+</details>
+<hr />
+<h2 id="lesson-3-first-verbs-verb-type-1">Lesson 3 — First verbs (Verb type 1)</h2>
+<p>Finnish verbs fall into six types by their infinitive ending. <strong>Type 1</strong> — infinitives in vowel + a/ä — is by far the biggest. Remove the final -a/-ä to get the stem, then add personal endings:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>puhua (speak)</th>
+<th>asua (live)</th>
+<th>kysyä (ask)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minä</td>
+<td>puhu<strong>n</strong></td>
+<td>asun</td>
+<td>kysyn</td>
+</tr>
+<tr>
+<td>sinä</td>
+<td>puhu<strong>t</strong></td>
+<td>asut</td>
+<td>kysyt</td>
+</tr>
+<tr>
+<td>hän</td>
+<td>puhu<strong>u</strong></td>
+<td>asuu</td>
+<td>kysyy</td>
+</tr>
+<tr>
+<td>me</td>
+<td>puhu<strong>mme</strong></td>
+<td>asumme</td>
+<td>kysymme</td>
+</tr>
+<tr>
+<td>te</td>
+<td>puhu<strong>tte</strong></td>
+<td>asutte</td>
+<td>kysytte</td>
+</tr>
+<tr>
+<td>he</td>
+<td>puhu<strong>vat</strong></td>
+<td>asuvat</td>
+<td>kysy<strong>vät</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>The hän-form doubles the stem's final vowel; the he-form obeys vowel harmony (-vat/-vät). Negation: negative verb + bare stem — <em>en puhu, et asu, hän ei kysy, emme puhu</em>.</p>
+<h3 id="core-type-1-verbs">Core type 1 verbs</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>puhua</td>
+<td>to speak</td>
+<td>sanoa</td>
+<td>to say</td>
+</tr>
+<tr>
+<td>asua</td>
+<td>to live (reside)</td>
+<td>kysyä</td>
+<td>to ask</td>
+</tr>
+<tr>
+<td>istua</td>
+<td>to sit</td>
+<td>maksaa</td>
+<td>to pay, to cost</td>
+</tr>
+<tr>
+<td>ostaa</td>
+<td>to buy</td>
+<td>katsoa</td>
+<td>to watch, look</td>
+</tr>
+<tr>
+<td>rakastaa</td>
+<td>to love</td>
+<td>odottaa*</td>
+<td>to wait</td>
+</tr>
+<tr>
+<td>lukea*</td>
+<td>to read</td>
+<td>kirjoittaa*</td>
+<td>to write</td>
+</tr>
+<tr>
+<td>antaa*</td>
+<td>to give</td>
+<td>ottaa*</td>
+<td>to take</td>
+</tr>
+<tr>
+<td>ymmärtää*</td>
+<td>to understand</td>
+<td>tietää*</td>
+<td>to know (a fact)</td>
+</tr>
+<tr>
+<td>muistaa</td>
+<td>to remember</td>
+<td>unohtaa</td>
+<td>to forget</td>
+</tr>
+<tr>
+<td>auttaa*</td>
+<td>to help</td>
+<td>laittaa</td>
+<td>to put; to prepare (food)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The starred verbs shift consonants when conjugated (<em>luen, odotan, kirjoitan, annan, otan, ymmärrän, tiedän, autan</em>) — this is <strong>consonant gradation</strong>, the single most important sound rule in Finnish, and Lesson 5 is devoted to it. For now just learn these first-person forms as given.</p>
+<p>Word order is flexible but neutral order is Subject–Verb–Object, and Finnish has <strong>no articles</strong> — <em>ostan auton</em> covers both "I buy a car" and "I buy the car."</p>
+<h3 id="survival-phrases-learn-as-chunks">Survival phrases (learn as chunks)</h3>
+<p><em>En ymmärrä.</em> — I don't understand. · <em>Voitko puhua hitaammin?</em> — Can you speak more slowly? · <em>Voitko toistaa?</em> — Can you repeat? · <em>Mitä "kello" tarkoittaa?</em> — What does "kello" mean? · <em>Anteeksi, en puhu hyvin suomea.</em> — Sorry, I don't speak Finnish well. · <em>Puhutko englantia?</em> — Do you speak English?</p>
+<p class="exercise"><strong>Harjoitus 3.1</strong> — Conjugate: 1. Hän ___ (asua) Turussa. 2. Me ___ (puhua) suomea. 3. ___ (katsoa, te) televisiota? 4. He ___ (istua) kahvilassa. 5. Minä ___ (ostaa) leipää. 6. Sinä ___ (kysyä) paljon!</p>
+<details>
+<summary><em>Vastaukset — show answers (3.1)</em></summary>
+<p>1 asuu 2 puhumme 3 Katsotteko 4 istuvat 5 ostan 6 kysyt.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 3.2</strong> — Make negative: 1. Puhun ruotsia. 2. Hän muistaa nimen. 3. Odotamme bussia. 4. He asuvat täällä. 5. Ymmärrät kaiken.</p>
+<details>
+<summary><em>Vastaukset — show answers (3.2)</em></summary>
+<p>1 En puhu ruotsia. 2 Hän ei muista nimeä. 3 Emme odota bussia. 4 He eivät asu täällä. 5 Et ymmärrä kaikkea. (In 2 and 5 the object slid into the partitive — negation does that; Lesson 8 explains.).</p>
+</details>
+<p class="exercise"><strong>Harjoitus 3.3</strong> — Translate: 1. Do you (sg.) understand? 2. She doesn't live in Helsinki. 3. We are waiting. 4. I love you. (<em>you</em> = sinua) 5. They speak Finnish and English.</p>
+<details>
+<summary><em>Vastaukset — show answers (3.3)</em></summary>
+<p>1 Ymmärrätkö? 2 Hän ei asu Helsingissä. 3 Odotamme. 4 Rakastan sinua. 5 He puhuvat suomea ja englantia.</p>
+</details>
+<hr />
+<h2 id="lesson-4-numbers-money-and-your-first-coffee">Lesson 4 — Numbers, money, and your first coffee</h2>
+<h3 id="numbers-0-10">Numbers 0–10</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>0 nolla</th>
+<th>1 yksi</th>
+<th>2 kaksi</th>
+<th>3 kolme</th>
+<th>4 neljä</th>
+<th>5 viisi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6 kuusi</strong></td>
+<td><strong>7 seitsemän</strong></td>
+<td><strong>8 kahdeksan</strong></td>
+<td><strong>9 yhdeksän</strong></td>
+<td><strong>10 kymmenen</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Teens add <strong>-toista</strong>: 11 yksitoista, 12 kaksitoista … 19 yhdeksäntoista. Tens use <strong>-kymmentä</strong>: 20 kaksikymmentä, 30 kolmekymmentä, 45 neljäkymmentäviisi. Then 100 <strong>sata</strong>, 200 kaksisataa, 1000 <strong>tuhat</strong>.</p>
+<h3 id="numbers-trigger-the-partitive">Numbers trigger the partitive</h3>
+<p>Here is your first real taste of Finland's favourite case. After any number greater than one, the noun goes in the <strong>partitive singular</strong>:</p>
+<p><em>yksi kahvi</em> → <em>kaksi kahvia</em> → <em>kolme olutta</em> → <em>viisi euroa</em> (the partitive ending in bold: kahvi<strong>a</strong>, olut<strong>ta</strong>, euro<strong>a</strong>)</p>
+<p>Why "two of coffee"? The partitive expresses an amount <em>of</em> something. You'll get the full picture in Lesson 8; for now, apply the pattern to money and ordering: <em>kolme euroa viisikymmentä (senttiä)</em> = €3.50. Note Finnish uses a decimal comma: 3,50 €.</p>
+<h3 id="café-vocabulary">Café vocabulary</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kahvi / tee</td>
+<td>coffee / tea</td>
+</tr>
+<tr>
+<td>maito / vesi</td>
+<td>milk / water</td>
+</tr>
+<tr>
+<td>mehu / olut</td>
+<td>juice / beer</td>
+</tr>
+<tr>
+<td>pulla / korvapuusti</td>
+<td>sweet bun / cinnamon bun</td>
+</tr>
+<tr>
+<td>leipä / voileipä</td>
+<td>bread / sandwich</td>
+</tr>
+<tr>
+<td>Saisinko…?</td>
+<td>Could I have…?</td>
+</tr>
+<tr>
+<td>Mitä saisi olla?</td>
+<td>What would you like?</td>
+</tr>
+<tr>
+<td>Tuleeko muuta?</td>
+<td>Anything else?</td>
+</tr>
+<tr>
+<td>Ei muuta, kiitos.</td>
+<td>Nothing else, thanks.</td>
+</tr>
+<tr>
+<td>Paljonko se maksaa?</td>
+<td>How much does it cost?</td>
+</tr>
+<tr>
+<td>Se tekee…</td>
+<td>That comes to…</td>
+</tr>
+<tr>
+<td>Käykö kortti?</td>
+<td>Do you take card?</td>
+</tr>
+<tr>
+<td>kortilla / käteisellä</td>
+<td>by card / in cash</td>
+</tr>
+<tr>
+<td>kuitti</td>
+<td>receipt</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="dialogue-kahvilassa">Dialogue: kahvilassa</h3>
+<p>— Hei! Mitä saisi olla?
+— Hei! Saisinko kahvin ja korvapuustin?
+— Tuleeko muuta?
+— Ei muuta, kiitos. Paljonko se tekee?
+— Se tekee viisi euroa kahdeksankymmentä. Käykö kortti?
+— Käy. Ole hyvä.
+— Kiitos, ja hyvää päivän jatkoa!</p>
+<p>(<em>Hyvää päivän jatkoa</em> — "good continuation of the day" — is what cashiers actually say. <em>Saisinko</em> is the conditional of <em>saada</em>, to get; treat it as a chunk until Lesson 15. Fun fact for your first coffee: Finns drink more coffee per person than any other nation on Earth.)</p>
+<p class="exercise"><strong>Harjoitus 4.1</strong> — Write out in words: 7, 14, 26, 58, 99, 100, 340, 1000.</p>
+<details>
+<summary><em>Vastaukset — show answers (4.1)</em></summary>
+<p>seitsemän, neljätoista, kaksikymmentäkuusi, viisikymmentäkahdeksan, yhdeksänkymmentäyhdeksän, sata, kolmesataaneljäkymmentä, tuhat.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 4.2</strong> — Apply the number rule: 1. kaksi (kahvi) 2. neljä (euro) 3. yksi (tee) 4. kolme (pulla) 5. kymmenen (sentti) 6. viisi (olut).</p>
+<details>
+<summary><em>Vastaukset — show answers (4.2)</em></summary>
+<p>1 kahvia 2 euroa 3 tee (yksi takes the basic form) 4 pullaa 5 senttiä 6 olutta.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 4.3</strong> — You want tea and a sandwich. Write your half of the café dialogue, including asking the price and saying you'll pay by card.</p>
+<details>
+<summary><em>Vastaukset — show answers (4.3)</em></summary>
+<p>Model: <em>Hei! Saisinko teen ja voileivän? … Ei muuta, kiitos. Paljonko se tekee? … Käykö kortti? Kiitos, hei hei!</em></p>
+</details>
+<hr />
+<h3 id="module-1-check-yourself">Module 1 — Check yourself</h3>
+<p>You should now be able to: greet people at any time of day and take your leave · introduce yourself, your nationality and languages · conjugate <em>olla</em> and any type 1 verb, positive and negative · form yes/no questions with -ko/-kö · count to a thousand and handle prices · order at a café. If any box feels shaky, redo that lesson's exercises before moving on — Module 2 builds directly on all of it.</p>
+<hr />
+<h1 id="module-2-the-case-engine-lessons-5-9">MODULE 2 — The case engine (Lessons 5–9)</h1>
+<p><em>Goal: unlock the case system — the heart of Finnish — and use it to talk about places, possession, food and your daily routine.</em></p>
+<hr />
+<h2 id="lesson-5-consonant-gradation-astevaihtelu">Lesson 5 — Consonant gradation (Astevaihtelu)</h2>
+<p>Before the cases, one sound law. When you attach most endings to a Finnish word, the consonants <strong>k, p, t</strong> in the last syllable often weaken. This is consonant gradation, and it explains why <em>kauppa</em> (shop) becomes <em>kaupassa</em> (in the shop). Learn the pattern table cold — it applies to thousands of nouns and verbs.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Strong</th>
+<th>Weak</th>
+<th>Example (basic form → genitive)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kk</td>
+<td>k</td>
+<td>kukka → kukan (flower)</td>
+</tr>
+<tr>
+<td>pp</td>
+<td>p</td>
+<td>kauppa → kaupan (shop)</td>
+</tr>
+<tr>
+<td>tt</td>
+<td>t</td>
+<td>tyttö → tytön (girl)</td>
+</tr>
+<tr>
+<td>k</td>
+<td>– (disappears)</td>
+<td>jalka → jalan (foot, leg)</td>
+</tr>
+<tr>
+<td>p</td>
+<td>v</td>
+<td>leipä → leivän (bread)</td>
+</tr>
+<tr>
+<td>t</td>
+<td>d</td>
+<td>katu → kadun (street)</td>
+</tr>
+<tr>
+<td>nk</td>
+<td>ng</td>
+<td>Helsinki → Helsingin</td>
+</tr>
+<tr>
+<td>nt</td>
+<td>nn</td>
+<td>Irlanti → Irlannin</td>
+</tr>
+<tr>
+<td>mp</td>
+<td>mm</td>
+<td>lampi → lammen (pond)</td>
+</tr>
+<tr>
+<td>lt</td>
+<td>ll</td>
+<td>ilta → illan (evening)</td>
+</tr>
+<tr>
+<td>rt</td>
+<td>rr</td>
+<td>parta → parran (beard)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>When does the weak grade appear?</strong> The working rule: when the ending <em>closes</em> the syllable — which covers the genitive -n and most case endings you're about to learn (-ssa, -sta, -lla, -lta, -lle). The <strong>strong</strong> grade survives in the basic form and in the partitive, illative and essive cases: <em>kauppa, kauppaa, kauppaan, kauppana</em> versus <em>kaupan, kaupassa, kaupalla</em>.</p>
+<p>Some words gradate in reverse — weak in the basic form, strong with endings: <em>hammas → hampaan</em> (tooth), <em>opas → oppaan</em> (guide). And clusters like <em>sk, st, tk</em> don't gradate at all: <em>matka → matkan</em> (trip), <em>posti → postin</em>.</p>
+<p>You already met gradation in verbs: type 1 verbs show the <strong>strong grade in the infinitive and the hän/he forms</strong>, weak elsewhere — <em>lukea: luen, luet, lukee, luemme, luette, lukevat</em>. That's why <em>tiedän</em> but <em>hän tietää</em>.</p>
+<p class="exercise"><strong>Harjoitus 5.1</strong> — Give the genitive (-n form, weak grade): 1. pankki (bank) 2. pöytä (table) 3. Eurooppa 4. kaupunki (city) 5. ranta (beach) 6. apu (help) 7. tukka (hair) 8. silta (bridge).</p>
+<details>
+<summary><em>Vastaukset — show answers (5.1)</em></summary>
+<p>pankin, pöydän, Euroopan, kaupungin, rannan, avun, tukan, sillan.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 5.2</strong> — Conjugate for minä and hän: 1. antaa 2. odottaa 3. lukea 4. ymmärtää 5. nukkua (to sleep).</p>
+<details>
+<summary><em>Vastaukset — show answers (5.2)</em></summary>
+<p>annan/antaa; odotan/odottaa; luen/lukee; ymmärrän/ymmärtää; nukun/nukkuu.</p>
+</details>
+<hr />
+<h2 id="lesson-6-where-where-from-where-to-the-six-location-cases">Lesson 6 — Where? Where from? Where to? (The six location cases)</h2>
+<p>Finnish replaces prepositions like <em>in, from, to</em> with case endings, arranged in a beautifully logical 3×2 grid — <strong>inside</strong> something versus <strong>on/at</strong> something, crossed with being there, leaving, and going:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Interior ("in")</th>
+<th>Exterior ("on/at")</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Being (missä? where?)</strong></td>
+<td>inessive <strong>-ssa/-ssä</strong> — talossa (in the house)</td>
+<td>adessive <strong>-lla/-llä</strong> — pöydällä (on the table)</td>
+</tr>
+<tr>
+<td><strong>Leaving (mistä? from where?)</strong></td>
+<td>elative <strong>-sta/-stä</strong> — talosta (out of the house)</td>
+<td>ablative <strong>-lta/-ltä</strong> — pöydältä (off the table)</td>
+</tr>
+<tr>
+<td><strong>Entering (mihin? where to?)</strong></td>
+<td>illative <strong>-Vn/-hVn/-seen</strong> — taloon (into the house)</td>
+<td>allative <strong>-lle</strong> — pöydälle (onto the table)</td>
+</tr>
+</tbody>
+</table></div>
+<p>The illative is the only tricky formation: short final vowel doubles + n (<em>talo → taloon, Helsinki → Helsinkiin</em>); after a long vowel or diphthong, -hVn echoing the vowel (<em>maa → maahan, työ → työhön</em>); words like <em>huone</em> take -seen (<em>huoneeseen</em>). Remember from Lesson 5: partitive, illative and essive keep the <strong>strong</strong> grade — <em>kauppaan</em> but <em>kaupassa</em>.</p>
+<p>The exterior cases also carry other meanings you'll meet constantly: the adessive marks <strong>instruments and transport</strong> (<em>bussilla</em> — by bus, <em>kortilla</em> — by card, <em>kirjoitan kynällä</em> — I write with a pen), the ablative marks asking/receiving <strong>from a person</strong> (<em>kysyn häneltä</em> — I ask him/her), and the allative giving <strong>to a person</strong> (<em>annan sinulle</em> — I give to you).</p>
+<h3 id="around-town">Around town</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kauppa</td>
+<td>shop</td>
+<td>asema</td>
+<td>station</td>
+</tr>
+<tr>
+<td>kahvila</td>
+<td>café</td>
+<td>pysäkki</td>
+<td>(bus/tram) stop</td>
+</tr>
+<tr>
+<td>ravintola</td>
+<td>restaurant</td>
+<td>tori</td>
+<td>market square</td>
+</tr>
+<tr>
+<td>kirjasto</td>
+<td>library</td>
+<td>pankki</td>
+<td>bank</td>
+</tr>
+<tr>
+<td>koulu</td>
+<td>school</td>
+<td>apteekki</td>
+<td>pharmacy</td>
+</tr>
+<tr>
+<td>kirkko</td>
+<td>church</td>
+<td>sairaala</td>
+<td>hospital</td>
+</tr>
+<tr>
+<td>museo</td>
+<td>museum</td>
+<td>hotelli</td>
+<td>hotel</td>
+</tr>
+<tr>
+<td>puisto</td>
+<td>park</td>
+<td>keskusta</td>
+<td>city centre</td>
+</tr>
+<tr>
+<td>katu</td>
+<td>street</td>
+<td>kaupunki</td>
+<td>city, town</td>
+</tr>
+</tbody>
+</table></div>
+<p>Transport: <em>bussilla, junalla (train), metrolla, raitiovaunulla / ratikalla (tram), autolla (car), pyörällä (bike), kävellen (on foot).</em></p>
+<h3 id="special-sets-worth-memorising-whole">Special sets worth memorising whole</h3>
+<ul>
+<li><strong>koti</strong> (home) is irregular: <em>kotona</em> (at home), <em>kotoa</em> (from home), <em>kotiin</em> ([to] home). <em>Olen kotona. Menen kotiin.</em></li>
+<li><strong>työ</strong> (work) uses plural forms idiomatically: <em>olen töissä</em> (I'm at work), <em>menen töihin</em> (I'm going to work), <em>tulen töistä</em> (I'm coming from work).</li>
+<li><strong>Streets are exterior:</strong> <em>kadulla</em> — on/in the street.</li>
+<li>Most towns take interior cases (<em>Helsingissä, Turussa, Lontoossa</em>), but some — especially names ending in -joki, -mäki, -järvi, plus Tampere and Rovaniemi — take exterior: <em>Tampereella, Seinäjoella, Rovaniemellä</em>. Also <em>Venäjällä</em> (in Russia), though <em>Suomessa, Englannissa</em>.</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<p><em>Asun Kalliossa, mutta olen nyt töissä keskustassa.</em> — I live in Kallio but I'm at work in the centre now. · <em>Menen töihin metrolla ja tulen kotiin bussilla.</em> · <em>Tuletko kahvilasta vai kirjastosta?</em> · <em>Kirja on pöydällä.</em></p>
+<p class="exercise"><strong>Harjoitus 6.1</strong> — Add the right case: 1. Asun (Helsinki). 2. Menemme (ravintola). 3. Hän tulee (koulu, from). 4. Kissa istuu (tuoli, on). 5. Otan kirjan (pöytä, off). 6. Menen (tori, to — exterior). 7. Olemme (koti). 8. He menevät (työ).</p>
+<details>
+<summary><em>Vastaukset — show answers (6.1)</em></summary>
+<p>1 Helsingissä 2 ravintolaan 3 koulusta 4 tuolilla 5 pöydältä 6 torille 7 kotona 8 töihin.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 6.2</strong> — Answer about yourself in full sentences: 1. Missä sinä asut? 2. Mihin menet huomenna (tomorrow)? 3. Millä menet töihin — bussilla, autolla vai kävellen?</p>
+<details>
+<summary><em>Vastaukset — show answers (6.2)</em></summary>
+<p>Models: <em>Asun Lontoossa. Menen huomenna keskustaan. Menen töihin metrolla.</em></p>
+</details>
+<p class="exercise"><strong>Harjoitus 6.3</strong> — Translate: 1. The book is in the bag (laukku). 2. I'm coming from the shop. 3. We're going to Tampere by train. 4. She's at home.</p>
+<details>
+<summary><em>Vastaukset — show answers (6.3)</em></summary>
+<p>1 Kirja on laukussa. 2 Tulen kaupasta. 3 Menemme Tampereelle junalla. 4 Hän on kotona.</p>
+</details>
+<hr />
+<h2 id="lesson-7-having-and-belonging-genitive-minulla-on">Lesson 7 — Having and belonging (Genitive; minulla on)</h2>
+<h3 id="the-genitive-n">The genitive: -n</h3>
+<p>Ownership and of-relations use the genitive, formed with <strong>-n</strong> on the (weak-grade) stem: <em>Annan auto</em> — Anna's car; <em>talon ovi</em> — the door of the house. Many common words change their stem before the -n; these stem changes then recur across <em>all</em> cases, so this table earns its keep:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Basic</th>
+<th>Genitive</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nainen</td>
+<td>naisen</td>
+<td>woman</td>
+</tr>
+<tr>
+<td>suomalainen</td>
+<td>suomalaisen</td>
+<td>Finn</td>
+</tr>
+<tr>
+<td>mies</td>
+<td>miehen</td>
+<td>man; husband</td>
+</tr>
+<tr>
+<td>lapsi</td>
+<td>lapsen</td>
+<td>child</td>
+</tr>
+<tr>
+<td>vesi</td>
+<td>veden</td>
+<td>water</td>
+</tr>
+<tr>
+<td>käsi</td>
+<td>käden</td>
+<td>hand</td>
+</tr>
+<tr>
+<td>kieli</td>
+<td>kielen</td>
+<td>language</td>
+</tr>
+<tr>
+<td>pieni</td>
+<td>pienen</td>
+<td>small</td>
+</tr>
+<tr>
+<td>suuri</td>
+<td>suuren</td>
+<td>big</td>
+</tr>
+<tr>
+<td>huone</td>
+<td>huoneen</td>
+<td>room</td>
+</tr>
+<tr>
+<td>perhe</td>
+<td>perheen</td>
+<td>family</td>
+</tr>
+<tr>
+<td>puhelin</td>
+<td>puhelimen</td>
+<td>telephone</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="i-have-minulla-on">"I have": minulla on</h3>
+<p>Finnish has no verb <em>to have</em>. Instead, the owner goes in the <strong>adessive</strong> and the thing owned is the subject: literally "on me is."</p>
+<p><em>Minulla on koira.</em> — I have a dog. · <em>Sinulla on kaunis asunto.</em> — You have a beautiful flat. · <em>Onko teillä lapsia?</em> — Do you have children? · <em>Kenellä on avain?</em> — Who has the key?</p>
+<p>The negative takes the partitive (Lesson 8 explains why): <em>Minulla ei ole autoa.</em> — I don't have a car.</p>
+<h3 id="possessive-suffixes">Possessive suffixes</h3>
+<p>Standard Finnish doubles up possession: pronoun in genitive <strong>plus</strong> a suffix on the noun — <em>minun kirjani</em> (my book), <em>sinun nimesi</em>, <em>hänen autonsa</em>, <em>meidän talomme</em>, <em>teidän koiranne</em>, <em>heidän lapsensa</em>. In everyday speech the suffix is usually dropped (<em>mun kirja</em>), and with third parties the genitive alone appears: <em>Annan kirja</em>. Recognise the suffixes; produce them when writing formally.</p>
+<h3 id="family">Family</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>perhe</td>
+<td>family</td>
+<td>äiti / isä</td>
+<td>mother / father</td>
+</tr>
+<tr>
+<td>vanhemmat</td>
+<td>parents</td>
+<td>veli / sisko</td>
+<td>brother / sister</td>
+</tr>
+<tr>
+<td>poika</td>
+<td>boy; son</td>
+<td>tytär / tyttö</td>
+<td>daughter / girl</td>
+</tr>
+<tr>
+<td>vaimo / mies</td>
+<td>wife / husband</td>
+<td>puoliso</td>
+<td>spouse, partner</td>
+</tr>
+<tr>
+<td>isoäiti, mummo</td>
+<td>grandmother</td>
+<td>isoisä, vaari</td>
+<td>grandfather</td>
+</tr>
+<tr>
+<td>ystävä</td>
+<td>friend</td>
+<td>kaveri</td>
+<td>mate, buddy</td>
+</tr>
+<tr>
+<td>koira / kissa</td>
+<td>dog / cat</td>
+<td>naimisissa</td>
+<td>married</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="postpositions">Postpositions</h3>
+<p>Where English has prepositions, Finnish mostly has <strong>post</strong>positions governing the genitive: <em>pöydän alla</em> (under the table), <em>talon edessä</em> (in front of the house), <em>kaupan takana</em> (behind the shop), <em>aseman vieressä</em> (next to the station), <em>keskustan lähellä</em> (near the centre), <em>ystävän kanssa</em> (with a friend). One common item takes the partitive instead: <em>ilman rahaa</em> — without money.</p>
+<p class="exercise"><strong>Harjoitus 7.1</strong> — Genitive: 1. Tämä on (Anna) kissa. 2. (Talo) ovi on auki. 3. (Mies) nimi on Jussi. 4. (Lapsi) äiti on lääkäri. 5. (Kaupunki) keskusta on pieni.</p>
+<details>
+<summary><em>Vastaukset — show answers (7.1)</em></summary>
+<p>1 Annan 2 Talon 3 Miehen 4 Lapsen 5 Kaupungin.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 7.2</strong> — Translate with minulla on -structures: 1. I have two brothers. 2. Do you have a car? 3. She has a big family. 4. We don't have time (aika → partitive aikaa). 5. Who has my key (avain)?</p>
+<details>
+<summary><em>Vastaukset — show answers (7.2)</em></summary>
+<p>1 Minulla on kaksi veljeä. 2 Onko sinulla auto(a)? 3 Hänellä on iso perhe. 4 Meillä ei ole aikaa. 5 Kenellä on minun avaimeni?.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 7.3</strong> — Write four sentences about your family or friends, using at least one postposition. (Model in key.)</p>
+<details>
+<summary><em>Vastaukset — show answers (7.3)</em></summary>
+<p>Model: <em>Minulla on pieni perhe. Vanhempani asuvat Lontoossa. Siskoni asuu miehensä kanssa Manchesterissa. Heidän koiransa nukkuu aina pöydän alla.</em></p>
+</details>
+<hr />
+<h2 id="lesson-8-the-partitive-finland-s-favourite-case">Lesson 8 — The partitive: Finland's favourite case</h2>
+<p>If Finnish grammar has a boss level, this is it — but it yields to patterns. The partitive expresses <em>an unspecified amount of</em> something, or an action that doesn't run to completion.</p>
+<h3 id="formation">Formation</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Ending</th>
+<th>When</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a / -ä</td>
+<td>after a short final vowel</td>
+<td>kahvi → kahvia, talo → taloa, kauppa → kauppaa</td>
+</tr>
+<tr>
+<td>-ta / -tä</td>
+<td>after a long vowel/diphthong, or a consonant stem</td>
+<td>maa → maata, työ → työtä, mies → miestä, kieli → kieltä, pieni → pientä</td>
+</tr>
+<tr>
+<td>-tta / -ttä</td>
+<td>e-words (huone type)</td>
+<td>huone → huonetta, perhe → perhettä</td>
+</tr>
+</tbody>
+</table></div>
+<p>Watch the old i-words, which use consonant stems: <em>vesi → vettä, käsi → kättä, lapsi → lasta, uusi → uutta</em>. And remember: the partitive keeps the <strong>strong</strong> grade (<em>kauppaa</em>, not kaupaa).</p>
+<h3 id="the-five-core-uses">The five core uses</h3>
+<ol>
+<li><strong>After numbers</strong> (Lesson 4): <em>kolme kahvia, viisi euroa, kaksi lasta.</em></li>
+<li><strong>After negation:</strong> <em>Minulla ei ole autoa. En juo kahvia. Emme osta leipää.</em> Negative sentences take partitive objects, full stop.</li>
+<li><strong>Indefinite amounts / mass nouns:</strong> <em>Juon kahvia</em> (I drink [some] coffee) versus <em>Juon kahvin</em> (I drink the/a whole coffee). <em>Ostan maitoa ja leipää.</em></li>
+<li><strong>Ongoing, incomplete action:</strong> <em>Luen kirjaa</em> — I'm reading a book (in progress). Lesson 13 develops this into the full object system.</li>
+<li><strong>After certain verbs, always:</strong> <em>rakastaa</em> (rakastan sinua), <em>odottaa</em> (odotan bussia), <em>harrastaa</em> (harrastan uintia — I do swimming), <em>opiskella</em> (opiskelen suomea), <em>pelata</em> (pelaan jalkapalloa), <em>ajatella</em> (ajattelen sinua — I'm thinking of you).</li>
+</ol>
+<p>Bonus: those greetings from Lesson 1 — <em>hyvää päivää, hyvää yötä</em> — are partitives. You're literally wishing someone "[some] good day."</p>
+<h3 id="food-and-drink">Food and drink</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ruoka / juoma</td>
+<td>food / drink</td>
+<td>liha / kana / kala</td>
+<td>meat / chicken / fish</td>
+</tr>
+<tr>
+<td>lohi</td>
+<td>salmon</td>
+<td>peruna</td>
+<td>potato</td>
+</tr>
+<tr>
+<td>riisi / pasta</td>
+<td>rice / pasta</td>
+<td>keitto</td>
+<td>soup</td>
+</tr>
+<tr>
+<td>salaatti</td>
+<td>salad</td>
+<td>kasvis / vihannes</td>
+<td>vegetable</td>
+</tr>
+<tr>
+<td>hedelmä</td>
+<td>fruit</td>
+<td>omena / banaani</td>
+<td>apple / banana</td>
+</tr>
+<tr>
+<td>marja / mustikka</td>
+<td>berry / bilberry</td>
+<td>juusto / kananmuna</td>
+<td>cheese / egg</td>
+</tr>
+<tr>
+<td>voi</td>
+<td>butter</td>
+<td>sokeri / suola</td>
+<td>sugar / salt</td>
+</tr>
+<tr>
+<td>jälkiruoka</td>
+<td>dessert</td>
+<td>herkullista!</td>
+<td>delicious!</td>
+</tr>
+<tr>
+<td>lounas</td>
+<td>lunch</td>
+<td>illallinen / päivällinen</td>
+<td>dinner</td>
+</tr>
+<tr>
+<td>aamupala</td>
+<td>breakfast</td>
+<td>vegaani / kasvissyöjä</td>
+<td>vegan / vegetarian</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="dialogue-ravintolassa">Dialogue: ravintolassa</h3>
+<p>— Hei, mitä saisi olla?
+— Mitä suosittelet?
+— Lohikeitto on tosi hyvää tänään.
+— Ottaisin sitten lohikeittoa, kiitos.
+— Ja juotavaa?
+— Vesi riittää, kiitos.
+(later) — Saisinko laskun? Maksetaanko erikseen vai yhdessä?
+— Yhdessä, kiitos.</p>
+<p>(<em>ottaisin</em> = I would take; <em>riittää</em> = is enough; <em>lasku</em> = the bill; <em>erikseen/yhdessä</em> = separately/together.)</p>
+<p class="exercise"><strong>Harjoitus 8.1</strong> — Form the partitive: 1. tee 2. olut 3. vesi 4. leipä 5. perhe 6. suomi 7. raha (money) 8. lapsi.</p>
+<details>
+<summary><em>Vastaukset — show answers (8.1)</em></summary>
+<p>teetä, olutta, vettä, leipää, perhettä, suomea, rahaa, lasta.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 8.2</strong> — Choose basic form or partitive and explain briefly why: 1. Minulla on (koira / koiraa). 2. Minulla ei ole (koira / koiraa). 3. Juon aamulla (kahvi / kahvia). 4. Ostan kaksi (lippu / lippua). 5. Rakastan (sinut / sinua). 6. Odotamme (juna / junaa).</p>
+<details>
+<summary><em>Vastaukset — show answers (8.2)</em></summary>
+<p>1 koira (affirmative "have" — subject stays basic) 2 koiraa (negation) 3 kahvia (indefinite mass) 4 lippua (after a number) 5 sinua (rakastaa always partitive) 6 junaa (odottaa always partitive).</p>
+</details>
+<p class="exercise"><strong>Harjoitus 8.3</strong> — Order at a restaurant: ask for a recommendation, order a soup and a beer, ask for the bill. Write your lines.</p>
+<details>
+<summary><em>Vastaukset — show answers (8.3)</em></summary>
+<p>Model: <em>Mitä suosittelet? … Ottaisin keittoa ja yhden oluen, kiitos. … Saisinko laskun?</em></p>
+</details>
+<hr />
+<h2 id="lesson-9-verb-types-2-and-3-telling-the-time">Lesson 9 — Verb types 2 and 3; telling the time</h2>
+<h3 id="type-2-infinitives-in-da-dä">Type 2: infinitives in -da/-dä</h3>
+<p>Drop <strong>-da/-dä</strong>, add the endings; the hän-form adds nothing (the stem already ends in a long vowel or diphthong).</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>syödä (eat)</th>
+<th>juoda (drink)</th>
+<th>voida (can)</th>
+<th>saada (get)</th>
+<th>tehdä (do)*</th>
+<th>nähdä (see)*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minä</td>
+<td>syön</td>
+<td>juon</td>
+<td>voin</td>
+<td>saan</td>
+<td>teen</td>
+<td>näen</td>
+</tr>
+<tr>
+<td>hän</td>
+<td>syö</td>
+<td>juo</td>
+<td>voi</td>
+<td>saa</td>
+<td>tekee</td>
+<td>näkee</td>
+</tr>
+<tr>
+<td>he</td>
+<td>syövät</td>
+<td>juovat</td>
+<td>voivat</td>
+<td>saavat</td>
+<td>tekevät</td>
+<td>näkevät</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>tehdä</em> and <em>nähdä</em> are slightly irregular — memorise <em>teen/tekee</em> and <em>näen/näkee</em>. Also in this family: <em>myydä</em> (sell), <em>viedä</em> (take away), <em>käydä</em> (visit: <em>käyn kaupassa</em> — I pop to the shop).</p>
+<h3 id="type-3-infinitives-in-lla-llä-nna-nnä-rra-rrä-sta-stä">Type 3: infinitives in -lla/-llä, -nna/-nnä, -rra/-rrä, -sta/-stä</h3>
+<p>Drop the last two letters, add <strong>-e-</strong>, then the endings:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>tulla (come)</th>
+<th>mennä (go)</th>
+<th>opiskella (study)</th>
+<th>nousta (get up)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minä</td>
+<td>tulen</td>
+<td>menen</td>
+<td>opiskelen</td>
+<td>nousen</td>
+</tr>
+<tr>
+<td>hän</td>
+<td>tulee</td>
+<td>menee</td>
+<td>opiskelee</td>
+<td>nousee</td>
+</tr>
+<tr>
+<td>he</td>
+<td>tulevat</td>
+<td>menevät</td>
+<td>opiskelevat</td>
+<td>nousevat</td>
+</tr>
+</tbody>
+</table></div>
+<p>Also: <em>olla</em> (which you know), <em>ajatella</em> (think), <em>kuunnella</em> (listen — <em>kuuntelen</em>, note reverse gradation: strong in personal forms), <em>pestä</em> (wash — <em>pesen</em>).</p>
+<h3 id="telling-the-time">Telling the time</h3>
+<p><em>Paljonko kello on?</em> — What time is it? <em>Kello on kolme.</em> — It's three. Half-hours count <strong>towards the coming hour</strong>: <strong><em>puoli kaksi</em> = half past ONE (1:30)</strong> — the classic trap for English speakers. <em>Viittätoista vaille neljä</em> — quarter to four; <em>kymmenen yli kaksi</em> — ten past two (vaille takes the partitive, yli the basic form). In timetables, just read digits: <em>kello 15.30 — viisitoista kolmekymmentä</em>.</p>
+<p>Times of day take the adessive: <em>aamulla</em> (in the morning), <em>päivällä</em>, <em>illalla</em>, <em>yöllä</em>. Days of the week take the essive <strong>-na</strong> for "on": <em>maanantai → maanantaina, tiistai, keskiviikko, torstai, perjantai, lauantai, sunnuntai; viikonloppuna</em> — at the weekend. Frequency adverbs: <em>aina</em> (always), <em>usein</em> (often), <em>joskus</em> (sometimes), <em>harvoin</em> (rarely), <em>ei koskaan</em> (never).</p>
+<h3 id="a-daily-routine-read-aloud">A daily routine (read aloud)</h3>
+<p><em>Nousen arkisin kello seitsemän. Käyn suihkussa ja syön aamupalaa. Juon aina kaksi kupillista kahvia. Menen töihin metrolla ja olen töissä kello yhdeksästä viiteen. Illalla laitan ruokaa, katson vähän televisiota ja luen kirjaa. Menen nukkumaan noin kello yksitoista.</em></p>
+<p>(<em>arkisin</em> = on weekdays; <em>kupillinen</em> = a cupful; <em>yhdeksästä viiteen</em> = from nine to five; <em>mennä nukkumaan</em> = go to sleep.)</p>
+<p class="exercise"><strong>Harjoitus 9.1</strong> — Conjugate for the person given: 1. me (syödä) 2. hän (tehdä) 3. sinä (mennä) 4. he (tulla) 5. minä (nähdä) 6. te (opiskella) 7. hän (käydä) 8. minä (nousta).</p>
+<details>
+<summary><em>Vastaukset — show answers (9.1)</em></summary>
+<p>syömme, tekee, menet, tulevat, näen, opiskelette, käy, nousen.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 9.2</strong> — Write the times in words: 1. 2:00 2. 5:30 3. 9:15 (use yli) 4. 7:45 (use vaille) 5. 12:00 (keskipäivä works too).</p>
+<details>
+<summary><em>Vastaukset — show answers (9.2)</em></summary>
+<p>1 Kello on kaksi. 2 puoli kuusi 3 viisitoista (vartin) yli yhdeksän 4 viittätoista (varttia) vaille kahdeksan 5 kaksitoista / keskipäivä.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 9.3</strong> — Describe your own weekday in five to seven sentences, using at least four different verbs and two time expressions. (Model in key.)</p>
+<details>
+<summary><em>Vastaukset — show answers (9.3)</em></summary>
+<p>Model: <em>Nousen kello seitsemän ja käyn suihkussa. Juon kahvia ja syön aamupalaa. Menen töihin bussilla. Illalla laitan ruokaa ja luen kirjaa. Menen nukkumaan kello yksitoista.</em></p>
+</details>
+<hr />
+<h3 id="module-2-check-yourself">Module 2 — Check yourself</h3>
+<p>You can now: apply consonant gradation automatically · move things and yourself around with all six location cases, including koti and työ idioms · express possession three ways (genitive, minulla on, possessive suffixes) · form and deploy the partitive in its five core uses · conjugate verb types 1–3 · tell the time and narrate a daily routine. That is genuinely the hard structural core of Finnish. Everything from here is expansion.</p>
+<hr />
+<h1 id="module-3-talking-about-your-life-lessons-10-14">MODULE 3 — Talking about your life (Lessons 10–14)</h1>
+<p><em>Goal: the remaining verb types, the past tenses, the notorious object rules, and enough descriptive language to talk about people, homes and weather.</em></p>
+<hr />
+<h2 id="lesson-10-verb-types-4-6-shopping-for-clothes">Lesson 10 — Verb types 4–6; shopping for clothes</h2>
+<h3 id="type-4-infinitives-in-ata-ätä-and-ota-uta">Type 4: infinitives in -ata/-ätä (and -ota, -uta…)</h3>
+<p>Drop the <strong>-t-</strong>: the stem ends in the vowel + a. These verbs show <strong>reverse gradation</strong> — weak in the infinitive, strong in personal forms:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Infinitive</th>
+<th>minä</th>
+<th>hän</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>haluta</td>
+<td>haluan</td>
+<td>haluaa</td>
+<td>to want</td>
+</tr>
+<tr>
+<td>tavata</td>
+<td>tapaan</td>
+<td>tapaa</td>
+<td>to meet</td>
+</tr>
+<tr>
+<td>herätä</td>
+<td>herään</td>
+<td>herää</td>
+<td>to wake up</td>
+</tr>
+<tr>
+<td>osata</td>
+<td>osaan</td>
+<td>osaa</td>
+<td>to know how to</td>
+</tr>
+<tr>
+<td>pelata</td>
+<td>pelaan</td>
+<td>pelaa</td>
+<td>to play (games/sport)</td>
+</tr>
+<tr>
+<td>avata</td>
+<td>avaan</td>
+<td>avaa</td>
+<td>to open</td>
+</tr>
+<tr>
+<td>tykätä</td>
+<td>tykkään</td>
+<td>tykkää</td>
+<td>to like</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Tykätä</em> takes the <strong>elative</strong>: <em>Tykkään kahvista</em> — I like coffee; <em>Tykkäätkö Helsingistä?</em> Compare <em>rakastaa</em> + partitive: <em>Rakastan kahvia</em>. Finns will forgive you for mixing these up roughly once.</p>
+<h3 id="type-5-infinitives-in-ita-itä">Type 5: infinitives in -ita/-itä</h3>
+<p>Insert <strong>-tse-</strong>: <em>tarvita → tarvitsen, tarvitsee</em> (to need); <em>valita → valitsen</em> (to choose); <em>häiritä → häiritsen</em> (to disturb).</p>
+<h3 id="type-6-infinitives-in-eta-etä">Type 6: infinitives in -eta/-etä</h3>
+<p>A small group meaning "to become X": <em>vanheta → vanhenen</em> (to age), <em>kylmetä → kylmenen</em>. Recognise them; you'll rarely need to produce them.</p>
+<h3 id="shopping-vocabulary">Shopping vocabulary</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ostoskeskus</td>
+<td>shopping centre</td>
+<td>myyjä / asiakas</td>
+<td>shop assistant / customer</td>
+</tr>
+<tr>
+<td>hinta</td>
+<td>price</td>
+<td>ale, alennus</td>
+<td>sale, discount</td>
+</tr>
+<tr>
+<td>koko</td>
+<td>size</td>
+<td>sovituskoppi</td>
+<td>fitting room</td>
+</tr>
+<tr>
+<td>paita</td>
+<td>shirt</td>
+<td>housut</td>
+<td>trousers</td>
+</tr>
+<tr>
+<td>farkut</td>
+<td>jeans</td>
+<td>takki</td>
+<td>coat, jacket</td>
+</tr>
+<tr>
+<td>kengät</td>
+<td>shoes</td>
+<td>sukat</td>
+<td>socks</td>
+</tr>
+<tr>
+<td>pipo</td>
+<td>beanie (essential kit)</td>
+<td>hanskat</td>
+<td>gloves</td>
+</tr>
+<tr>
+<td>mekko</td>
+<td>dress</td>
+<td>puku</td>
+<td>suit</td>
+</tr>
+<tr>
+<td>halpa / kallis</td>
+<td>cheap / expensive</td>
+<td>sopia</td>
+<td>to fit, to suit</td>
+</tr>
+</tbody>
+</table></div>
+<p>Colours (adjectives): <em>punainen</em> red, <em>sininen</em> blue, <em>vihreä</em> green, <em>keltainen</em> yellow, <em>musta</em> black, <em>valkoinen</em> white, <em>harmaa</em> grey, <em>ruskea</em> brown, <em>oranssi</em> orange.</p>
+<h3 id="dialogue-vaatekaupassa">Dialogue: vaatekaupassa</h3>
+<p>— Hei, voinko auttaa?
+— Hei! Etsin talvitakkia.
+— Mitä kokoa?
+— Kokoa M, luulen. Onko teillä sinistä?
+— On, ole hyvä. Sovituskoppi on tuolla.
+(a moment later) — No, sopiiko?
+— Sopii hyvin. Otan tämän. Paljonko se maksaa?
+— Se on alessa — kahdeksankymmentä euroa.</p>
+<p>(<em>etsiä</em> = to look for, + partitive; <em>luulen</em> = I think; <em>tuolla</em> = over there.)</p>
+<p class="exercise"><strong>Harjoitus 10.1</strong> — Conjugate: 1. minä (haluta) 2. hän (tavata) 3. me (tarvita) 4. sinä (herätä) 5. he (pelata) 6. minä (valita).</p>
+<details>
+<summary><em>Vastaukset — show answers (10.1)</em></summary>
+<p>haluan, tapaa, tarvitsemme, heräät, pelaavat, valitsen.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 10.2</strong> — Tykätä + elative. Say you like: 1. coffee 2. Helsinki 3. music (musiikki) 4. this coat 5. Finnish food (suomalainen ruoka — both words take the ending).</p>
+<details>
+<summary><em>Vastaukset — show answers (10.2)</em></summary>
+<p>1 Tykkään kahvista. 2 Helsingistä 3 musiikista 4 tästä takista 5 suomalaisesta ruoasta.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 10.3</strong> — Translate: 1. I want to buy new shoes. (haluan + infinitive) 2. Do you need help (apu)? 3. We meet at the café at five. 4. She wakes up at six on weekdays.</p>
+<details>
+<summary><em>Vastaukset — show answers (10.3)</em></summary>
+<p>1 Haluan ostaa uudet kengät. 2 Tarvitsetko apua? 3 Tapaamme kahvilassa kello viisi. 4 Hän herää kello kuusi arkisin.</p>
+</details>
+<hr />
+<h2 id="lesson-11-the-past-tense-imperfekti">Lesson 11 — The past tense (Imperfekti)</h2>
+<p>The simple past inserts <strong>-i-</strong> between stem and ending: <em>puhun → puhuin</em> (I spoke). The -i- jostles with the stem's final vowel by type:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Present → Past</th>
+<th>Rule of thumb</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>o, u, y, ö survive</td>
+<td>sanon → sanoin; puhun → puhuin</td>
+<td>just add i</td>
+</tr>
+<tr>
+<td>e, i drop</td>
+<td>luen → luin; etsin → etsin (!)</td>
+<td>i replaces e/i</td>
+</tr>
+<tr>
+<td>a drops (long words / o,u in word)</td>
+<td>otan → otin; muistan → muistin</td>
+<td>i replaces a</td>
+</tr>
+<tr>
+<td>a → o (two-syllable a-a verbs)</td>
+<td>annan → annoin; maksan → maksoin; alan → aloin</td>
+<td>a-verbs with a in 1st syllable</td>
+</tr>
+<tr>
+<td>type 2 long vowels shorten</td>
+<td>saan → sain; jään → jäin</td>
+<td>i replaces one vowel</td>
+</tr>
+<tr>
+<td>type 2 diphthongs shift</td>
+<td>syön → söin; juon → join; vien → vein; käyn → kävin</td>
+<td>middle vowel out</td>
+</tr>
+<tr>
+<td>type 3</td>
+<td>tulen → tulin; menin, opiskelin, nousin</td>
+<td>e → i</td>
+</tr>
+<tr>
+<td>type 4: t → s</td>
+<td>haluan → halusin; tapaan → tapasin; heräsin, pelasin</td>
+<td>s marks the past</td>
+</tr>
+<tr>
+<td>type 5</td>
+<td>tarvitsen → tarvitsin</td>
+<td>e → i</td>
+</tr>
+</tbody>
+</table></div>
+<p>Irregular-ish but essential: <em>olla → olin</em> (I was), <em>tehdä → tein</em>, <em>nähdä → näin</em>, <em>tietää → tiesin</em>, <em>löytää → löysin</em> (found), <em>lähteä → lähdin</em> (left). Note <em>hän</em>-forms: <em>hän puhui, otti, söi, tuli, halusi, oli</em>.</p>
+<h3 id="time-expressions-for-the-past">Time expressions for the past</h3>
+<p><em>eilen</em> (yesterday), <em>toissapäivänä</em> (day before yesterday), <em>viime viikolla / viime viikonloppuna / viime vuonna</em> (last week/weekend/year), <em>kaksi päivää sitten</em> (two days ago), <em>aamulla</em> (this morning), <em>silloin</em> (then, back then).</p>
+<h3 id="reading-viikonloppuna">Reading: Viikonloppuna</h3>
+<p><em>Lauantaina heräsin myöhään, noin kello kymmenen. Join kahvia ja luin lehteä. Päivällä tapasin ystävän keskustassa. Kävimme museossa ja söimme lounasta pienessä ravintolassa. Illalla katsoin elokuvan kotona. Sunnuntaina en tehnyt mitään erikoista — se oli täydellinen viikonloppu.</em></p>
+<p>(<em>lehti</em> = newspaper (lukea lehteä); <em>elokuva</em> = film; <em>en tehnyt mitään erikoista</em> = I didn't do anything special — negative past, next lesson; <em>täydellinen</em> = perfect.)</p>
+<p class="exercise"><strong>Harjoitus 11.1</strong> — Put into the past (same person): 1. Puhun suomea. 2. Hän ostaa leivän. 3. Syömme kotona. 4. He tulevat junalla. 5. Haluan kahvia. 6. Näen hänet usein. 7. Olen väsynyt. 8. Tapaamme maanantaina.</p>
+<details>
+<summary><em>Vastaukset — show answers (11.1)</em></summary>
+<p>1 Puhuin 2 osti 3 Söimme 4 tulivat 5 Halusin 6 Näin hänet usein 7 Olin 8 Tapasimme.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 11.2</strong> — Answer in Finnish, past tense: 1. Mitä joit aamulla? 2. Missä olit eilen illalla? 3. Mitä teit viime viikonloppuna? (two or three sentences).</p>
+<details>
+<summary><em>Vastaukset — show answers (11.2)</em></summary>
+<p>Models: <em>Join kahvia ja vettä. Olin kotona. Viime viikonloppuna kävin salilla ja tapasin ystävän. Illalla katsoimme elokuvan.</em></p>
+</details>
+<p class="exercise"><strong>Harjoitus 11.3</strong> — Translate: 1. I woke up at seven and went to work. 2. We visited (käydä) Tampere last week. 3. She read the book yesterday.</p>
+<details>
+<summary><em>Vastaukset — show answers (11.3)</em></summary>
+<p>1 Heräsin kello seitsemän ja menin töihin. 2 Kävimme Tampereella viime viikolla. 3 Hän luki kirjan eilen.</p>
+</details>
+<hr />
+<h2 id="lesson-12-the-perfect-tense-and-the-negative-past">Lesson 12 — The perfect tense and the negative past</h2>
+<h3 id="perfect-olla-nut-participle">Perfect: olla + NUT-participle</h3>
+<p>"I have done" = present of <em>olla</em> + past participle in <strong>-nut/-nyt</strong> (plural <strong>-neet</strong>):</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Infinitive → participle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>puhua → puhunut; ostaa → ostanut</td>
+</tr>
+<tr>
+<td>2</td>
+<td>syödä → syönyt; tehdä → tehnyt; nähdä → nähnyt</td>
+</tr>
+<tr>
+<td>3</td>
+<td>tulla → tullut; mennä → mennyt; opiskella → opiskellut</td>
+</tr>
+<tr>
+<td>4</td>
+<td>haluta → halunnut; tavata → tavannut</td>
+</tr>
+<tr>
+<td>5</td>
+<td>tarvita → tarvinnut</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Olen asunut Lontoossa kymmenen vuotta.</em> — I have lived in London for ten years (and still do). <em>Oletko käynyt Suomessa?</em> — Have you (ever) been to Finland? <em>Hän on jo syönyt.</em> — She has already eaten. <em>He ovat opiskelleet suomea vuoden.</em> — They've studied Finnish for a year.</p>
+<p>Use the perfect for experiences, unfinished periods, and past events whose result matters now. The pluperfect ("had done") simply swaps in the past of olla: <em>olin syönyt</em> — I had eaten.</p>
+<h3 id="the-negative-past">The negative past</h3>
+<p>Negative verb + the same NUT-participle: <em>En puhunut.</em> — I didn't speak. <em>Hän ei tullut eilen.</em> — He didn't come yesterday. <em>Emme nähneet mitään.</em> — We didn't see anything (plural -neet!). <em>Etkö saanut viestiä?</em> — Didn't you get the message?</p>
+<h3 id="travel-vocabulary">Travel vocabulary</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>matka</td>
+<td>trip, journey</td>
+<td>matkustaa</td>
+<td>to travel</td>
+</tr>
+<tr>
+<td>lentokenttä</td>
+<td>airport</td>
+<td>lento</td>
+<td>flight</td>
+</tr>
+<tr>
+<td>lippu</td>
+<td>ticket</td>
+<td>meno-paluu</td>
+<td>return (ticket)</td>
+</tr>
+<tr>
+<td>passi</td>
+<td>passport</td>
+<td>matkalaukku</td>
+<td>suitcase</td>
+</tr>
+<tr>
+<td>varaus</td>
+<td>reservation, booking</td>
+<td>varata</td>
+<td>to book</td>
+</tr>
+<tr>
+<td>loma</td>
+<td>holiday</td>
+<td>kesäloma</td>
+<td>summer holiday</td>
+</tr>
+<tr>
+<td>nähtävyys</td>
+<td>sight, attraction</td>
+<td>ulkomailla</td>
+<td>abroad</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Käydä</em> (to visit and come back) pairs with <strong>missä</strong>-forms: <em>Olen käynyt Tallinnassa kolme kertaa.</em> — I've been to Tallinn three times. (<em>kertaa</em> — partitive after a number, as ever.)</p>
+<h3 id="culture-box-sauna">Culture box: sauna</h3>
+<p>You cannot learn Finnish without learning sauna. Key words: <em>sauna</em> itself, <em>löyly</em> (the steam that rises when you throw water on the stove — also the untranslatable soul of the experience), <em>kiuas</em> (the sauna stove), <em>vihta/vasta</em> (the birch whisk, regional names, mild national controversy over which is correct). Grammar in the wild: <em>Menen saunaan. Olen saunassa. Tulen saunasta.</em> There are more saunas than cars in Finland; an invitation is hospitality, not eccentricity.</p>
+<p class="exercise"><strong>Harjoitus 12.1</strong> — Form the perfect (minä): 1. lukea 2. syödä 3. tulla 4. haluta 5. tehdä 6. olla.</p>
+<details>
+<summary><em>Vastaukset — show answers (12.1)</em></summary>
+<p>olen lukenut, syönyt, tullut, halunnut, tehnyt, ollut.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 12.2</strong> — Make negative past: 1. Ostin liput. 2. Hän meni kotiin. 3. Söimme aamupalaa. 4. He puhuivat englantia. 5. Näin hänet.</p>
+<details>
+<summary><em>Vastaukset — show answers (12.2)</em></summary>
+<p>1 En ostanut lippuja (plural object → partitive plural under negation). 2 Hän ei mennyt kotiin. 3 Emme syöneet aamupalaa. 4 He eivät puhuneet englantia. 5 En nähnyt häntä.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 12.3</strong> — Answer truthfully in full sentences: 1. Oletko käynyt Suomessa? 2. Kuinka kauan olet opiskellut suomea? (kuinka kauan = how long) 3. Mitä et tehnyt eilen?</p>
+<details>
+<summary><em>Vastaukset — show answers (12.3)</em></summary>
+<p>Models: <em>Olen käynyt Suomessa kerran. / En ole vielä käynyt Suomessa. — Olen opiskellut suomea kaksi kuukautta. — En käynyt eilen salilla.</em></p>
+</details>
+<hr />
+<h2 id="lesson-13-the-object-total-or-partial">Lesson 13 — The object: total or partial?</h2>
+<p>This is the grammar point Finns themselves will tell you is the hardest — and the most satisfying to crack. Every object in a Finnish sentence is either <strong>total</strong> (the action covers the whole thing, to completion) or <strong>partial</strong> (partitive: incomplete, ongoing, indefinite, or negated).</p>
+<h3 id="total-object-the-action-is-complete-and-covers-the-whole">Total object — the action is complete and covers the whole</h3>
+<p>Form: <strong>genitive -n</strong> in the singular (<em>Luin kirjan</em> — I read the book, finished it), <strong>nominative</strong> in the plural (<em>Ostin kengät</em> — I bought the shoes), and <strong>nominative</strong> also after imperatives and <em>täytyy</em>: <em>Osta kirja! Minun täytyy ostaa liput.</em></p>
+<h3 id="partial-object-partitive">Partial object — partitive</h3>
+<p>Used when the action is <strong>ongoing</strong> (<em>Luin kirjaa, kun hän soitti</em> — I was reading the book when he called), <strong>negated</strong> (<em>En lukenut kirjaa</em>), covers an <strong>indefinite amount</strong> (<em>Ostin maitoa</em> — I bought some milk), or follows an inherently open-ended verb (<em>rakastaa, odottaa, ajatella, tarvita, harrastaa, etsiä, kuunnella, katsoa</em> in the sense of watching).</p>
+<h3 id="minimal-pairs-read-these-until-they-feel-different">Minimal pairs — read these until they feel different</h3>
+<ul>
+<li><em>Join kahvin.</em> (I drank the coffee — cup emptied.) / <em>Join kahvia.</em> (I drank some coffee.)</li>
+<li><em>Luin kirjan eilen.</em> (Read it cover to cover.) / <em>Luin kirjaa eilen.</em> (Did some reading of it.)</li>
+<li><em>Ostin asunnon.</em> (I bought a flat — done deal.) / <em>Etsin asuntoa.</em> (I'm looking for a flat.)</li>
+<li><em>Rakennan taloa.</em> (I'm building a house — in progress.) / <em>Rakensin talon.</em> (I built the house.)</li>
+</ul>
+<h3 id="personal-pronouns-have-a-special-accusative">Personal pronouns have a special accusative</h3>
+<p><em>minut, sinut, hänet, meidät, teidät, heidät</em> — and <em>kenet</em> (whom): <em>Hän vei minut lentokentälle.</em> — She took me to the airport. <em>Tunnetko hänet?</em> — Do you know him/her? In the negative, back to partitive: <em>En tunne häntä.</em></p>
+<p>One elegant extra: durations behave like total objects — <em>Asuin Suomessa vuoden.</em> — I lived in Finland for a year.</p>
+<p class="exercise"><strong>Harjoitus 13.1</strong> — Choose the object form: 1. Ostan (auto / auton / autoa) ensi vuonna — a specific whole purchase. 2. En osta (auto / auton / autoa). 3. Juotko (maito / maidon / maitoa)? — generally. 4. Hän luki (kirja / kirjan / kirjaa) loppuun (to the end). 5. Odotan (bussi / bussin / bussia). 6. Rakastan (tämä kaupunki → both words!). 7. Minun täytyy ostaa (lippu / lipun / lippua). 8. Näitkö (minä → ?) eilen?</p>
+<details>
+<summary><em>Vastaukset — show answers (13.1)</em></summary>
+<p>1 auton 2 autoa 3 maitoa 4 kirjan 5 bussia 6 tätä kaupunkia 7 lippu (nominative after täytyy) 8 minut.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 13.2</strong> — Explain the difference in one sentence each: a) <em>Söin puuron</em> vs <em>Söin puuroa</em>. b) <em>Kirjoitin raportin</em> vs <em>Kirjoitin raporttia</em>.</p>
+<details>
+<summary><em>Vastaukset — show answers (13.2)</em></summary>
+<p>a) <em>puuron</em> = ate the whole bowl; <em>puuroa</em> = ate some porridge. b) <em>raportin</em> = finished the report; <em>raporttia</em> = was working on it, unfinished.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 13.3</strong> — Translate: 1. I'm waiting for you. 2. She bought the tickets. 3. We didn't see the film. 4. Do you know me? 5. I was writing an email when you called (kun soitit).</p>
+<details>
+<summary><em>Vastaukset — show answers (13.3)</em></summary>
+<p>1 Odotan sinua. 2 Hän osti liput. 3 Emme nähneet elokuvaa. 4 Tunnetko minut? 5 Kirjoitin sähköpostia, kun soitit.</p>
+</details>
+<hr />
+<h2 id="lesson-14-describing-things-adjectives-comparison-home-and-weather">Lesson 14 — Describing things: adjectives, comparison, home and weather</h2>
+<h3 id="adjectives-agree-with-their-noun">Adjectives agree with their noun</h3>
+<p>In case and number, always: <em>iso talo → isossa talossa → isot talot → isoja taloja.</em> You've been doing this quietly since <em>hyvää päivää</em>; now it's official.</p>
+<h3 id="comparative-and-superlative">Comparative and superlative</h3>
+<p>Comparative <strong>-mpi</strong>, superlative <strong>-in</strong>, both attached to the (inflectional) stem, gradation applying: <em>helppo → helpompi → helpoin</em> (easy); <em>vanha → vanhempi → vanhin</em>; <em>kylmä → kylmempi → kylmin</em>. Two-syllable adjectives ending in -a/-ä change it to -e-: <em>matala → matalampi</em>. Irregulars worth their weight: <strong>hyvä → parempi → paras</strong> (good/better/best), <em>pitkä → pidempi → pisin</em> (long/tall), <em>uusi → uudempi → uusin</em>. "Than" = <em>kuin</em>: <em>Helsinki on isompi kuin Turku.</em> "As…as" = <em>yhtä … kuin</em>.</p>
+<h3 id="describing-people">Describing people</h3>
+<p><em>pitkä / lyhyt</em> (tall/short), <em>vanha / nuori</em> (old/young), <em>ystävällinen</em> (friendly), <em>mukava</em> (nice), <em>hauska</em> (funny, fun), <em>ahkera</em> (hard-working), <em>väsynyt</em> (tired), <em>iloinen / surullinen</em> (happy/sad), <em>fiksu</em> (smart), <em>kiireinen</em> (busy).</p>
+<h3 id="home-and-housing">Home and housing</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>asunto</td>
+<td>flat, apartment</td>
+<td>yksiö / kaksio / kolmio</td>
+<td>studio / one-bed / two-bed flat</td>
+</tr>
+<tr>
+<td>kerrostalo</td>
+<td>apartment block</td>
+<td>rivitalo</td>
+<td>terraced house</td>
+</tr>
+<tr>
+<td>omakotitalo</td>
+<td>detached house</td>
+<td>huone</td>
+<td>room</td>
+</tr>
+<tr>
+<td>keittiö</td>
+<td>kitchen</td>
+<td>makuuhuone</td>
+<td>bedroom</td>
+</tr>
+<tr>
+<td>olohuone</td>
+<td>living room</td>
+<td>kylpyhuone</td>
+<td>bathroom</td>
+</tr>
+<tr>
+<td>parveke</td>
+<td>balcony</td>
+<td>sauna</td>
+<td>(naturally)</td>
+</tr>
+<tr>
+<td>vuokra</td>
+<td>rent</td>
+<td>vuokrata</td>
+<td>to rent (both directions)</td>
+</tr>
+<tr>
+<td>omistaa</td>
+<td>to own</td>
+<td>omistusasunto</td>
+<td>owner-occupied flat</td>
+</tr>
+<tr>
+<td>muuttaa</td>
+<td>to move (house)</td>
+<td>naapuri</td>
+<td>neighbour</td>
+</tr>
+</tbody>
+</table></div>
+<p>Culture box for the housing-curious: most Finnish flats are owned through an <em>asunto-osakeyhtiö</em> — a housing company in which you own shares entitling you to your flat — universally called the <em>taloyhtiö</em>. Owners pay a monthly <em>yhtiövastike</em> (maintenance charge) to it. And in Helsinki a large share of buildings stand on city-owned land under long ground leases, so listings distinguish <em>oma tontti</em> (own plot) from <em>vuokratontti</em> (leased plot) — vocabulary that turns out to matter a great deal to the price. More on reading that kind of text in Lesson 22.</p>
+<h3 id="weather-a-national-conversation-topic">Weather — a national conversation topic</h3>
+<p><em>Millainen sää tänään on?</em> — What's the weather like today? <em>Sataa.</em> — It's raining. <em>Sataa lunta.</em> — It's snowing (literally "it rains snow"). <em>Aurinko paistaa.</em> — The sun is shining. <em>On pilvistä / tuulista.</em> — It's cloudy / windy. <em>Ulkona on kymmenen astetta pakkasta.</em> — It's minus ten out (<em>pakkanen</em> = sub-zero cold, a word with many friends in Finnish). Seasons take the adessive: <em>keväällä, kesällä, syksyllä, talvella</em> (in spring/summer/autumn/winter).</p>
+<p class="exercise"><strong>Harjoitus 14.1</strong> — Comparative and superlative: 1. kylmä 2. hyvä 3. kallis (stem kallii-: kalliimpi) 4. pieni 5. pitkä.</p>
+<details>
+<summary><em>Vastaukset — show answers (14.1)</em></summary>
+<p>kylmempi/kylmin; parempi/paras; kalliimpi/kallein; pienempi/pienin; pidempi/pisin.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 14.2</strong> — Make the adjective agree: 1. Asun (pieni) asunnossa. 2. Hän ostaa (uusi) auton. 3. Juon (kuuma → kuumaa) kahvia. 4. (iso) talot ovat kalliita. 5. Tämä on Suomen (vanha, superlative) kaupunki.</p>
+<details>
+<summary><em>Vastaukset — show answers (14.2)</em></summary>
+<p>1 pienessä 2 uuden 3 kuumaa 4 Isot 5 vanhin.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 14.3</strong> — Describe your home in five sentences: type, rooms, what you like about it (tykkään + elative!), and compare it with a previous home (isompi/pienempi kuin…). (Model in key.)</p>
+<details>
+<summary><em>Vastaukset — show answers (14.3)</em></summary>
+<p>Model: <em>Asun pienessä kaksiossa kerrostalossa. Asunnossa on keittiö, olohuone, makuuhuone ja parveke. Tykkään parvekkeesta, koska sieltä näkee puiston. Asunto on pienempi kuin vanha asuntoni, mutta keskusta on lähempänä.</em></p>
+</details>
+<hr />
+<h3 id="module-3-check-yourself">Module 3 — Check yourself</h3>
+<p>You can now: handle all six verb types in the present · narrate the past in the imperfect and perfect, positive and negative · pick the right object form and articulate why · compare and describe people, homes and weather. You're at solid A2 grammar. Module 4 is about sounding like a human rather than a textbook.</p>
+<hr />
+<h1 id="module-4-sounding-natural-lessons-15-19">MODULE 4 — Sounding natural (Lessons 15–19)</h1>
+<p><em>Goal: politeness, instructions, obligation, real spoken Finnish, and the passive — the toolkit that separates functional from natural.</em></p>
+<hr />
+<h2 id="lesson-15-the-conditional-finnish-politeness-technology">Lesson 15 — The conditional: Finnish politeness technology</h2>
+<p>Since Finnish has no "please," the conditional mood <strong>-isi-</strong> does that work. It also handles hypotheticals, wishes and suggestions — one morpheme, enormous mileage.</p>
+<p>Formation: stem + <strong>isi</strong> + personal ending. Final -e and -i drop before it; type-by-type examples:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Infinitive</th>
+<th>Conditional (minä / hän)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>olla</td>
+<td>olisin / olisi</td>
+</tr>
+<tr>
+<td>saada</td>
+<td>saisin / saisi</td>
+</tr>
+<tr>
+<td>voida</td>
+<td>voisin / voisi</td>
+</tr>
+<tr>
+<td>syödä</td>
+<td>söisin / söisi</td>
+</tr>
+<tr>
+<td>mennä</td>
+<td>menisin / menisi</td>
+</tr>
+<tr>
+<td>tulla</td>
+<td>tulisin / tulisi</td>
+</tr>
+<tr>
+<td>haluta</td>
+<td>haluaisin / haluaisi</td>
+</tr>
+<tr>
+<td>ostaa</td>
+<td>ostaisin / ostaisi</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="the-politeness-patterns">The politeness patterns</h3>
+<ul>
+<li><em>Saisinko kahvin?</em> — Could I have a coffee? (Now you know what Lesson 4's chunk was.)</li>
+<li><em>Voisitko auttaa minua?</em> — Could you help me?</li>
+<li><em>Haluaisin varata pöydän kahdelle.</em> — I'd like to book a table for two.</li>
+<li><em>Olisiko sinulla hetki aikaa?</em> — Would you have a moment?</li>
+<li><em>Ottaisin lohikeittoa.</em> — I'd take the salmon soup.</li>
+</ul>
+<h3 id="suggestions-plans-hypotheticals">Suggestions, plans, hypotheticals</h3>
+<p><em>Mentäisiinkö kahville?</em> — Shall we go for a coffee? (a passive conditional — recognise it, Lesson 19 explains the passive). <em>Jos minulla olisi aikaa, matkustaisin enemmän.</em> — If I had time, I'd travel more. <em>Mitä tekisit, jos voittaisit miljoonan?</em> — What would you do if you won a million?</p>
+<h3 id="dialogue-making-plans">Dialogue: making plans</h3>
+<p>— Moi! Haluaisitko lähteä huomenna kahville?
+— Joo, mielelläni! Mihin aikaan?
+— Sopisiko kello neljä?
+— Neljä on vähän huono… Kävisikö viisi?
+— Käy hyvin. Nähdään Fazerilla!
+— Sovittu, nähdään!</p>
+<p>(<em>mielelläni</em> = gladly, with pleasure; <em>sopia/käydä</em> = to suit/work; <em>sovittu</em> = agreed, deal. Declining politely: <em>Valitettavasti en pääse huomenna — kävisikö ensi viikolla?</em> — Unfortunately I can't make tomorrow, would next week work?)</p>
+<p class="exercise"><strong>Harjoitus 15.1</strong> — Make polite with the conditional: 1. Saanko laskun? 2. Voitko avata ikkunan? 3. Haluan kaksi lippua. 4. Onko teillä pöytä neljälle?</p>
+<details>
+<summary><em>Vastaukset — show answers (15.1)</em></summary>
+<p>1 Saisinko laskun? 2 Voisitko avata ikkunan? 3 Haluaisin kaksi lippua. 4 Olisiko teillä pöytää neljälle?.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 15.2</strong> — Complete the jos-sentences: 1. Jos minulla ___ (olla) enemmän rahaa, ___ (ostaa) isomman asunnon. 2. Jos sää ___ (olla) parempi, ___ (mennä, me) ulos. 3. Mitä sinä ___ (tehdä), jos ___ (asua) Suomessa?</p>
+<details>
+<summary><em>Vastaukset — show answers (15.2)</em></summary>
+<p>1 olisi / ostaisin 2 olisi / menisimme 3 tekisit / asuisit.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 15.3</strong> — Write a four-line exchange inviting a friend to lunch; they can't make the first time and you agree another. Use at least three conditionals.</p>
+<details>
+<summary><em>Vastaukset — show answers (15.3)</em></summary>
+<p>Model: <em>— Haluaisitko lähteä huomenna lounaalle? — Valitettavasti en pääse huomenna. Kävisikö perjantai? — Kävisi hyvin! Sopisiko kello kaksitoista? — Sopii, nähdään silloin!</em></p>
+</details>
+<hr />
+<h2 id="lesson-16-commands-and-directions-imperatiivi">Lesson 16 — Commands and directions (Imperatiivi)</h2>
+<h3 id="forming-the-imperative">Forming the imperative</h3>
+<p><strong>Singular:</strong> the present minä-form minus -n — which means <strong>weak grade</strong>: <em>puhu! tule! mene! syö! ota! odota! anna!</em> Negative: <strong>älä</strong> + same form: <em>Älä mene! Älä unohda!</em></p>
+<p><strong>Plural / polite:</strong> infinitive stem + <strong>-kaa/-kää</strong>: <em>puhukaa! tulkaa! menkää! syökää! ottakaa!</em> (Note the stem is the infinitive's, so strong grade returns.) Negative: <em>älkää menkö, älkää ottako</em> — recognise it; you'll rarely produce it early on.</p>
+<p>Softening: <em>Ole hyvä ja istu.</em> — Please sit down (literally "be good and sit"). Or reach for Lesson 15: <em>Voisitko istua?</em></p>
+<h3 id="asking-for-and-giving-directions">Asking for and giving directions</h3>
+<p><em>Anteeksi, missä on lähin metroasema?</em> — Excuse me, where's the nearest metro station? <em>Miten pääsen rautatieasemalle?</em> — How do I get to the railway station? (<em>päästä</em> = to get [somewhere].)</p>
+<p>Directions toolkit: <em>Mene suoraan eteenpäin.</em> — Go straight ahead. <em>Käänny oikealle / vasemmalle.</em> — Turn right / left. <em>Jatka toiseen risteykseen asti.</em> — Continue to the second junction. <em>Se on sillan yli / kadun toisella puolella.</em> — It's over the bridge / on the other side of the street. <em>Se on ihan lähellä / aika kaukana.</em> — It's very close / quite far.</p>
+<h3 id="everyday-commands-you-ll-hear">Everyday commands you'll hear</h3>
+<p><em>Tule sisään!</em> — Come in! <em>Istu alas.</em> — Sit down. <em>Ota lisää.</em> — Take more (at any Finnish table, repeatedly). <em>Odota hetki.</em> — Wait a moment. <em>Katso!</em> — Look! <em>Anna mennä!</em> — Go for it! (also what the crowd shouts at the gym).</p>
+<p class="exercise"><strong>Harjoitus 16.1</strong> — Give the singular imperative: 1. ostaa 2. tulla 3. syödä 4. odottaa 5. mennä 6. tehdä.</p>
+<details>
+<summary><em>Vastaukset — show answers (16.1)</em></summary>
+<p>osta, tule, syö, odota, mene, tee.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 16.2</strong> — Make negative commands (sg.): 1. Osta se. 2. Mene kotiin. 3. Unohda avaimet. 4. Puhu englantia.</p>
+<details>
+<summary><em>Vastaukset — show answers (16.2)</em></summary>
+<p>Älä osta sitä. Älä mene kotiin. Älä unohda avaimia. Älä puhu englantia.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 16.3</strong> — A tourist at the station asks you the way to the market square: straight ahead, second street left, the square is on the right next to the church. Write the directions in Finnish.</p>
+<details>
+<summary><em>Vastaukset — show answers (16.3)</em></summary>
+<p>Model: <em>Mene suoraan eteenpäin. Käänny toisesta kadusta vasemmalle. Tori on oikealla, kirkon vieressä.</em></p>
+</details>
+<hr />
+<h2 id="lesson-17-going-to-do-things-the-ma-infinitive-obligation-and-hobbies">Lesson 17 — Going to do things: the MA-infinitive, obligation, and hobbies</h2>
+<h3 id="the-ma-infinitive-movement-toward-at-from-an-activity">The MA-infinitive: movement toward/at/from an activity</h3>
+<p>Finnish marks what you're going off to do with case endings on a verb form — the third ("MA") infinitive, built on the strong verb stem:</p>
+<ul>
+<li><strong>-maan/-mään</strong> (into the activity): <em>Menen syömään.</em> — I'm going to eat. <em>Tuletko uimaan?</em> — Coming swimming? <em>Menen salille treenaamaan.</em> — I'm off to the gym to train.</li>
+<li><strong>-massa/-mässä</strong> (in the middle of it): <em>Hän on syömässä.</em> — She's (out) eating. <em>Olin juuri lähtemässä.</em> — I was just leaving.</li>
+<li><strong>-masta/-mästä</strong> (coming from it): <em>Tulen juuri treenaamasta.</em> — I've just come from training.</li>
+</ul>
+<p>The pattern also follows verbs of starting and learning: <em>Aloitan opiskelemaan? — careful:</em> standard Finnish prefers <em>alan opiskella</em> or <em>rupean opiskelemaan</em>; but <em>Opettelen puhumaan suomea</em> — I'm learning to speak Finnish — is pure MA-infinitive territory.</p>
+<h3 id="obligation-täytyy-and-pitää">Obligation: täytyy and pitää</h3>
+<p>Both mean "must/have to." The person obliged goes in the <strong>genitive</strong>, the verb stays in the basic infinitive, and any object is nominative (Lesson 13!):</p>
+<p><em>Minun täytyy mennä nyt.</em> — I have to go now. <em>Sinun pitää varata aika.</em> — You need to book an appointment. <em>Meidän täytyy ostaa liput.</em> — We have to buy the tickets.</p>
+<p>The negation is its own verb: <strong>ei tarvitse</strong> — <em>Sinun ei tarvitse tulla.</em> — You don't have to come. (<em>Ei täydy</em> doesn't exist; this trips up everyone.)</p>
+<h3 id="ability-osata-vs-voida">Ability: osata vs voida</h3>
+<p><em>Osata</em> = to know how (a learned skill): <em>Osaan puhua suomea. Osaatko uida?</em> <em>Voida</em> = to be able / it's possible: <em>Voin auttaa sinua huomenna. En voi tulla tänään.</em> Permission uses <em>saada</em>: <em>Saako täällä pysäköidä?</em> — May one park here?</p>
+<h3 id="hobbies-harrastukset">Hobbies — harrastukset</h3>
+<p><em>Mitä sinä harrastat?</em> — What are your hobbies? (<em>harrastaa</em> + partitive): <em>Harrastan lukemista / uintia / hiihtoa / valokuvausta.</em> Sport verbs: <em>pelata</em> + partitive for games (<em>pelaan jalkapalloa, sählyä</em> — floorball, the true Finnish office sport), <em>käydä lenkillä</em> (go jogging), <em>käydä salilla</em> (go to the gym).</p>
+<p>Gym corner, since strength training deserves precise vocabulary: <em>kuntosali / sali</em> (gym), <em>treenata</em> (to train), <em>treeni</em> (a workout), <em>ohjelma</em> (programme), <em>sarja</em> (set), <em>toisto</em> (rep), <em>kyykky</em> (squat), <em>penkkipunnerrus / penkki</em> (bench press), <em>maastaveto</em> (deadlift), <em>lämmittely</em> (warm-up), <em>palautuminen</em> (recovery), <em>lepopäivä</em> (rest day), <em>lihas</em> (muscle), <em>painot</em> (weights).</p>
+<p><em>Käyn salilla neljä tai viisi kertaa viikossa. Ohjelmassa on kyykkyä, penkkiä ja maastavetoa — viisi sarjaa, viisi toistoa. Treenin jälkeen olen väsynyt mutta iloinen.</em></p>
+<p class="exercise"><strong>Harjoitus 17.1</strong> — Fill in the right MA-form: 1. Menemme (uida). 2. Hän on (syödä). 3. Tulen (treenata). 4. Lapset menevät (nukkua). 5. Opettelen (puhua) suomea.</p>
+<details>
+<summary><em>Vastaukset — show answers (17.1)</em></summary>
+<p>uimaan, syömässä, treenaamasta, nukkumaan, puhumaan.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 17.2</strong> — Obligation: translate. 1. I have to work tomorrow. 2. You don't have to pay. 3. We must book a table. 4. She has to wake up early (aikaisin).</p>
+<details>
+<summary><em>Vastaukset — show answers (17.2)</em></summary>
+<p>1 Minun täytyy tehdä töitä huomenna. 2 Sinun ei tarvitse maksaa. 3 Meidän täytyy varata pöytä. 4 Hänen täytyy herätä aikaisin.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 17.3</strong> — Write four sentences about a hobby of yours: what it is, how often (kertaa viikossa), where, and one thing you must do or don't have to do. (Model in key.)</p>
+<details>
+<summary><em>Vastaukset — show answers (17.3)</em></summary>
+<p>Model: <em>Harrastan voimaharjoittelua. Käyn salilla viisi kertaa viikossa. Treenaan kyykkyä, penkkiä ja maastavetoa — viisi sarjaa ja viisi toistoa. Lepopäivänä minun ei tarvitse tehdä mitään, mutta täytyy syödä hyvin.</em></p>
+</details>
+<hr />
+<h2 id="lesson-18-puhekieli-how-finns-actually-talk">Lesson 18 — Puhekieli: how Finns actually talk</h2>
+<p>Everything so far is correct, standard Finnish — the language of writing, news and formal speech. On the street, in offices and in every text message, Finns speak <strong>puhekieli</strong>, a systematically compressed register. It is not slang or sloppiness; it has its own consistent rules. Your strategy: <strong>understand puhekieli, produce standard Finnish</strong> — and let your speech drift colloquial naturally over time.</p>
+<h3 id="the-conversion-table">The conversion table</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Standard</th>
+<th>Spoken</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minä / sinä</td>
+<td>mä / sä</td>
+<td>I / you</td>
+</tr>
+<tr>
+<td>minun / sinun</td>
+<td>mun / sun</td>
+<td>my / your</td>
+</tr>
+<tr>
+<td>minulla on</td>
+<td>mul(la) on</td>
+<td>I have</td>
+</tr>
+<tr>
+<td>hän / he</td>
+<td>se / ne</td>
+<td>he, she / they</td>
+</tr>
+<tr>
+<td>olen / olet</td>
+<td>oon / oot</td>
+<td>am / are</td>
+</tr>
+<tr>
+<td>ei ole</td>
+<td>ei oo</td>
+<td>isn't</td>
+</tr>
+<tr>
+<td>me menemme</td>
+<td>me mennään</td>
+<td>we go (passive as we-form!)</td>
+</tr>
+<tr>
+<td>tämä / nämä</td>
+<td>tää / nää</td>
+<td>this / these</td>
+</tr>
+<tr>
+<td>tuo / nuo</td>
+<td>toi / noi</td>
+<td>that / those</td>
+</tr>
+<tr>
+<td>Oletko sinä…?</td>
+<td>Ooksä…? / Ootko…?</td>
+<td>Are you…?</td>
+</tr>
+<tr>
+<td>mutta / sitten</td>
+<td>mut / sit</td>
+<td>but / then</td>
+</tr>
+<tr>
+<td>kaksikymmentä</td>
+<td>kakskyt</td>
+<td>twenty</td>
+</tr>
+<tr>
+<td>tule tänne</td>
+<td>tuu tänne</td>
+<td>come here</td>
+</tr>
+<tr>
+<td>en tiedä</td>
+<td>emmä tiiä</td>
+<td>I don't know</td>
+</tr>
+</tbody>
+</table></div>
+<p>Numbers shrink across the board: <em>yks, kaks, kolme, neljä, viis, kuus, seittemän, kaheksan, yheksän, kymmenen</em>.</p>
+<h3 id="the-sound-of-finnish-conversation">The sound of Finnish conversation</h3>
+<p>Fillers and particles carry half the meaning: <strong>no</strong> (well), <strong>niin / nii</strong> (yeah, so), <strong>siis</strong> (so, I mean), <strong>niinku</strong> (like), <strong>vaan</strong> (just), <strong>kyl</strong> (surely, "kyl mä tuun" — yeah I'll come), <strong>joo</strong> and its skeptical cousin <strong>joo joo</strong>. And the mighty <strong>no niin</strong> — pronounced with different intonation it means "let's begin," "there we go," "I told you so," "calm down," or "well, that happened." Finns are only half joking when they say it's the only phrase you really need.</p>
+<h3 id="side-by-side">Side-by-side</h3>
+<p>Standard: <em>Minä en tiedä, haluatko sinä tulla, mutta me menemme nyt.</em>
+Spoken: <em>Emmä tiiä haluuksä tulla, mut me mennään nyt.</em></p>
+<p>Both are the same sentence. If the spoken version looks alarming, take heart: it's generated by regular rules from what you already know.</p>
+<p class="exercise"><strong>Harjoitus 18.1</strong> — Convert to standard Finnish: 1. Mä oon kotona. 2. Onks sul rahaa? 3. Se ei tuu tänään. 4. Me ollaan käyty siellä. 5. Toi on mun kirja.</p>
+<details>
+<summary><em>Vastaukset — show answers (18.1)</em></summary>
+<p>1 Minä olen kotona. 2 Onko sinulla rahaa? 3 Hän ei tule tänään. 4 Me olemme käyneet siellä. 5 Tuo on minun kirjani.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 18.2</strong> — Convert to spoken Finnish: 1. Minä olen väsynyt. 2. Oletko sinä nähnyt hänet? 3. Me menemme kotiin. 4. Minulla ei ole aikaa.</p>
+<details>
+<summary><em>Vastaukset — show answers (18.2)</em></summary>
+<p>1 Mä oon väsyny. 2 Ooksä nähny sen? 3 Me mennään kotiin. 4 Mul ei oo aikaa.</p>
+</details>
+<hr />
+<h2 id="lesson-19-the-passive-plurals-in-cases-and-reading-the-street">Lesson 19 — The passive, plurals in cases, and reading the street</h2>
+<h3 id="the-passive-finnish-s-one-does">The passive: Finnish's "one does"</h3>
+<p>The Finnish passive is really an impersonal: <em>puhutaan</em> = "one speaks / people speak / is spoken." Formation, present: type 1 takes the (weak) minä-stem + <strong>-taan/-tään</strong> with the final a/ä turning to e (<em>puhun → puhutaan; annan → annetaan</em>); other types add <strong>-daan/-dään</strong> or <strong>-laan/-nään/-taan</strong> straight onto the infinitive (<em>syödään, tullaan, mennään, halutaan, tarvitaan</em>). Past passive: <strong>-ttiin/-tiin</strong>: <em>puhuttiin, syötiin, mentiin</em>.</p>
+<p>Three uses to internalise:</p>
+<ol>
+<li><strong>General statements:</strong> <em>Suomessa juodaan paljon kahvia.</em> — In Finland, people drink a lot of coffee. <em>Täällä puhutaan ruotsia.</em> — Swedish is spoken here.</li>
+<li><strong>Spoken-language we</strong> (as met in Lesson 18): <em>Mennään!</em> — Let's go! <em>Otetaanko taksi?</em> — Shall we take a taxi? <em>Nähdään maanantaina!</em></li>
+<li><strong>Signs and notices</strong> — see below.</li>
+</ol>
+<h3 id="plurals-beyond-the-basic-t">Plurals beyond the basic -t</h3>
+<p>You know the nominative plural: <em>talo → talot, kauppa → kaupat</em> (weak grade — the -t closes the syllable). In <strong>all other cases</strong>, the plural marker is <strong>-i-</strong> slotted before the case ending: <em>taloissa</em> (in the houses), <em>kaupoissa</em> (in the shops), <em>autoilla</em> (by cars), <em>ystäville</em> (to friends). Final vowels shuffle before the i — a → o in many words (<em>kauppa → kaupoissa</em>), e and i drop (<em>suuri → suurissa</em>) — learn the patterns from examples rather than by rule.</p>
+<p>The partitive plural runs on the same -i-: <em>taloja, kirjoja, autoja; naisia, miehiä; huoneita.</em> You need it for existence and shopping: <em>Kaupassa on omenoita.</em> — There are apples in the shop. <em>Ostin kukkia.</em> — I bought (some) flowers. The genitive plural (<em>talojen, naisten</em>) exists and is formed variously; recognise it now, produce it later.</p>
+<h3 id="reading-the-street-signs-are-passives-and-participles">Reading the street — signs are passives and participles</h3>
+<p><em>Myydään</em> — For sale. <em>Vuokrataan</em> — To let (so a listing beginning <em>Vuokrataan kaksio keskustasta</em> offers a one-bedroom flat in the centre). <em>Avoinna 9–17</em> — Open 9–17. <em>Suljettu</em> — Closed. <em>Työnnä / Vedä</em> — Push / Pull (learn before your first Finnish door defeats you). <em>Ale</em> — Sale. <em>Ei sisäänkäyntiä</em> — No entry. <em>Hätäuloskäynti</em> — Emergency exit. <em>Paina nappia</em> — Press the button.</p>
+<p class="exercise"><strong>Harjoitus 19.1</strong> — Form the present passive: 1. ostaa 2. syödä 3. mennä 4. haluta 5. puhua.</p>
+<details>
+<summary><em>Vastaukset — show answers (19.1)</em></summary>
+<p>ostetaan, syödään, mennään, halutaan, puhutaan.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 19.2</strong> — Put the bracketed phrase into the plural with the same case: 1. Asumme (isossa talossa). 2. Menen (hyvälle ystävälle). 3. Kirjat ovat (kaupassa). 4. Ostin (uuden kirjan → partitive plural: some new books).</p>
+<details>
+<summary><em>Vastaukset — show answers (19.2)</em></summary>
+<p>1 isoissa taloissa 2 hyville ystäville 3 kaupoissa 4 uusia kirjoja.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 19.3</strong> — What do these mean? 1. Täällä ei tupakoida. 2. Ovi avataan kello 8. 3. Vuokrataan yksiö Kalliosta. 4. Mennäänkö syömään?</p>
+<details>
+<summary><em>Vastaukset — show answers (19.3)</em></summary>
+<p>1 No smoking here. 2 The door opens at 8. 3 Studio flat to let in Kallio. 4 Shall we go and eat?.</p>
+</details>
+<hr />
+<h3 id="module-4-check-yourself">Module 4 — Check yourself</h3>
+<p>You can now: be effortlessly polite with the conditional · give and follow commands and directions · say what you're off to do and what you must (or needn't) do · decode real spoken Finnish and its particles · use the passive for generalisations, let's-suggestions and signs · inflect plurals in the cases. From here on it's domain expansion: work, health, and the news.</p>
+<hr />
+<h1 id="module-5-wider-worlds-lessons-20-23">MODULE 5 — Wider worlds (Lessons 20–23)</h1>
+<p><em>Goal: stretch beyond survival into work, health, and reading real-world texts about society and the economy — plus the last of the fifteen cases.</em></p>
+<hr />
+<h2 id="lesson-20-työelämä-work-email-and-two-new-cases">Lesson 20 — Työelämä: work, email, and two new cases</h2>
+<h3 id="workplace-vocabulary">Workplace vocabulary</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>työpaikka</td>
+<td>workplace, job</td>
+<td>työkaveri / kollega</td>
+<td>colleague</td>
+</tr>
+<tr>
+<td>esihenkilö</td>
+<td>manager, line manager</td>
+<td>tiimi</td>
+<td>team</td>
+</tr>
+<tr>
+<td>kokous / palaveri</td>
+<td>meeting</td>
+<td>sähköposti</td>
+<td>email</td>
+</tr>
+<tr>
+<td>liite</td>
+<td>attachment</td>
+<td>määräaika</td>
+<td>deadline</td>
+</tr>
+<tr>
+<td>hanke / projekti</td>
+<td>programme / project</td>
+<td>tavoite</td>
+<td>goal, objective</td>
+</tr>
+<tr>
+<td>raportti</td>
+<td>report</td>
+<td>sopimus</td>
+<td>contract, agreement</td>
+</tr>
+<tr>
+<td>asiakas</td>
+<td>client, customer</td>
+<td>ministeriö</td>
+<td>ministry</td>
+</tr>
+<tr>
+<td>virasto</td>
+<td>agency, office</td>
+<td>etätyö</td>
+<td>remote work</td>
+</tr>
+<tr>
+<td>palkka</td>
+<td>salary</td>
+<td>työhaastattelu</td>
+<td>job interview</td>
+</tr>
+<tr>
+<td>kiireinen</td>
+<td>busy</td>
+<td>vastuu</td>
+<td>responsibility</td>
+</tr>
+</tbody>
+</table></div>
+<p>Useful meeting lines: <em>Sopiiko sinulle huomenna kello kymmenen?</em> — Does tomorrow at ten suit you? <em>Palataan asiaan.</em> — Let's come back to this (the great Finnish meeting-ender). <em>Laitan sen kalenteriin.</em> — I'll put it in the calendar. <em>Hyvä kysymys.</em> — Good question (buys time in any language).</p>
+<h3 id="email-register">Email register</h3>
+<p>Finnish work email is brisk and unceremonious by British standards — no "I hope this email finds you well," ever. A complete, polite email:</p>
+<p><em>Hei Sari,</em></p>
+<p><em>kiitos viestistäsi. Liitteenä on raportti, jota pyysit. Palataan asiaan kokouksessa torstaina.</em></p>
+<p><em>Ystävällisin terveisin,</em>
+<em>Malcolm</em></p>
+<p>(<em>kiitos viestistäsi</em> — thanks for your message (elative + possessive suffix); <em>liitteenä</em> — attached, literally "as an attachment" — see the essive, below; <em>jota pyysit</em> — which you asked for, a relative clause, Lesson 22. Sign-offs: <em>Ystävällisin terveisin</em> = kind regards, or plain <em>Terveisin</em>.)</p>
+<h3 id="case-13-and-14-of-15-the-translative-and-the-essive">Case 13 and 14 of 15: the translative and the essive</h3>
+<p>You've quietly used both; now formally.</p>
+<p><strong>Translative -ksi</strong> marks becoming, turning into, or a purpose: <em>Haluan tulla johtajaksi.</em> — I want to become a manager. <em>Hän opiskelee ekonomiksi.</em> — She's studying to be an economist. <em>Ilma muuttui kylmäksi.</em> — The weather turned cold. <em>Hyväksi lopuksi…</em> — to top it off.</p>
+<p><strong>Essive -na/-nä</strong> marks being in a role or temporary state — and, as you know from Lesson 9, "on" a day: <em>Työskentelen projektipäällikkönä.</em> — I work as a project manager. <em>Lapsena asuin maalla.</em> — As a child I lived in the countryside. <em>Maanantaina. Jouluna</em> — at Christmas.</p>
+<p>The pair makes a neat system: essive = the state you're in; translative = the state you enter.</p>
+<p class="exercise"><strong>Harjoitus 20.1</strong> — Translative or essive? 1. Hän työskentelee (opettaja). 2. Haluan tulla (opettaja). 3. (Lapsi) hän puhui ruotsia kotona. 4. Sää muuttuu (huono). 5. Syön puuroa (aamupala) — for breakfast.</p>
+<details>
+<summary><em>Vastaukset — show answers (20.1)</em></summary>
+<p>1 opettajana 2 opettajaksi 3 Lapsena 4 huonoksi 5 aamupalaksi.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 20.2</strong> — Write a three-sentence work email in Finnish: greet, say the report is attached, propose returning to it in Thursday's meeting, sign off.</p>
+<details>
+<summary><em>Vastaukset — show answers (20.2)</em></summary>
+<p>Model: <em>Hei Sari, kiitos viestistäsi. Liitteenä on raportti. Palataan asiaan torstain kokouksessa. Ystävällisin terveisin, Malcolm.</em></p>
+</details>
+<p class="exercise"><strong>Harjoitus 20.3</strong> — Translate: 1. My colleague is busy today. 2. The meeting is on Tuesday at nine. 3. The deadline is next week — we must finish (saada valmiiksi!) the report.</p>
+<details>
+<summary><em>Vastaukset — show answers (20.3)</em></summary>
+<p>1 Työkaverini on tänään kiireinen. 2 Kokous on tiistaina kello yhdeksän. 3 Määräaika on ensi viikolla — meidän täytyy saada raportti valmiiksi.</p>
+</details>
+<hr />
+<h2 id="lesson-21-terveys-health-body-pharmacy">Lesson 21 — Terveys: health, body, pharmacy</h2>
+<h3 id="the-body">The body</h3>
+<p><em>pää</em> (head), <em>silmä</em> (eye), <em>korva</em> (ear), <em>nenä</em> (nose), <em>suu</em> (mouth), <em>hammas</em> (tooth — genitive <em>hampaan</em>, that reverse gradation), <em>kurkku</em> (throat; also cucumber, context will save you), <em>niska</em> (back of neck), <em>selkä</em> (back), <em>vatsa</em> (stomach), <em>käsi</em> (hand, arm), <em>jalka</em> (leg, foot), <em>sydän</em> (heart), <em>iho</em> (skin).</p>
+<h3 id="saying-what-s-wrong">Saying what's wrong</h3>
+<p>The workhorse pattern is possession: <em>Minulla on flunssa / kuume / päänsärky / yskä.</em> — I have a cold / fever / headache / cough. States: <em>Kurkku on kipeä.</em> — My throat is sore. <em>Selkä on kipeä treenin jälkeen.</em> — My back is sore after training (the good kind, ideally). <em>Voin huonosti.</em> — I feel unwell. <em>Olen ollut kipeänä kolme päivää.</em> — I've been ill for three days (essive for the state!).</p>
+<h3 id="getting-help">Getting help</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>terveysasema</td>
+<td>health centre</td>
+</tr>
+<tr>
+<td>lääkäri</td>
+<td>doctor</td>
+</tr>
+<tr>
+<td>päivystys</td>
+<td>A&amp;E, urgent care</td>
+</tr>
+<tr>
+<td>varata aika</td>
+<td>to book an appointment</td>
+</tr>
+<tr>
+<td>apteekki</td>
+<td>pharmacy</td>
+</tr>
+<tr>
+<td>lääke</td>
+<td>medicine</td>
+</tr>
+<tr>
+<td>resepti</td>
+<td>prescription</td>
+</tr>
+<tr>
+<td>särkylääke</td>
+<td>painkiller</td>
+</tr>
+<tr>
+<td>laastari</td>
+<td>plaster</td>
+</tr>
+<tr>
+<td>Mikä sinulla on?</td>
+<td>What's wrong? (lit. what do you have)</td>
+</tr>
+<tr>
+<td>Paraneminen! / Pikaista paranemista!</td>
+<td>Get well soon!</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="dialogue-apteekissa">Dialogue: apteekissa</h3>
+<p>— Hei! Mitä sinulle saisi olla?
+— Hei. Minulla on kova päänsärky. Saisinko jotain särkylääkettä?
+— Tämä on hyvä ja tehokas. Tarvitsetko jotain muuta?
+— Onko teillä myös laastareita?
+— On, ne ovat tuolla hyllyllä. Tuleeko muuta?
+— Ei kiitos, siinä kaikki.
+— Se tekee yhdeksän euroa. Pikaista paranemista!</p>
+<p>(<em>jotain</em> = some, something; <em>tehokas</em> = effective; <em>hylly</em> = shelf; <em>siinä kaikki</em> = that's all.)</p>
+<p class="exercise"><strong>Harjoitus 21.1</strong> — Say in Finnish: 1. I have a fever. 2. My throat is sore. 3. I need painkillers (partitive plural: särkylääkkeitä works, or jotain särkylääkettä). 4. I'd like to book an appointment with a doctor (lääkärille).</p>
+<details>
+<summary><em>Vastaukset — show answers (21.1)</em></summary>
+<p>1 Minulla on kuume. 2 Kurkkuni on kipeä. 3 Tarvitsen särkylääkettä. 4 Haluaisin varata ajan lääkärille.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 21.2</strong> — Complete the pharmacy dialogue playing the customer: you have a cough, ask whether they have something for it (jotain yskään), ask the price, pay by card.</p>
+<details>
+<summary><em>Vastaukset — show answers (21.2)</em></summary>
+<p>Model: <em>Hei! Minulla on paha yskä. Onko teillä jotain yskään? … Paljonko se maksaa? … Maksan kortilla, kiitos.</em></p>
+</details>
+<hr />
+<h2 id="lesson-22-reading-the-news-society-economy-and-the-last-cases">Lesson 22 — Reading the news: society, economy — and the last cases</h2>
+<p>Time to put everything together on a real-world register: the language of news, policy and money.</p>
+<h3 id="vocabulary-yhteiskunta-ja-talous">Vocabulary: yhteiskunta ja talous</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finnish</th>
+<th>English</th>
+<th>Finnish</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uutinen / uutiset</td>
+<td>a news item / the news</td>
+<td>yhteiskunta</td>
+<td>society</td>
+</tr>
+<tr>
+<td>hallitus</td>
+<td>government</td>
+<td>eduskunta</td>
+<td>parliament (Finland's)</td>
+</tr>
+<tr>
+<td>kaupunginvaltuusto</td>
+<td>city council</td>
+<td>päättää</td>
+<td>to decide</td>
+</tr>
+<tr>
+<td>ehdottaa</td>
+<td>to propose</td>
+<td>laki</td>
+<td>law</td>
+</tr>
+<tr>
+<td>talous</td>
+<td>economy</td>
+<td>vero</td>
+<td>tax</td>
+</tr>
+<tr>
+<td>korko</td>
+<td>interest rate</td>
+<td>hinta / arvo</td>
+<td>price / value</td>
+</tr>
+<tr>
+<td>asuntomarkkinat</td>
+<td>housing market</td>
+<td>tontti</td>
+<td>plot of land</td>
+</tr>
+<tr>
+<td>maa</td>
+<td>land (also country)</td>
+<td>vuokrasopimus</td>
+<td>lease</td>
+</tr>
+<tr>
+<td>nousta / laskea</td>
+<td>to rise / to fall</td>
+<td>kasvaa</td>
+<td>to grow</td>
+</tr>
+<tr>
+<td>rakentaa</td>
+<td>to build</td>
+<td>työttömyys</td>
+<td>unemployment</td>
+</tr>
+<tr>
+<td>mielestäni / minusta</td>
+<td>in my opinion</td>
+<td>samaa mieltä / eri mieltä</td>
+<td>agree / disagree</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="the-relative-pronoun-joka">The relative pronoun joka</h3>
+<p>"Who/which/that," declining like a noun for its role in the clause: <em>joka</em> (subject), <em>jonka</em> (genitive/total object), <em>jota</em> (partitive), <em>jossa/josta/johon</em> (in/from/into which), <em>jolla</em> etc.; plural <em>jotka, joita, joissa…</em></p>
+<p><em>Asunto, </em><em>jonka</em><em> ostin, on pieni.</em> — The flat that I bought is small. <em>Kaupunki, </em><em>jossa</em><em> asun, kasvaa nopeasti.</em> — The city I live in is growing fast. <em>Se on asia, </em><em>josta</em><em> puhutaan paljon.</em> — It's a matter that gets talked about a lot. And the conjunction <strong>että</strong> = "that": <em>Luulen, että vuokra nousee.</em> — I think that the rent will rise. (Finnish always takes the comma before <em>että</em> and <em>joka</em> — a spelling-test favourite.)</p>
+<h3 id="reading-text-tontti-omaksi-vai-vuokralle">Reading text: Tontti omaksi vai vuokralle?</h3>
+<p><em>Helsingissä kaupunki omistaa paljon maata. Kaupunki ei aina myy tonttia, jolla talo seisoo, vaan vuokraa sen pitkällä sopimuksella. Asukkaat maksavat kaupungille vuokraa joka vuosi. Kun maan arvo nousee, myös tontinvuokra nousee vähitellen. Asunto, joka seisoo vuokratontilla, on yleensä halvempi ostaa kuin asunto omalla tontilla — mutta kuukausikulut ovat suuremmat. Monet ekonomistit ajattelevat, että järjestelmä toimii vähän kuin maavero: kaupunki saa osan maan arvosta, jonka koko yhteiskunta luo. Toiset ovat eri mieltä ja sanovat, että vuokra tekee asumisesta kallista.</em></p>
+<p>Glossary: <em>vaan</em> = but rather (after a negative); <em>pitkällä sopimuksella</em> = on a long contract; <em>vähitellen</em> = gradually; <em>kuukausikulut</em> = monthly costs; <em>järjestelmä</em> = system; <em>maavero</em> = land tax; <em>luoda</em> = to create (<em>luo</em> = creates); <em>asumisesta</em> = ~about/of living (elative of the -minen noun <em>asuminen</em>, "living/housing" — verbs become nouns with -minen: <em>lukeminen</em>, <em>asuminen</em>).</p>
+<p>Comprehension (Harjoitus 22.1): 1. Mitä kaupunki tekee tontille, jos se ei myy sitä? 2. Mitä tapahtuu tontinvuokralle, kun maan arvo nousee? 3. Miksi jotkut ekonomistit vertaavat (compare) järjestelmää maaveroon? Answer in Finnish, one sentence each.</p>
+<details>
+<summary><em>Vastaukset — show answers (22.1)</em></summary>
+<p>1 Kaupunki vuokraa sen pitkällä sopimuksella. 2 Se nousee vähitellen. 3 Koska kaupunki saa osan maan arvosta, jonka koko yhteiskunta luo.</p>
+</details>
+<h3 id="the-last-three-cases-cases-13-14-15-of-15">The last three cases — cases 13, 14, 15 of 15</h3>
+<p>For completeness, the rare trio. You now formally know all fifteen.</p>
+<ul>
+<li><strong>Abessive -tta/-ttä</strong> — "without": <em>rahatta</em> (without money). In practice everyone says <em>ilman rahaa</em>; the abessive survives mostly in set forms like <em>huomaamatta</em> (without noticing).</li>
+<li><strong>Comitative -ine-</strong> — "together with (one's)," always plural-shaped and with a possessive suffix: <em>Presidentti saapui puolisoineen.</em> — The president arrived with their spouse. Newspaper Finnish; recognise it.</li>
+<li><strong>Instructive -in</strong> — "by means of," fossilised in expressions: <em>omin silmin</em> (with one's own eyes), <em>jalan</em> (on foot), <em>kaksin käsin</em> (with both hands).</li>
+</ul>
+<p class="exercise"><strong>Harjoitus 22.2</strong> — Join with the right form of joka: 1. Ostin kirjan. Kirja oli kallis. → Kirja, ___ ostin, oli kallis. 2. Asun kaupungissa. Kaupunki on pieni. → Kaupunki, ___ asun, on pieni. 3. Hän on ystävä. Ystävään voi luottaa (trust, + illative!). → Hän on ystävä, ___ voi luottaa.</p>
+<details>
+<summary><em>Vastaukset — show answers (22.2)</em></summary>
+<p>1 jonka 2 jossa 3 johon.</p>
+</details>
+<p class="exercise"><strong>Harjoitus 22.3</strong> — Give your opinion in Finnish (two or three sentences each), using <em>minusta / mielestäni</em> and <em>koska</em> (because): 1. Pitäisikö vuokrien olla halvempia? 2. Onko etätyö hyvä asia?</p>
+<details>
+<summary><em>Vastaukset — show answers (22.3)</em></summary>
+<p>Models: <em>Minusta vuokrien pitäisi olla halvempia, koska asuminen on nyt liian kallista. / Mielestäni etätyö on hyvä asia, koska silloin ei tarvitse matkustaa joka päivä — mutta työkavereita näkee harvemmin.</em></p>
+</details>
+<hr />
+<h2 id="lesson-23-finale-the-graduation-text-the-final-test-and-where-next">Lesson 23 — Finale: the graduation text, the final test, and where next</h2>
+<h3 id="graduation-reading-päivä-helsingissä">Graduation reading: Päivä Helsingissä</h3>
+<p><em>Heräsin aikaisin, koska lento Helsinkiin lähti kello seitsemän. Lentokentältä menin junalla keskustaan ja kävelin hotellille, jonka olin varannut netistä. Huone ei ollut vielä valmis, joten jätin matkalaukun ja lähdin kävelemään.</em></p>
+<p><em>Ensin join kahvia pienessä kahvilassa Kalliossa. Myyjä kysyi jotain, mitä en ymmärtänyt, ja sanoin: "Anteeksi, voisitko puhua hitaammin? Opiskelen suomea." Hän hymyili ja puhui hitaammin. Ymmärsin melkein kaiken!</em></p>
+<p><em>Päivällä kävin museossa ja torilla. Ostin marjoja ja söin lohikeittoa. Illalla menin saunaan — löyly oli kuuma, mutta olo oli hyvä. Huomenna minun täytyy herätä aikaisin, koska tapaan vanhan ystävän, joka asuu Tampereella. Menemme junalla. Suomi on kylmä maa, mutta ihmiset eivät ole.</em></p>
+<p>If you can read that without the answer key, you have earned the next section. (<em>joten</em> = so, therefore; <em>jättää</em> = to leave [something]; <em>hymyillä</em> = to smile; <em>melkein kaikki</em> = almost everything; <em>olo</em> = the feeling/state one is in.)</p>
+<h3 id="final-self-test-harjoitus-23-1-answers-below-no-peeking-until-you-finish">Final self-test (Harjoitus 23.1 — answers below, no peeking until you finish)</h3>
+<p>1–3. Give the missä, mistä and mihin forms of <em>kauppa</em>. 4. Negate: <em>Minulla on aikaa.</em> 5. Translate: I'd like two coffees and a bun. 6. Past tense, minä: <em>syödä, tavata, olla</em>. 7. Perfect: Have you been to Finland? 8. Object: I read the book (finished) / I was reading the book. 9. Make polite: <em>Autatko minua?</em> 10. Imperative sg. and its negative: <em>ottaa</em>. 11. Translate: We have to buy the tickets. 12. Spoken → standard: <em>Emmä tiiä, tuuksä mukaan.</em> 13. Passive: In Finland people go (mennä) to the sauna on Saturdays (lauantaisin). 14. Plural inessive of <em>iso kauppa</em>. 15. Essive or translative: Hän työskentelee (lääkäri); Hän opiskelee (lääkäri). 16. Join with joka: <em>Talo on vanha. Asun talossa.</em> 17. What is <em>puoli kolme</em> in English? 18. Comparative and superlative of <em>hyvä</em>. 19. Translate: I like Helsinki because the sea (meri) is near. 20. Write two sentences about what you did last weekend.</p>
+<details>
+<summary><em>Vastaukset — show answers (23.1)</em></summary>
+<p>1 kaupassa 2 kaupasta 3 kauppaan 4 Minulla ei ole aikaa. 5 Saisinko kaksi kahvia ja pullan? 6 söin, tapasin, olin 7 Oletko käynyt Suomessa? 8 Luin kirjan. / Luin kirjaa. 9 Auttaisitko minua? (or: Voisitko auttaa minua?) 10 Ota! / Älä ota! 11 Meidän täytyy ostaa liput. 12 Minä en tiedä, tuletko sinä mukaan. 13 Suomessa mennään saunaan lauantaisin. 14 isoissa kaupoissa 15 lääkärinä; lääkäriksi 16 Talo, jossa asun, on vanha. 17 Half past two — 2:30, not 3:30. 18 parempi, paras 19 Tykkään Helsingistä, koska meri on lähellä. 20 Model: <em>Viikonloppuna kävin salilla ja luin hyvää kirjaa. Sunnuntaina en tehnyt mitään erikoista.</em></p>
+</details>
+<h3 id="where-next">Where next</h3>
+<p>You're now at a solid A2, brushing B1 in reading. To keep climbing: make <strong>Yle Uutiset selkosuomeksi</strong> (simplified-Finnish news, with audio) a daily habit and graduate to normal Yle news when it starts feeling slow. The standard textbook series from here is <strong>Suomen mestari</strong> (books 2–3 map onto A2–B1). Grammar still ahead of you, in rough order of usefulness: the potential mood (<em>lienee</em>), participle constructions (<em>sanoi tulevansa</em> — said he was coming), the agent participle (<em>minun ostamani kirja</em>), and the object rules' final boss, the accusative in infinitive chains. Find speaking practice through a <em>kielikahvila</em> (language café — most Finnish cities and many international ones run them) or a tandem partner; Finns famously switch to English out of politeness, so the magic phrase is: <em>Voidaanko puhua suomea? Minä harjoittelen.</em> — Can we speak Finnish? I'm practising. No Finn can refuse that.</p>
+<p>Onnea matkaan — good luck on the journey!</p>
+<hr />
+<h1 id="appendices">APPENDICES</h1>
+<h2 id="appendix-a-the-fifteen-cases-one-table">Appendix A — The fifteen cases, one table</h2>
+<p>Model word: <em>talo</em> (house). Weak-grade cases marked (w).</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Case</th>
+<th>Ending</th>
+<th>Answers</th>
+<th>Example</th>
+<th>Core meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Nominative</td>
+<td>—</td>
+<td>mikä? kuka?</td>
+<td>talo</td>
+<td>dictionary form; subject</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Genitive (w)</td>
+<td>-n</td>
+<td>kenen? minkä?</td>
+<td>talon</td>
+<td>of, possession; total object</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Partitive</td>
+<td>-a/-ä, -ta/-tä, -tta/-ttä</td>
+<td>mitä?</td>
+<td>taloa</td>
+<td>amount of; partial object; after numbers &amp; negation</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Accusative</td>
+<td>= nom. or gen.; pronouns -t</td>
+<td>kenet?</td>
+<td>talon / minut</td>
+<td>total object (only pronouns have a distinct form)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Inessive (w)</td>
+<td>-ssa/-ssä</td>
+<td>missä?</td>
+<td>talossa</td>
+<td>in</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Elative (w)</td>
+<td>-sta/-stä</td>
+<td>mistä?</td>
+<td>talosta</td>
+<td>out of, from; about (puhua asiasta); tykätä +</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Illative</td>
+<td>-Vn / -hVn / -seen</td>
+<td>mihin?</td>
+<td>taloon</td>
+<td>into</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Adessive (w)</td>
+<td>-lla/-llä</td>
+<td>millä?</td>
+<td>talolla</td>
+<td>on, at; instrument (bussilla); owner (minulla on)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Ablative (w)</td>
+<td>-lta/-ltä</td>
+<td>miltä?</td>
+<td>talolta</td>
+<td>off, from (a surface/person)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Allative</td>
+<td>-lle</td>
+<td>mille? kenelle?</td>
+<td>talolle</td>
+<td>onto, to (a surface/person)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Essive</td>
+<td>-na/-nä</td>
+<td>minä? (as what?)</td>
+<td>talona</td>
+<td>as, in the role/state of; on (days)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Translative (w)</td>
+<td>-ksi</td>
+<td>miksi?</td>
+<td>taloksi</td>
+<td>becoming, turning into; for (a purpose)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Abessive (w)</td>
+<td>-tta/-ttä</td>
+<td>—</td>
+<td>talotta</td>
+<td>without (usually replaced by ilman + partitive)</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Comitative</td>
+<td>-ine- (+ poss. suffix)</td>
+<td>—</td>
+<td>taloineen</td>
+<td>together with one's (formal/newspaper)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Instructive</td>
+<td>-in</td>
+<td>—</td>
+<td>(omin) käsin</td>
+<td>by means of (fossilised expressions)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="appendix-b-verb-types-at-a-glance">Appendix B — Verb types at a glance</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Infinitive ends</th>
+<th>Model</th>
+<th>Present (minä/hän)</th>
+<th>Past (minä)</th>
+<th>NUT-participle</th>
+<th>Passive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>vowel + a/ä</td>
+<td>puhua</td>
+<td>puhun / puhuu</td>
+<td>puhuin</td>
+<td>puhunut</td>
+<td>puhutaan</td>
+</tr>
+<tr>
+<td>1 (gradating)</td>
+<td></td>
+<td>lukea</td>
+<td>luen / lukee</td>
+<td>luin</td>
+<td>lukenut</td>
+<td>luetaan</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-da/-dä</td>
+<td>syödä</td>
+<td>syön / syö</td>
+<td>söin</td>
+<td>syönyt</td>
+<td>syödään</td>
+</tr>
+<tr>
+<td>2 (irregular)</td>
+<td></td>
+<td>tehdä</td>
+<td>teen / tekee</td>
+<td>tein</td>
+<td>tehnyt</td>
+<td>tehdään</td>
+</tr>
+<tr>
+<td>3</td>
+<td>-lla, -nnä, -sta…</td>
+<td>tulla</td>
+<td>tulen / tulee</td>
+<td>tulin</td>
+<td>tullut</td>
+<td>tullaan</td>
+</tr>
+<tr>
+<td>4</td>
+<td>-ata/-ätä etc.</td>
+<td>haluta</td>
+<td>haluan / haluaa</td>
+<td>halusin</td>
+<td>halunnut</td>
+<td>halutaan</td>
+</tr>
+<tr>
+<td>5</td>
+<td>-ita/-itä</td>
+<td>tarvita</td>
+<td>tarvitsen / tarvitsee</td>
+<td>tarvitsin</td>
+<td>tarvinnut</td>
+<td>tarvitaan</td>
+</tr>
+<tr>
+<td>6</td>
+<td>-eta/-etä</td>
+<td>vanheta</td>
+<td>vanhenen / vanhenee</td>
+<td>vanhenin</td>
+<td>vanhennut</td>
+<td>vanhetaan</td>
+</tr>
+</tbody>
+</table></div>
+<p>Negatives: present = negative verb + bare stem (<em>en puhu</em>); past = negative verb + NUT-participle (<em>en puhunut</em>, plural <em>emme puhuneet</em>); conditional = stem + isi (<em>en puhuisi</em>).</p>
+<h2 id="appendix-c-consonant-gradation-quick-card">Appendix C — Consonant gradation quick card</h2>
+<p>Strong → weak: kk→k, pp→p, tt→t, k→∅, p→v, t→d, nk→ng, nt→nn, mp→mm, lt→ll, rt→rr. Weak grade before endings that close the syllable (genitive and most cases; type 1 verb forms except hän/he). Strong grade survives in: basic form, partitive, illative, essive; and in the personal forms of verb types 3–4 (reverse gradation: <em>tavata → tapaan</em>). No gradation in sk, st, tk clusters.</p>
+<h2 id="appendix-d-numbers-and-time-quick-card">Appendix D — Numbers and time quick card</h2>
+<p>0 nolla, 1 yksi, 2 kaksi, 3 kolme, 4 neljä, 5 viisi, 6 kuusi, 7 seitsemän, 8 kahdeksan, 9 yhdeksän, 10 kymmenen; 11–19 + -toista; 20/30… + -kymmentä; 100 sata; 1000 tuhat. Ordinals: ensimmäinen, toinen, kolmas, neljäs, viides… After 2+: partitive. Clock: <em>kello kolme; puoli neljä = 3:30; kymmenen yli kolme; kymmentä vaille neljä.</em> Days + -na (maanantaina); months + -kuussa (tammikuussa = in January); seasons + -lla (kesällä); years: <em>vuonna 2026</em>.</p>
+<h2 id="appendix-e-puhekieli-cheat-card">Appendix E — Puhekieli cheat card</h2>
+<p>mä, sä, se (= hän), ne (= he) · oon, oot, ei oo · mun, sun · me mennään (= we go) · tää, toi · -ks (onks, tuuks) · mut, sit, ku · kakskyt (20), viis (5) · fillers: no, nii(n), siis, niinku, vaan, kyl · the universal <em>no niin</em>. Understand it everywhere; write standard Finnish.</p>
+<h2 id="appendix-f-answer-key">Appendix F — Answer key</h2>
+<p><strong>0.1</strong> 1 koulussa 2 kylässä 3 ravintolassa 4 työssä 5 Helsingissä (nk→ng!). <strong>0.2</strong> Practice only — check length pairs against Lesson 0.</p>
+<p><strong>1.1</strong> 1 hyvää päivää (or huomenta) 2 näkemiin 3 kiitos 4 anteeksi 5 ole hyvä 6 hei hei / moi moi / nähdään. <strong>1.2</strong> Hyvää päivää — kuuluu — Kiitos — sinulle — nähdään (or hei hei).</p>
+<p><strong>2.1</strong> 1 olemme 2 Oletko 3 ole 4 ovat 5 olen. <strong>2.2</strong> 1 Oletko sinä opettaja? 2 Onko hän kotoisin Ruotsista? 3 Oletteko te Annan ystäviä? 4 Onko se hyvä? <strong>2.3</strong> Model: <em>Minä olen Malcolm. Olen englantilainen ja olen kotoisin Lontoosta. Puhun englantia ja vähän suomea.</em></p>
+<p><strong>3.1</strong> 1 asuu 2 puhumme 3 Katsotteko 4 istuvat 5 ostan 6 kysyt. <strong>3.2</strong> 1 En puhu ruotsia. 2 Hän ei muista nimeä. 3 Emme odota bussia. 4 He eivät asu täällä. 5 Et ymmärrä kaikkea. (In 2 and 5 the object slid into the partitive — negation does that; Lesson 8 explains.) <strong>3.3</strong> 1 Ymmärrätkö? 2 Hän ei asu Helsingissä. 3 Odotamme. 4 Rakastan sinua. 5 He puhuvat suomea ja englantia.</p>
+<p><strong>4.1</strong> seitsemän, neljätoista, kaksikymmentäkuusi, viisikymmentäkahdeksan, yhdeksänkymmentäyhdeksän, sata, kolmesataaneljäkymmentä, tuhat. <strong>4.2</strong> 1 kahvia 2 euroa 3 tee (yksi takes the basic form) 4 pullaa 5 senttiä 6 olutta. <strong>4.3</strong> Model: <em>Hei! Saisinko teen ja voileivän? … Ei muuta, kiitos. Paljonko se tekee? … Käykö kortti? Kiitos, hei hei!</em></p>
+<p><strong>5.1</strong> pankin, pöydän, Euroopan, kaupungin, rannan, avun, tukan, sillan. <strong>5.2</strong> annan/antaa; odotan/odottaa; luen/lukee; ymmärrän/ymmärtää; nukun/nukkuu.</p>
+<p><strong>6.1</strong> 1 Helsingissä 2 ravintolaan 3 koulusta 4 tuolilla 5 pöydältä 6 torille 7 kotona 8 töihin. <strong>6.2</strong> Models: <em>Asun Lontoossa. Menen huomenna keskustaan. Menen töihin metrolla.</em> <strong>6.3</strong> 1 Kirja on laukussa. 2 Tulen kaupasta. 3 Menemme Tampereelle junalla. 4 Hän on kotona.</p>
+<p><strong>7.1</strong> 1 Annan 2 Talon 3 Miehen 4 Lapsen 5 Kaupungin. <strong>7.2</strong> 1 Minulla on kaksi veljeä. 2 Onko sinulla auto(a)? 3 Hänellä on iso perhe. 4 Meillä ei ole aikaa. 5 Kenellä on minun avaimeni? <strong>7.3</strong> Model: <em>Minulla on pieni perhe. Vanhempani asuvat Lontoossa. Siskoni asuu miehensä kanssa Manchesterissa. Heidän koiransa nukkuu aina pöydän alla.</em></p>
+<p><strong>8.1</strong> teetä, olutta, vettä, leipää, perhettä, suomea, rahaa, lasta. <strong>8.2</strong> 1 koira (affirmative "have" — subject stays basic) 2 koiraa (negation) 3 kahvia (indefinite mass) 4 lippua (after a number) 5 sinua (rakastaa always partitive) 6 junaa (odottaa always partitive). <strong>8.3</strong> Model: <em>Mitä suosittelet? … Ottaisin keittoa ja yhden oluen, kiitos. … Saisinko laskun?</em></p>
+<p><strong>9.1</strong> syömme, tekee, menet, tulevat, näen, opiskelette, käy, nousen. <strong>9.2</strong> 1 Kello on kaksi. 2 puoli kuusi 3 viisitoista (vartin) yli yhdeksän 4 viittätoista (varttia) vaille kahdeksan 5 kaksitoista / keskipäivä. <strong>9.3</strong> Model: <em>Nousen kello seitsemän ja käyn suihkussa. Juon kahvia ja syön aamupalaa. Menen töihin bussilla. Illalla laitan ruokaa ja luen kirjaa. Menen nukkumaan kello yksitoista.</em></p>
+<p><strong>10.1</strong> haluan, tapaa, tarvitsemme, heräät, pelaavat, valitsen. <strong>10.2</strong> 1 Tykkään kahvista. 2 Helsingistä 3 musiikista 4 tästä takista 5 suomalaisesta ruoasta. <strong>10.3</strong> 1 Haluan ostaa uudet kengät. 2 Tarvitsetko apua? 3 Tapaamme kahvilassa kello viisi. 4 Hän herää kello kuusi arkisin.</p>
+<p><strong>11.1</strong> 1 Puhuin 2 osti 3 Söimme 4 tulivat 5 Halusin 6 Näin hänet usein 7 Olin 8 Tapasimme. <strong>11.2</strong> Models: <em>Join kahvia ja vettä. Olin kotona. Viime viikonloppuna kävin salilla ja tapasin ystävän. Illalla katsoimme elokuvan.</em> <strong>11.3</strong> 1 Heräsin kello seitsemän ja menin töihin. 2 Kävimme Tampereella viime viikolla. 3 Hän luki kirjan eilen.</p>
+<p><strong>12.1</strong> olen lukenut, syönyt, tullut, halunnut, tehnyt, ollut. <strong>12.2</strong> 1 En ostanut lippuja (plural object → partitive plural under negation). 2 Hän ei mennyt kotiin. 3 Emme syöneet aamupalaa. 4 He eivät puhuneet englantia. 5 En nähnyt häntä. <strong>12.3</strong> Models: <em>Olen käynyt Suomessa kerran. / En ole vielä käynyt Suomessa. — Olen opiskellut suomea kaksi kuukautta. — En käynyt eilen salilla.</em></p>
+<p><strong>13.1</strong> 1 auton 2 autoa 3 maitoa 4 kirjan 5 bussia 6 tätä kaupunkia 7 lippu (nominative after täytyy) 8 minut. <strong>13.2</strong> a) <em>puuron</em> = ate the whole bowl; <em>puuroa</em> = ate some porridge. b) <em>raportin</em> = finished the report; <em>raporttia</em> = was working on it, unfinished. <strong>13.3</strong> 1 Odotan sinua. 2 Hän osti liput. 3 Emme nähneet elokuvaa. 4 Tunnetko minut? 5 Kirjoitin sähköpostia, kun soitit.</p>
+<p><strong>14.1</strong> kylmempi/kylmin; parempi/paras; kalliimpi/kallein; pienempi/pienin; pidempi/pisin. <strong>14.2</strong> 1 pienessä 2 uuden 3 kuumaa 4 Isot 5 vanhin. <strong>14.3</strong> Model: <em>Asun pienessä kaksiossa kerrostalossa. Asunnossa on keittiö, olohuone, makuuhuone ja parveke. Tykkään parvekkeesta, koska sieltä näkee puiston. Asunto on pienempi kuin vanha asuntoni, mutta keskusta on lähempänä.</em></p>
+<p><strong>15.1</strong> 1 Saisinko laskun? 2 Voisitko avata ikkunan? 3 Haluaisin kaksi lippua. 4 Olisiko teillä pöytää neljälle? <strong>15.2</strong> 1 olisi / ostaisin 2 olisi / menisimme 3 tekisit / asuisit. <strong>15.3</strong> Model: <em>— Haluaisitko lähteä huomenna lounaalle? — Valitettavasti en pääse huomenna. Kävisikö perjantai? — Kävisi hyvin! Sopisiko kello kaksitoista? — Sopii, nähdään silloin!</em></p>
+<p><strong>16.1</strong> osta, tule, syö, odota, mene, tee. <strong>16.2</strong> Älä osta sitä. Älä mene kotiin. Älä unohda avaimia. Älä puhu englantia. <strong>16.3</strong> Model: <em>Mene suoraan eteenpäin. Käänny toisesta kadusta vasemmalle. Tori on oikealla, kirkon vieressä.</em></p>
+<p><strong>17.1</strong> uimaan, syömässä, treenaamasta, nukkumaan, puhumaan. <strong>17.2</strong> 1 Minun täytyy tehdä töitä huomenna. 2 Sinun ei tarvitse maksaa. 3 Meidän täytyy varata pöytä. 4 Hänen täytyy herätä aikaisin. <strong>17.3</strong> Model: <em>Harrastan voimaharjoittelua. Käyn salilla viisi kertaa viikossa. Treenaan kyykkyä, penkkiä ja maastavetoa — viisi sarjaa ja viisi toistoa. Lepopäivänä minun ei tarvitse tehdä mitään, mutta täytyy syödä hyvin.</em></p>
+<p><strong>18.1</strong> 1 Minä olen kotona. 2 Onko sinulla rahaa? 3 Hän ei tule tänään. 4 Me olemme käyneet siellä. 5 Tuo on minun kirjani. <strong>18.2</strong> 1 Mä oon väsyny. 2 Ooksä nähny sen? 3 Me mennään kotiin. 4 Mul ei oo aikaa.</p>
+<p><strong>19.1</strong> ostetaan, syödään, mennään, halutaan, puhutaan. <strong>19.2</strong> 1 isoissa taloissa 2 hyville ystäville 3 kaupoissa 4 uusia kirjoja. <strong>19.3</strong> 1 No smoking here. 2 The door opens at 8. 3 Studio flat to let in Kallio. 4 Shall we go and eat?</p>
+<p><strong>20.1</strong> 1 opettajana 2 opettajaksi 3 Lapsena 4 huonoksi 5 aamupalaksi. <strong>20.2</strong> Model: <em>Hei Sari, kiitos viestistäsi. Liitteenä on raportti. Palataan asiaan torstain kokouksessa. Ystävällisin terveisin, Malcolm.</em> <strong>20.3</strong> 1 Työkaverini on tänään kiireinen. 2 Kokous on tiistaina kello yhdeksän. 3 Määräaika on ensi viikolla — meidän täytyy saada raportti valmiiksi.</p>
+<p><strong>21.1</strong> 1 Minulla on kuume. 2 Kurkkuni on kipeä. 3 Tarvitsen särkylääkettä. 4 Haluaisin varata ajan lääkärille. <strong>21.2</strong> Model: <em>Hei! Minulla on paha yskä. Onko teillä jotain yskään? … Paljonko se maksaa? … Maksan kortilla, kiitos.</em></p>
+<p><strong>22.1</strong> 1 Kaupunki vuokraa sen pitkällä sopimuksella. 2 Se nousee vähitellen. 3 Koska kaupunki saa osan maan arvosta, jonka koko yhteiskunta luo. <strong>22.2</strong> 1 jonka 2 jossa 3 johon. <strong>22.3</strong> Models: <em>Minusta vuokrien pitäisi olla halvempia, koska asuminen on nyt liian kallista. / Mielestäni etätyö on hyvä asia, koska silloin ei tarvitse matkustaa joka päivä — mutta työkavereita näkee harvemmin.</em></p>
+<p><strong>23.1 Final test</strong> 1 kaupassa 2 kaupasta 3 kauppaan 4 Minulla ei ole aikaa. 5 Saisinko kaksi kahvia ja pullan? 6 söin, tapasin, olin 7 Oletko käynyt Suomessa? 8 Luin kirjan. / Luin kirjaa. 9 Auttaisitko minua? (or: Voisitko auttaa minua?) 10 Ota! / Älä ota! 11 Meidän täytyy ostaa liput. 12 Minä en tiedä, tuletko sinä mukaan. 13 Suomessa mennään saunaan lauantaisin. 14 isoissa kaupoissa 15 lääkärinä; lääkäriksi 16 Talo, jossa asun, on vanha. 17 Half past two — 2:30, not 3:30. 18 parempi, paras 19 Tykkään Helsingistä, koska meri on lähellä. 20 Model: <em>Viikonloppuna kävin salilla ja luin hyvää kirjaa. Sunnuntaina en tehnyt mitään erikoista.</em></p>
+<h2 id="appendix-g-resources-for-the-road-ahead">Appendix G — Resources for the road ahead</h2>
+<p>Listening and reading: Yle Uutiset selkosuomeksi (daily news in simplified Finnish, text + audio — the single best free resource at this level), then regular Yle uutiset. Textbooks: the Suomen mestari series (start from book 2 after this course). Vocabulary: build your Anki deck from this course's tables and add ten words a day from your listening. Speaking: kielikahvila meetups, a tandem partner, or lessons — and remember the magic phrase when a Finn switches to English on you: <em>Voidaanko puhua suomea? Minä harjoittelen.</em></p>
+</main>
+</div>
+
+<script>
+document.querySelectorAll(".answer-toggle").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var panels = document.querySelectorAll("main details:not(.mobilenav)");
+    var anyClosed = Array.prototype.some.call(panels, function(d){ return !d.open; });
+    panels.forEach(function(d){ d.open = anyClosed; });
+    document.querySelectorAll(".answer-toggle").forEach(function(b){
+      b.textContent = anyClosed ? "Hide all answers" : "Show all answers";
+    });
+  });
+});
+</script>
+</body>
+</html>

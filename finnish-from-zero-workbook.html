@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harjoituskirja — Finnish from Zero Workbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF9F5; --panel:#EDF1F8; --birch:#F2EFE8; --ink:#1C2530; --ink-soft:#4A5568;
+  --blue:#14417B; --blue-deep:#0D2F5C; --lakka:#B96A00; --green:#2E7D32; --green-soft:#E7F2E7;
+  --rule:#D8DCE3; --radius:10px;
+  --sans:"Jost","Futura","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.03rem;line-height:1.6}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--lakka);outline-offset:2px;border-radius:3px}
+.wrap{display:grid;grid-template-columns:280px minmax(0,1fr);max-width:1180px;margin:0 auto}
+main{padding:0 clamp(1.2rem,4vw,3.2rem) 6rem;max-width:52rem}
+
+nav.side{position:sticky;top:0;height:100vh;overflow-y:auto;padding:1.6rem 1.2rem 2rem;border-right:1px solid var(--rule);font-family:var(--sans);background:var(--paper)}
+nav.side .brand{font-weight:600;font-size:1.02rem;color:var(--blue-deep);margin-bottom:.15rem}
+nav.side .brand-sub{font-size:.8rem;color:var(--ink-soft);margin-bottom:.9rem}
+#globalscore{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--blue-deep);background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;margin-bottom:.8rem}
+nav.side a.lesson{display:flex;justify-content:space-between;gap:.5rem;text-decoration:none;color:var(--ink-soft);font-size:.86rem;padding:.24rem .5rem;border-radius:6px;line-height:1.3}
+nav.side a.lesson:hover{background:var(--panel);color:var(--blue-deep)}
+nav.side a.lesson .chip{color:var(--blue);font-weight:600;white-space:nowrap}
+nav.side .backlink{display:block;margin-top:1.2rem;font-size:.82rem;font-weight:600;color:var(--blue-deep);text-decoration:none;padding:.45rem .6rem;background:var(--panel);border:1px solid var(--rule);border-radius:8px;text-align:center}
+
+details.mobilenav{display:none}
+@media (max-width:940px){
+  .wrap{grid-template-columns:1fr}
+  nav.side{display:none}
+  details.mobilenav{display:block;position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--rule);padding:.6rem clamp(1.2rem,4vw,2rem);font-family:var(--sans)}
+  details.mobilenav summary{cursor:pointer;font-weight:600;color:var(--blue-deep);font-size:.95rem;list-style:none}
+  details.mobilenav summary::before{content:"☰  "}
+  details.mobilenav nav{max-height:60vh;overflow-y:auto;padding:.6rem 0}
+}
+
+header.hero{padding:3rem 0 1.3rem;border-bottom:2px solid var(--blue);margin-bottom:1.6rem}
+header.hero h1{font-family:var(--sans);font-weight:700;color:var(--blue-deep);font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.12;margin:0 0 .35rem}
+header.hero p{font-family:var(--sans);color:var(--ink-soft);margin:0;font-size:clamp(.95rem,2vw,1.1rem)}
+
+h2{font-family:var(--sans);color:var(--blue-deep);font-size:1.45rem;font-weight:600;margin:2.6rem 0 .8rem;padding-top:1rem;border-top:1px solid var(--rule);scroll-margin-top:4.5rem}
+
+.excard{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--lakka);border-radius:0 var(--radius) var(--radius) 0;margin:1.1rem 0;padding:.95rem 1.05rem}
+.excard.modelcard{border-left-color:var(--blue)}
+.exhead{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;flex-wrap:wrap}
+.exhead .exid{font-family:var(--sans);font-weight:600;color:var(--lakka);letter-spacing:.02em}
+.modelcard .exhead .exid{color:var(--blue-deep)}
+.exhead .score{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--blue-deep);background:var(--panel);border-radius:99px;padding:.15rem .6rem}
+.instr{margin:.35rem 0 .7rem;color:var(--ink);font-size:.98rem}
+
+.item{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,220px) 1.6rem;gap:.5rem .7rem;align-items:center;padding:.3rem 0}
+.item.wide{grid-template-columns:1fr;gap:.25rem}
+.item.wide input{width:100%}
+.item .q{font-size:.97rem}
+.item .q em{color:var(--ink)}
+input.ans{font-family:var(--serif);font-size:.97rem;padding:.4rem .55rem;border:1px solid var(--rule);border-radius:7px;background:#fff;color:var(--ink);width:100%}
+input.ans:focus{border-color:var(--blue)}
+input.ans.right{border-color:var(--green);background:var(--green-soft)}
+input.ans.wrong{border-color:var(--lakka);background:#FBF3E6}
+.mark{font-family:var(--sans);font-weight:700;text-align:center}
+.mark.right{color:var(--green)}
+.mark.wrong{color:var(--lakka)}
+.sol{grid-column:1 / -1;font-size:.9rem;color:var(--green);padding:.05rem 0 .25rem}
+.sol .lbl{font-family:var(--sans);font-weight:600;font-size:.78rem;letter-spacing:.04em;color:var(--ink-soft);margin-right:.4rem}
+.showsol{grid-column:1 / -1;justify-self:start;font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--blue);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline}
+.checkrow{margin-top:.7rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+button.check{font-family:var(--sans);font-weight:600;font-size:.85rem;color:#fff;background:var(--blue);border:none;border-radius:8px;padding:.5rem 1rem;cursor:pointer}
+button.check:hover{background:var(--blue-deep)}
+.hint{font-family:var(--sans);font-size:.76rem;color:var(--ink-soft)}
+
+textarea.free{width:100%;min-height:5.2rem;font-family:var(--serif);font-size:.97rem;padding:.55rem .65rem;border:1px solid var(--rule);border-radius:7px;background:#fff;color:var(--ink);resize:vertical}
+details.model{margin-top:.6rem;border:1px solid var(--rule);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;background:#fff}
+details.model summary{cursor:pointer;list-style:none;font-family:var(--sans);font-weight:600;font-size:.84rem;color:var(--blue-deep);padding:.5rem .8rem}
+details.model summary::-webkit-details-marker{display:none}
+details.model summary::before{content:"▸";display:inline-block;margin-right:.5rem;transition:transform .15s ease}
+details.model[open] summary::before{transform:rotate(90deg)}
+details.model .modeltext{padding:.1rem .8rem .7rem;font-size:.95rem}
+details.model[open]{background:var(--panel)}
+
+.charbar{position:fixed;bottom:1rem;right:1rem;display:flex;gap:.4rem;z-index:10}
+.charbar button{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--blue-deep);background:#fff;border:1px solid var(--rule);border-radius:9px;width:2.6rem;height:2.6rem;cursor:pointer;box-shadow:0 2px 8px rgba(13,47,92,.12)}
+.charbar button:hover{background:var(--panel)}
+.charbar .lbl{align-self:center;font-family:var(--sans);font-size:.68rem;color:var(--ink-soft);background:var(--paper);padding:.2rem .4rem;border-radius:6px}
+@media print{nav.side,details.mobilenav,.charbar,button.check,.showsol{display:none!important}.wrap{display:block}main{max-width:none}}
+</style>
+</head>
+<body>
+<details class="mobilenav"><summary>Lessons</summary><nav id="mnav"></nav></details>
+<div class="wrap">
+<nav class="side" aria-label="Lessons">
+  <div class="brand">Harjoituskirja</div>
+  <div class="brand-sub">Finnish from Zero · interactive workbook</div>
+  <div id="globalscore">0 / 0 answered correctly</div>
+  <div id="nav"></div>
+  <a class="backlink" href="finnish-from-zero.html">← Back to the course</a>
+</nav>
+<main>
+<header class="hero">
+  <h1>Harjoituskirja</h1>
+  <p>Type your answer, press Enter or hit <em>Check</em>. Wrong answers offer the correct solution — retype and re-check as many times as you like. Use the ä ö å buttons if your keyboard lacks them.</p>
+</header>
+<div id="app"></div>
+</main>
+</div>
+<div class="charbar" aria-label="Finnish characters">
+  <span class="lbl">insert:</span>
+  <button type="button" data-ch="ä">ä</button>
+  <button type="button" data-ch="ö">ö</button>
+  <button type="button" data-ch="å">å</button>
+</div>
+<script>
+const DATA = [
+{lesson:"Lesson 0 — Sounds and spelling", anchor:"l0", ex:[
+ {id:"0.1", title:"Vowel harmony: choose -ssa or -ssä", type:"check", instr:"Attach the correct form of the ending to each word.", items:[
+  {q:"koulu (school) + ssa/ssä", a:["koulussa"]},
+  {q:"kylä (village) + ssa/ssä", a:["kylässä"]},
+  {q:"ravintola (restaurant) + ssa/ssä", a:["ravintolassa"]},
+  {q:"työ (work) + ssa/ssä", a:["työssä"]},
+  {q:"Helsinki + ssa/ssä (careful: nk→ng)", a:["helsingissä"], d:"Helsingissä"}]},
+ {id:"0.2", title:"Read aloud", type:"model", instr:"Say these aloud, exaggerating the length differences: kuka / kukka · tili / tiili · mato / matto · vara / varaa. Then: Hyvää päivää! Kiitos paljon. Näkemiin.", model:"Self-check: every doubled letter should take noticeably longer to say. Stress always lands on the first syllable."}]},
+
+{lesson:"Lesson 1 — Greetings and courtesy", anchor:"l1", ex:[
+ {id:"1.1", title:"What do you say when…", type:"check", instr:"Answer with the Finnish phrase.", items:[
+  {q:"…entering a shop at 10 a.m.?", a:["hyvää päivää","päivää","hyvää huomenta","huomenta"], d:"Hyvää päivää (or huomenta)"},
+  {q:"…leaving a meeting, formally?", a:["näkemiin"], d:"Näkemiin"},
+  {q:"…someone hands you coffee?", a:["kiitos","kiitos paljon"], d:"Kiitos"},
+  {q:"…you bump into someone?", a:["anteeksi"], d:"Anteeksi"},
+  {q:"…someone thanks you?", a:["ole hyvä"], d:"Ole hyvä"},
+  {q:"…parting from a friend?", a:["hei hei","moi moi","nähdään","heippa","moikka"], d:"Hei hei / moi moi / nähdään"}]},
+ {id:"1.2", title:"Fill in the dialogue", type:"check", instr:"— Hyvää päivää! — ___(1)! Mitä ___(2)? — ___(3), hyvää. Entä ___(4)? — Ihan hyvää. No, ___(5)!", items:[
+  {q:"(1) reply to the greeting", a:["hyvää päivää","päivää","hei"], d:"Hyvää päivää"},
+  {q:"(2) Mitä ___?", a:["kuuluu"]},
+  {q:"(3) ___, hyvää.", a:["kiitos"], d:"Kiitos"},
+  {q:"(4) Entä ___?", a:["sinulle"]},
+  {q:"(5) No, ___!", a:["nähdään","hei hei","moi moi"], d:"nähdään"}]}]},
+
+{lesson:"Lesson 2 — Who are you? (olla)", anchor:"l2", ex:[
+ {id:"2.1", title:"Conjugate olla", type:"check", instr:"Fill in the right form of olla (to be).", items:[
+  {q:"Me ___ opiskelijoita.", a:["olemme"]},
+  {q:"___ (sinä) insinööri?", a:["oletko"], d:"Oletko"},
+  {q:"Hän ei ___ kotona.", a:["ole"]},
+  {q:"He ___ suomalaisia.", a:["ovat"]},
+  {q:"Minä ___ britti.", a:["olen"]}]},
+ {id:"2.2", title:"Make questions with -ko/-kö", type:"check", instr:"Turn each statement into a yes/no question. Type the whole question.", items:[
+  {q:"Sinä olet opettaja.", a:["oletko sinä opettaja","oletko opettaja"], d:"Oletko sinä opettaja?", wide:1},
+  {q:"Hän on kotoisin Ruotsista.", a:["onko hän kotoisin ruotsista"], d:"Onko hän kotoisin Ruotsista?", wide:1},
+  {q:"Te olette Annan ystäviä.", a:["oletteko te annan ystäviä","oletteko annan ystäviä"], d:"Oletteko te Annan ystäviä?", wide:1},
+  {q:"Se on hyvä.", a:["onko se hyvä"], d:"Onko se hyvä?", wide:1}]},
+ {id:"2.3", title:"Introduce yourself", type:"model", instr:"Write four sentences: name, nationality, where you are from, which languages you speak.", model:"Minä olen Malcolm. Olen englantilainen ja olen kotoisin Lontoosta. Puhun englantia ja vähän suomea."}]},
+
+{lesson:"Lesson 3 — First verbs (type 1)", anchor:"l3", ex:[
+ {id:"3.1", title:"Conjugate", type:"check", instr:"Fill in the right present-tense form.", items:[
+  {q:"Hän ___ (asua) Turussa.", a:["asuu"]},
+  {q:"Me ___ (puhua) suomea.", a:["puhumme"]},
+  {q:"___ (katsoa, te) televisiota?", a:["katsotteko"], d:"Katsotteko"},
+  {q:"He ___ (istua) kahvilassa.", a:["istuvat"]},
+  {q:"Minä ___ (ostaa) leipää.", a:["ostan"]},
+  {q:"Sinä ___ (kysyä) paljon!", a:["kysyt"]}]},
+ {id:"3.2", title:"Make negative", type:"check", instr:"Negate the whole sentence (watch what happens to the verb — and in 2 and 5, the object shifts to the partitive; Lesson 8 explains).", items:[
+  {q:"Puhun ruotsia.", a:["en puhu ruotsia","minä en puhu ruotsia"], d:"En puhu ruotsia.", wide:1},
+  {q:"Hän muistaa nimen.", a:["hän ei muista nimeä"], d:"Hän ei muista nimeä.", wide:1},
+  {q:"Odotamme bussia.", a:["emme odota bussia","me emme odota bussia"], d:"Emme odota bussia.", wide:1},
+  {q:"He asuvat täällä.", a:["he eivät asu täällä"], d:"He eivät asu täällä.", wide:1},
+  {q:"Ymmärrät kaiken.", a:["et ymmärrä kaikkea","sinä et ymmärrä kaikkea"], d:"Et ymmärrä kaikkea.", wide:1}]},
+ {id:"3.3", title:"Translate", type:"check", instr:"Into Finnish.", items:[
+  {q:"Do you (sg.) understand?", a:["ymmärrätkö","ymmärrätkö sinä"], d:"Ymmärrätkö?", wide:1},
+  {q:"She doesn't live in Helsinki.", a:["hän ei asu helsingissä"], d:"Hän ei asu Helsingissä.", wide:1},
+  {q:"We are waiting.", a:["odotamme","me odotamme"], d:"(Me) odotamme.", wide:1},
+  {q:"I love you.", a:["rakastan sinua","minä rakastan sinua"], d:"Rakastan sinua.", wide:1},
+  {q:"They speak Finnish and English.", a:["he puhuvat suomea ja englantia"], d:"He puhuvat suomea ja englantia.", wide:1}]}]},
+
+{lesson:"Lesson 4 — Numbers, money, coffee", anchor:"l4", ex:[
+ {id:"4.1", title:"Write out the numbers", type:"check", instr:"In words.", items:[
+  {q:"7", a:["seitsemän"]},
+  {q:"14", a:["neljätoista"]},
+  {q:"26", a:["kaksikymmentäkuusi"]},
+  {q:"58", a:["viisikymmentäkahdeksan"]},
+  {q:"99", a:["yhdeksänkymmentäyhdeksän"]},
+  {q:"100", a:["sata"]},
+  {q:"340", a:["kolmesataaneljäkymmentä"]},
+  {q:"1000", a:["tuhat"]}]},
+ {id:"4.2", title:"The number rule", type:"check", instr:"Put the noun in the form the number demands.", items:[
+  {q:"kaksi (kahvi)", a:["kahvia"]},
+  {q:"neljä (euro)", a:["euroa"]},
+  {q:"yksi (tee)", a:["tee"]},
+  {q:"kolme (pulla)", a:["pullaa"]},
+  {q:"kymmenen (sentti)", a:["senttiä"]},
+  {q:"viisi (olut)", a:["olutta"]}]},
+ {id:"4.3", title:"Café dialogue", type:"model", instr:"You want tea and a sandwich. Write your half of the dialogue: order, ask the price, say you'll pay by card.", model:"Hei! Saisinko teen ja voileivän? … Ei muuta, kiitos. Paljonko se tekee? … Käykö kortti? Kiitos, hei hei!"}]},
+
+{lesson:"Lesson 5 — Consonant gradation", anchor:"l5", ex:[
+ {id:"5.1", title:"Genitive with gradation", type:"check", instr:"Give the -n form (weak grade).", items:[
+  {q:"pankki (bank)", a:["pankin"]},
+  {q:"pöytä (table)", a:["pöydän"]},
+  {q:"Eurooppa", a:["euroopan"], d:"Euroopan"},
+  {q:"kaupunki (city)", a:["kaupungin"]},
+  {q:"ranta (beach)", a:["rannan"]},
+  {q:"apu (help)", a:["avun"]},
+  {q:"tukka (hair)", a:["tukan"]},
+  {q:"silta (bridge)", a:["sillan"]}]},
+ {id:"5.2", title:"Verbs gradate too", type:"check", instr:"Conjugate for minä (weak) and hän (strong).", items:[
+  {q:"antaa → minä", a:["annan"]},
+  {q:"antaa → hän", a:["antaa"]},
+  {q:"odottaa → minä", a:["odotan"]},
+  {q:"odottaa → hän", a:["odottaa"]},
+  {q:"lukea → minä", a:["luen"]},
+  {q:"lukea → hän", a:["lukee"]},
+  {q:"ymmärtää → minä", a:["ymmärrän"]},
+  {q:"ymmärtää → hän", a:["ymmärtää"]},
+  {q:"nukkua → minä", a:["nukun"]},
+  {q:"nukkua → hän", a:["nukkuu"]}]}]},
+
+{lesson:"Lesson 6 — The six location cases", anchor:"l6", ex:[
+ {id:"6.1", title:"Pick the right case", type:"check", instr:"Put the bracketed word into the case the sentence needs.", items:[
+  {q:"Asun (Helsinki).", a:["helsingissä"], d:"Helsingissä"},
+  {q:"Menemme (ravintola).", a:["ravintolaan"]},
+  {q:"Hän tulee (koulu — from).", a:["koulusta"]},
+  {q:"Kissa istuu (tuoli — on).", a:["tuolilla"]},
+  {q:"Otan kirjan (pöytä — off).", a:["pöydältä"]},
+  {q:"Menen (tori — to, exterior).", a:["torille"]},
+  {q:"Olemme (koti).", a:["kotona"]},
+  {q:"He menevät (työ).", a:["töihin"]}]},
+ {id:"6.2", title:"About you", type:"model", instr:"Answer in full sentences: Missä sinä asut? Mihin menet huomenna? Millä menet töihin?", model:"Asun Lontoossa. Menen huomenna keskustaan. Menen töihin metrolla."},
+ {id:"6.3", title:"Translate", type:"check", instr:"Into Finnish.", items:[
+  {q:"The book is in the bag (laukku).", a:["kirja on laukussa"], d:"Kirja on laukussa.", wide:1},
+  {q:"I'm coming from the shop.", a:["tulen kaupasta","minä tulen kaupasta"], d:"Tulen kaupasta.", wide:1},
+  {q:"We're going to Tampere by train.", a:["menemme tampereelle junalla","me menemme tampereelle junalla"], d:"Menemme Tampereelle junalla.", wide:1},
+  {q:"She's at home.", a:["hän on kotona"], d:"Hän on kotona.", wide:1}]}]},
+
+{lesson:"Lesson 7 — Genitive; minulla on", anchor:"l7", ex:[
+ {id:"7.1", title:"Genitive", type:"check", instr:"Put the bracketed word into the genitive.", items:[
+  {q:"Tämä on (Anna) kissa.", a:["annan"], d:"Annan"},
+  {q:"(Talo) ovi on auki.", a:["talon"], d:"Talon"},
+  {q:"(Mies) nimi on Jussi.", a:["miehen"], d:"Miehen"},
+  {q:"(Lapsi) äiti on lääkäri.", a:["lapsen"], d:"Lapsen"},
+  {q:"(Kaupunki) keskusta on pieni.", a:["kaupungin"], d:"Kaupungin"}]},
+ {id:"7.2", title:"Having things", type:"check", instr:"Translate with a minulla on -structure.", items:[
+  {q:"I have two brothers.", a:["minulla on kaksi veljeä"], d:"Minulla on kaksi veljeä.", wide:1},
+  {q:"Do you have a car?", a:["onko sinulla autoa","onko sinulla auto"], d:"Onko sinulla auto(a)?", wide:1},
+  {q:"She has a big family.", a:["hänellä on iso perhe"], d:"Hänellä on iso perhe.", wide:1},
+  {q:"We don't have time.", a:["meillä ei ole aikaa"], d:"Meillä ei ole aikaa.", wide:1},
+  {q:"Who has my key?", a:["kenellä on minun avaimeni","kenellä on avaimeni","kenellä on minun avain"], d:"Kenellä on (minun) avaimeni?", wide:1}]},
+ {id:"7.3", title:"Family and friends", type:"model", instr:"Write four sentences about your family or friends, using at least one postposition (kanssa, alla, vieressä…).", model:"Minulla on pieni perhe. Vanhempani asuvat Lontoossa. Siskoni asuu miehensä kanssa Manchesterissa. Heidän koiransa nukkuu aina pöydän alla."}]},
+
+{lesson:"Lesson 8 — The partitive", anchor:"l8", ex:[
+ {id:"8.1", title:"Form the partitive", type:"check", instr:"Give the partitive singular.", items:[
+  {q:"tee", a:["teetä"]},
+  {q:"olut", a:["olutta"]},
+  {q:"vesi", a:["vettä"]},
+  {q:"leipä", a:["leipää"]},
+  {q:"perhe", a:["perhettä"]},
+  {q:"suomi", a:["suomea"]},
+  {q:"raha (money)", a:["rahaa"]},
+  {q:"lapsi", a:["lasta"]}]},
+ {id:"8.2", title:"Basic form or partitive?", type:"check", instr:"Type the correct option.", items:[
+  {q:"Minulla on (koira / koiraa).", a:["koira"]},
+  {q:"Minulla ei ole (koira / koiraa).", a:["koiraa"]},
+  {q:"Juon aamulla (kahvi / kahvia).", a:["kahvia"]},
+  {q:"Ostan kaksi (lippu / lippua).", a:["lippua"]},
+  {q:"Rakastan (sinut / sinua).", a:["sinua"]},
+  {q:"Odotamme (juna / junaa).", a:["junaa"]}]},
+ {id:"8.3", title:"At the restaurant", type:"model", instr:"Ask for a recommendation, order a soup and a beer, ask for the bill.", model:"Mitä suosittelet? … Ottaisin keittoa ja yhden oluen, kiitos. … Saisinko laskun?"}]},
+
+{lesson:"Lesson 9 — Verb types 2–3; time", anchor:"l9", ex:[
+ {id:"9.1", title:"Conjugate", type:"check", instr:"Present tense, for the person given.", items:[
+  {q:"me (syödä)", a:["syömme"]},
+  {q:"hän (tehdä)", a:["tekee"]},
+  {q:"sinä (mennä)", a:["menet"]},
+  {q:"he (tulla)", a:["tulevat"]},
+  {q:"minä (nähdä)", a:["näen"]},
+  {q:"te (opiskella)", a:["opiskelette"]},
+  {q:"hän (käydä)", a:["käy"]},
+  {q:"minä (nousta)", a:["nousen"]}]},
+ {id:"9.2", title:"Tell the time", type:"check", instr:"Write the times in words. Careful with puoli!", items:[
+  {q:"2:00", a:["kello on kaksi","kaksi"], d:"(Kello on) kaksi"},
+  {q:"5:30", a:["puoli kuusi","kello on puoli kuusi"], d:"puoli kuusi"},
+  {q:"9:15 (use yli)", a:["viisitoista yli yhdeksän","vartin yli yhdeksän","kello on viisitoista yli yhdeksän"], d:"viisitoista (vartin) yli yhdeksän"},
+  {q:"7:45 (use vaille)", a:["viittätoista vaille kahdeksan","varttia vaille kahdeksan"], d:"viittätoista (varttia) vaille kahdeksan"},
+  {q:"12:00", a:["kaksitoista","keskipäivä","kello on kaksitoista"], d:"kaksitoista / keskipäivä"}]},
+ {id:"9.3", title:"Your weekday", type:"model", instr:"Describe your weekday in five to seven sentences, using at least four verbs and two time expressions.", model:"Nousen kello seitsemän ja käyn suihkussa. Juon kahvia ja syön aamupalaa. Menen töihin bussilla. Illalla laitan ruokaa ja luen kirjaa. Menen nukkumaan kello yksitoista."}]},
+
+{lesson:"Lesson 10 — Verb types 4–6; shopping", anchor:"l10", ex:[
+ {id:"10.1", title:"Conjugate", type:"check", instr:"Present tense. Remember reverse gradation in type 4.", items:[
+  {q:"minä (haluta)", a:["haluan"]},
+  {q:"hän (tavata)", a:["tapaa"]},
+  {q:"me (tarvita)", a:["tarvitsemme"]},
+  {q:"sinä (herätä)", a:["heräät"]},
+  {q:"he (pelata)", a:["pelaavat"]},
+  {q:"minä (valita)", a:["valitsen"]}]},
+ {id:"10.2", title:"Tykätä + elative", type:"check", instr:"Say you like each thing: Tykkään…", items:[
+  {q:"coffee", a:["tykkään kahvista","kahvista"], d:"Tykkään kahvista."},
+  {q:"Helsinki", a:["tykkään helsingistä","helsingistä"], d:"Tykkään Helsingistä."},
+  {q:"music (musiikki)", a:["tykkään musiikista","musiikista"], d:"Tykkään musiikista."},
+  {q:"this coat (tämä takki)", a:["tykkään tästä takista","tästä takista"], d:"Tykkään tästä takista."},
+  {q:"Finnish food (suomalainen ruoka)", a:["tykkään suomalaisesta ruoasta","tykkään suomalaisesta ruuasta","suomalaisesta ruoasta","suomalaisesta ruuasta"], d:"Tykkään suomalaisesta ruoasta."}]},
+ {id:"10.3", title:"Translate", type:"check", instr:"Into Finnish.", items:[
+  {q:"I want to buy new shoes.", a:["haluan ostaa uudet kengät","minä haluan ostaa uudet kengät"], d:"Haluan ostaa uudet kengät.", wide:1},
+  {q:"Do you need help (apu)?", a:["tarvitsetko apua","tarvitsetko sinä apua"], d:"Tarvitsetko apua?", wide:1},
+  {q:"We meet at the café at five.", a:["tapaamme kahvilassa kello viisi","tapaamme kahvilassa viideltä","me tapaamme kahvilassa kello viisi"], d:"Tapaamme kahvilassa kello viisi.", wide:1},
+  {q:"She wakes up at six on weekdays.", a:["hän herää kello kuusi arkisin","hän herää kuudelta arkisin","hän herää arkisin kello kuusi"], d:"Hän herää kello kuusi arkisin.", wide:1}]}]},
+
+{lesson:"Lesson 11 — The past tense", anchor:"l11", ex:[
+ {id:"11.1", title:"Into the past", type:"check", instr:"Give the past-tense verb (same person).", items:[
+  {q:"Puhun suomea → ___ suomea", a:["puhuin"]},
+  {q:"Hän ostaa leivän → Hän ___ leivän", a:["osti"]},
+  {q:"Syömme kotona → ___ kotona", a:["söimme"]},
+  {q:"He tulevat junalla → He ___ junalla", a:["tulivat"]},
+  {q:"Haluan kahvia → ___ kahvia", a:["halusin"]},
+  {q:"Näen hänet usein → ___ hänet usein", a:["näin"]},
+  {q:"Olen väsynyt → ___ väsynyt", a:["olin"]},
+  {q:"Tapaamme maanantaina → ___ maanantaina", a:["tapasimme"]}]},
+ {id:"11.2", title:"About yesterday", type:"model", instr:"Answer in the past tense: Mitä joit aamulla? Missä olit eilen illalla? Mitä teit viime viikonloppuna?", model:"Join kahvia ja vettä. Olin kotona. Viime viikonloppuna kävin salilla ja tapasin ystävän. Illalla katsoimme elokuvan."},
+ {id:"11.3", title:"Translate", type:"check", instr:"Into Finnish, past tense.", items:[
+  {q:"I woke up at seven and went to work.", a:["heräsin kello seitsemän ja menin töihin","heräsin seitsemältä ja menin töihin"], d:"Heräsin kello seitsemän ja menin töihin.", wide:1},
+  {q:"We visited (käydä) Tampere last week.", a:["kävimme tampereella viime viikolla","me kävimme tampereella viime viikolla"], d:"Kävimme Tampereella viime viikolla.", wide:1},
+  {q:"She read the book yesterday (finished it).", a:["hän luki kirjan eilen"], d:"Hän luki kirjan eilen.", wide:1}]}]},
+
+{lesson:"Lesson 12 — Perfect; negative past", anchor:"l12", ex:[
+ {id:"12.1", title:"Form the perfect", type:"check", instr:"olen + NUT-participle, for minä.", items:[
+  {q:"lukea", a:["olen lukenut"]},
+  {q:"syödä", a:["olen syönyt"]},
+  {q:"tulla", a:["olen tullut"]},
+  {q:"haluta", a:["olen halunnut"]},
+  {q:"tehdä", a:["olen tehnyt"]},
+  {q:"olla", a:["olen ollut"]}]},
+ {id:"12.2", title:"Negative past", type:"check", instr:"Negate these past-tense sentences (note what happens to plural objects).", items:[
+  {q:"Ostin liput.", a:["en ostanut lippuja","minä en ostanut lippuja"], d:"En ostanut lippuja.", wide:1},
+  {q:"Hän meni kotiin.", a:["hän ei mennyt kotiin"], d:"Hän ei mennyt kotiin.", wide:1},
+  {q:"Söimme aamupalaa.", a:["emme syöneet aamupalaa","me emme syöneet aamupalaa"], d:"Emme syöneet aamupalaa.", wide:1},
+  {q:"He puhuivat englantia.", a:["he eivät puhuneet englantia"], d:"He eivät puhuneet englantia.", wide:1},
+  {q:"Näin hänet.", a:["en nähnyt häntä","minä en nähnyt häntä"], d:"En nähnyt häntä.", wide:1}]},
+ {id:"12.3", title:"Truthfully", type:"model", instr:"Answer in full sentences: Oletko käynyt Suomessa? Kuinka kauan olet opiskellut suomea? Mitä et tehnyt eilen?", model:"Olen käynyt Suomessa kerran. / En ole vielä käynyt Suomessa. — Olen opiskellut suomea kaksi kuukautta. — En käynyt eilen salilla."}]},
+
+{lesson:"Lesson 13 — The object: total or partial?", anchor:"l13", ex:[
+ {id:"13.1", title:"Choose the object form", type:"check", instr:"Type the correct option.", items:[
+  {q:"Ostan (auto / auton / autoa) ensi vuonna — a whole, specific purchase.", a:["auton"]},
+  {q:"En osta (auto / auton / autoa).", a:["autoa"]},
+  {q:"Juotko (maito / maidon / maitoa)? — generally", a:["maitoa"]},
+  {q:"Hän luki (kirja / kirjan / kirjaa) loppuun.", a:["kirjan"]},
+  {q:"Odotan (bussi / bussin / bussia).", a:["bussia"]},
+  {q:"Rakastan (tämä kaupunki — both words!).", a:["tätä kaupunkia"]},
+  {q:"Minun täytyy ostaa (lippu / lipun / lippua).", a:["lippu"]},
+  {q:"Näitkö (minä → ?) eilen?", a:["minut"]}]},
+ {id:"13.2", title:"Explain the difference", type:"model", instr:"One sentence each: a) Söin puuron vs Söin puuroa. b) Kirjoitin raportin vs Kirjoitin raporttia.", model:"a) Puuron = I ate the whole bowl; puuroa = I ate some porridge. b) Raportin = I finished the report; raporttia = I was working on it, unfinished."},
+ {id:"13.3", title:"Translate", type:"check", instr:"Into Finnish — object form is the point.", items:[
+  {q:"I'm waiting for you.", a:["odotan sinua","minä odotan sinua"], d:"Odotan sinua.", wide:1},
+  {q:"She bought the tickets.", a:["hän osti liput"], d:"Hän osti liput.", wide:1},
+  {q:"We didn't see the film.", a:["emme nähneet elokuvaa","me emme nähneet elokuvaa"], d:"Emme nähneet elokuvaa.", wide:1},
+  {q:"Do you know me?", a:["tunnetko minut","tunnetko sinä minut"], d:"Tunnetko minut?", wide:1},
+  {q:"I was writing an email when you called.", a:["kirjoitin sähköpostia kun soitit","minä kirjoitin sähköpostia kun soitit"], d:"Kirjoitin sähköpostia, kun soitit.", wide:1}]}]},
+
+{lesson:"Lesson 14 — Adjectives and comparison", anchor:"l14", ex:[
+ {id:"14.1", title:"Comparative and superlative", type:"check", instr:"Two forms for each adjective.", items:[
+  {q:"kylmä → comparative", a:["kylmempi"]},
+  {q:"kylmä → superlative", a:["kylmin"]},
+  {q:"hyvä → comparative", a:["parempi"]},
+  {q:"hyvä → superlative", a:["paras"]},
+  {q:"kallis → comparative", a:["kalliimpi"]},
+  {q:"kallis → superlative", a:["kallein"]},
+  {q:"pieni → comparative", a:["pienempi"]},
+  {q:"pieni → superlative", a:["pienin"]},
+  {q:"pitkä → comparative", a:["pidempi","pitempi"], d:"pidempi"},
+  {q:"pitkä → superlative", a:["pisin"]}]},
+ {id:"14.2", title:"Agreement", type:"check", instr:"Make the adjective agree with its noun.", items:[
+  {q:"Asun (pieni) asunnossa.", a:["pienessä"]},
+  {q:"Hän ostaa (uusi) auton.", a:["uuden"]},
+  {q:"Juon (kuuma) kahvia.", a:["kuumaa"]},
+  {q:"(iso) talot ovat kalliita.", a:["isot"], d:"Isot"},
+  {q:"Tämä on Suomen (vanha, superlative) kaupunki.", a:["vanhin"]}]},
+ {id:"14.3", title:"Your home", type:"model", instr:"Describe your home in four or five sentences, with at least one comparative.", model:"Asun pienessä kaksiossa kerrostalossa. Asunnossa on keittiö, olohuone, makuuhuone ja parveke. Tykkään parvekkeesta, koska sieltä näkee puiston. Asunto on pienempi kuin vanha asuntoni, mutta keskusta on lähempänä."}]},
+
+{lesson:"Lesson 15 — The conditional", anchor:"l15", ex:[
+ {id:"15.1", title:"Make it polite", type:"check", instr:"Rewrite with the conditional.", items:[
+  {q:"Saanko laskun?", a:["saisinko laskun"], d:"Saisinko laskun?", wide:1},
+  {q:"Voitko avata ikkunan?", a:["voisitko avata ikkunan"], d:"Voisitko avata ikkunan?", wide:1},
+  {q:"Haluan kaksi lippua.", a:["haluaisin kaksi lippua"], d:"Haluaisin kaksi lippua.", wide:1},
+  {q:"Onko teillä pöytä neljälle?", a:["olisiko teillä pöytää neljälle","olisiko teillä pöytä neljälle"], d:"Olisiko teillä pöytää neljälle?", wide:1}]},
+ {id:"15.2", title:"Jos-sentences", type:"check", instr:"Fill both verbs in the conditional.", items:[
+  {q:"Jos minulla ___ (olla) enemmän rahaa…", a:["olisi"]},
+  {q:"…___ (ostaa, minä) isomman asunnon.", a:["ostaisin"]},
+  {q:"Jos sää ___ (olla) parempi…", a:["olisi"]},
+  {q:"…___ (mennä, me) ulos.", a:["menisimme"]},
+  {q:"Mitä sinä ___ (tehdä)…", a:["tekisit"]},
+  {q:"…jos ___ (asua) Suomessa?", a:["asuisit"]}]},
+ {id:"15.3", title:"Making plans", type:"model", instr:"Write a four-line dialogue making plans with a friend, using at least three conditional forms.", model:"— Haluaisitko lähteä huomenna lounaalle? — Valitettavasti en pääse huomenna. Kävisikö perjantai? — Kävisi hyvin! Sopisiko kello kaksitoista? — Sopii, nähdään silloin!"}]},
+
+{lesson:"Lesson 16 — Commands and directions", anchor:"l16", ex:[
+ {id:"16.1", title:"Singular imperative", type:"check", instr:"Give the command form.", items:[
+  {q:"ostaa", a:["osta"]},
+  {q:"tulla", a:["tule"]},
+  {q:"syödä", a:["syö"]},
+  {q:"odottaa", a:["odota"]},
+  {q:"mennä", a:["mene"]},
+  {q:"tehdä", a:["tee"]}]},
+ {id:"16.2", title:"Negative commands", type:"check", instr:"Älä + … (watch the object in 3).", items:[
+  {q:"Osta se.", a:["älä osta sitä"], d:"Älä osta sitä.", wide:1},
+  {q:"Mene kotiin.", a:["älä mene kotiin"], d:"Älä mene kotiin.", wide:1},
+  {q:"Unohda avaimet.", a:["älä unohda avaimia"], d:"Älä unohda avaimia.", wide:1},
+  {q:"Puhu englantia.", a:["älä puhu englantia"], d:"Älä puhu englantia.", wide:1}]},
+ {id:"16.3", title:"Give directions", type:"model", instr:"Direct someone from a station to a market square: straight on, second street left, the square is on the right by the church.", model:"Mene suoraan eteenpäin. Käänny toisesta kadusta vasemmalle. Tori on oikealla, kirkon vieressä."}]},
+
+{lesson:"Lesson 17 — MA-infinitive; obligation", anchor:"l17", ex:[
+ {id:"17.1", title:"The right MA-form", type:"check", instr:"-maan, -massa or -masta?", items:[
+  {q:"Menemme (uida).", a:["uimaan"]},
+  {q:"Hän on (syödä).", a:["syömässä"]},
+  {q:"Tulen (treenata).", a:["treenaamasta"]},
+  {q:"Lapset menevät (nukkua).", a:["nukkumaan"]},
+  {q:"Opettelen (puhua) suomea.", a:["puhumaan"]}]},
+ {id:"17.2", title:"Obligation", type:"check", instr:"Translate with täytyy / ei tarvitse (genitive subject!).", items:[
+  {q:"I have to work tomorrow.", a:["minun täytyy tehdä töitä huomenna","minun täytyy olla töissä huomenna","minun pitää tehdä töitä huomenna","minun täytyy huomenna tehdä töitä"], d:"Minun täytyy tehdä töitä huomenna.", wide:1},
+  {q:"You don't have to pay.", a:["sinun ei tarvitse maksaa"], d:"Sinun ei tarvitse maksaa.", wide:1},
+  {q:"We must book a table.", a:["meidän täytyy varata pöytä","meidän pitää varata pöytä"], d:"Meidän täytyy varata pöytä.", wide:1},
+  {q:"She has to wake up early.", a:["hänen täytyy herätä aikaisin","hänen pitää herätä aikaisin"], d:"Hänen täytyy herätä aikaisin.", wide:1}]},
+ {id:"17.3", title:"Your training week", type:"model", instr:"Describe your hobby or training week in five sentences, using at least one MA-form and one täytyy / ei tarvitse.", model:"Harrastan voimaharjoittelua. Käyn salilla viisi kertaa viikossa. Treenaan kyykkyä, penkkiä ja maastavetoa — viisi sarjaa ja viisi toistoa. Lepopäivänä minun ei tarvitse tehdä mitään, mutta täytyy syödä hyvin."}]},
+
+{lesson:"Lesson 18 — Puhekieli", anchor:"l18", ex:[
+ {id:"18.1", title:"Spoken → standard", type:"check", instr:"Convert to standard Finnish.", items:[
+  {q:"Mä oon kotona.", a:["minä olen kotona"], d:"Minä olen kotona.", wide:1},
+  {q:"Onks sul rahaa?", a:["onko sinulla rahaa"], d:"Onko sinulla rahaa?", wide:1},
+  {q:"Se ei tuu tänään.", a:["hän ei tule tänään"], d:"Hän ei tule tänään.", wide:1},
+  {q:"Me ollaan käyty siellä.", a:["me olemme käyneet siellä","olemme käyneet siellä"], d:"Me olemme käyneet siellä.", wide:1},
+  {q:"Toi on mun kirja.", a:["tuo on minun kirjani","tuo on minun kirja"], d:"Tuo on minun kirjani.", wide:1}]},
+ {id:"18.2", title:"Standard → spoken", type:"check", instr:"Convert to everyday Helsinki speech.", items:[
+  {q:"Minä olen väsynyt.", a:["mä oon väsyny","mä oon väsynyt"], d:"Mä oon väsyny(t).", wide:1},
+  {q:"Oletko sinä nähnyt hänet?", a:["ooksä nähny sen","ooks sä nähny sen","ootko sä nähny sen","ooksä nähnyt sen"], d:"Ooksä nähny sen?", wide:1},
+  {q:"Me menemme kotiin.", a:["me mennään kotiin"], d:"Me mennään kotiin.", wide:1},
+  {q:"Minulla ei ole aikaa.", a:["mul ei oo aikaa","mulla ei oo aikaa"], d:"Mul(la) ei oo aikaa.", wide:1}]}]},
+
+{lesson:"Lesson 19 — Passive; plurals", anchor:"l19", ex:[
+ {id:"19.1", title:"Present passive", type:"check", instr:"Form the -taan form.", items:[
+  {q:"ostaa", a:["ostetaan"]},
+  {q:"syödä", a:["syödään"]},
+  {q:"mennä", a:["mennään"]},
+  {q:"haluta", a:["halutaan"]},
+  {q:"puhua", a:["puhutaan"]}]},
+ {id:"19.2", title:"Into the plural", type:"check", instr:"Same case, plural.", items:[
+  {q:"Asumme (isossa talossa).", a:["isoissa taloissa"]},
+  {q:"Menen (hyvälle ystävälle).", a:["hyville ystäville"]},
+  {q:"Kirjat ovat (kaupassa).", a:["kaupoissa"]},
+  {q:"Ostin (uuden kirjan → partitive plural).", a:["uusia kirjoja"]}]},
+ {id:"19.3", title:"Reading the street", type:"model", instr:"What do these mean? 1. Täällä ei tupakoida. 2. Ovi avataan kello 8. 3. Vuokrataan yksiö Kalliosta. 4. Mennäänkö syömään?", model:"1. No smoking here. 2. The door opens at 8. 3. Studio flat to let in Kallio. 4. Shall we go and eat?"}]},
+
+{lesson:"Lesson 20 — Work; essive & translative", anchor:"l20", ex:[
+ {id:"20.1", title:"Translative or essive?", type:"check", instr:"-na (as, in the role of) or -ksi (becoming, for)?", items:[
+  {q:"Hän työskentelee (opettaja).", a:["opettajana"]},
+  {q:"Haluan tulla (opettaja).", a:["opettajaksi"]},
+  {q:"(Lapsi) hän puhui ruotsia kotona.", a:["lapsena"], d:"Lapsena"},
+  {q:"Sää muuttuu (huono).", a:["huonoksi"]},
+  {q:"Syön puuroa (aamupala).", a:["aamupalaksi"]}]},
+ {id:"20.2", title:"A work email", type:"model", instr:"Write a three-line reply to a colleague: thank them for their message, attach the report, suggest returning to it in Thursday's meeting. Sign off properly.", model:"Hei Sari, kiitos viestistäsi. Liitteenä on raportti. Palataan asiaan torstain kokouksessa. Ystävällisin terveisin, Malcolm"},
+ {id:"20.3", title:"Translate", type:"check", instr:"Office Finnish.", items:[
+  {q:"My colleague is busy today.", a:["työkaverini on tänään kiireinen","työkaverini on kiireinen tänään","kollegani on tänään kiireinen"], d:"Työkaverini on tänään kiireinen.", wide:1},
+  {q:"The meeting is on Tuesday at nine.", a:["kokous on tiistaina kello yhdeksän","kokous on tiistaina yhdeksältä"], d:"Kokous on tiistaina kello yhdeksän.", wide:1},
+  {q:"The deadline is next week.", a:["määräaika on ensi viikolla"], d:"Määräaika on ensi viikolla.", wide:1},
+  {q:"We must finish the report (saada valmiiksi).", a:["meidän täytyy saada raportti valmiiksi","meidän pitää saada raportti valmiiksi"], d:"Meidän täytyy saada raportti valmiiksi.", wide:1}]}]},
+
+{lesson:"Lesson 21 — Health and pharmacy", anchor:"l21", ex:[
+ {id:"21.1", title:"Say in Finnish", type:"check", instr:"At the pharmacy or the doctor's.", items:[
+  {q:"I have a fever.", a:["minulla on kuume"], d:"Minulla on kuume.", wide:1},
+  {q:"My throat is sore.", a:["kurkkuni on kipeä","kurkku on kipeä","minulla on kipeä kurkku","minulla on kurkku kipeä"], d:"Kurkkuni on kipeä.", wide:1},
+  {q:"I need painkillers.", a:["tarvitsen särkylääkettä","tarvitsen särkylääkkeitä","tarvitsen jotain särkylääkettä"], d:"Tarvitsen särkylääkettä.", wide:1},
+  {q:"I would like to book an appointment with a doctor.", a:["haluaisin varata ajan lääkärille"], d:"Haluaisin varata ajan lääkärille.", wide:1}]},
+ {id:"21.2", title:"At the pharmacy", type:"model", instr:"Write your half of a pharmacy dialogue: you have a bad cough, ask for something for it, ask the price, pay by card.", model:"Hei! Minulla on paha yskä. Onko teillä jotain yskään? … Paljonko se maksaa? … Maksan kortilla, kiitos."}]},
+
+{lesson:"Lesson 22 — News, society, joka", anchor:"l22", ex:[
+ {id:"22.1", title:"Reading comprehension", type:"model", instr:"From the tontti text: 1. Mitä kaupunki tekee tontille, jos se ei myy sitä? 2. Mitä tapahtuu tontinvuokralle, kun maan arvo nousee? 3. Miksi jotkut ekonomistit vertaavat järjestelmää maaveroon? Answer in Finnish, one sentence each.", model:"1. Kaupunki vuokraa sen pitkällä sopimuksella. 2. Se nousee vähitellen. 3. Koska kaupunki saa osan maan arvosta, jonka koko yhteiskunta luo."},
+ {id:"22.2", title:"Join with joka", type:"check", instr:"The right form of joka.", items:[
+  {q:"Kirja, ___ ostin, oli kallis.", a:["jonka"]},
+  {q:"Kaupunki, ___ asun, on pieni.", a:["jossa"]},
+  {q:"Hän on ystävä, ___ voi luottaa (luottaa + illative!).", a:["johon"]}]},
+ {id:"22.3", title:"Your opinion", type:"model", instr:"Two sentences of opinion with Minusta / Mielestäni + koska: one about housing costs, one about remote work.", model:"Minusta vuokrien pitäisi olla halvempia, koska asuminen on nyt liian kallista. Mielestäni etätyö on hyvä asia, koska silloin ei tarvitse matkustaa joka päivä — mutta työkavereita näkee harvemmin."}]},
+
+{lesson:"Lesson 23 — Final test", anchor:"l23", ex:[
+ {id:"23.1", title:"The final self-test", type:"check", instr:"Twenty items covering the whole course. No peeking at the course text.", items:[
+  {q:"1. missä form of kauppa", a:["kaupassa"]},
+  {q:"2. mistä form of kauppa", a:["kaupasta"]},
+  {q:"3. mihin form of kauppa", a:["kauppaan"]},
+  {q:"4. Negate: Minulla on aikaa.", a:["minulla ei ole aikaa"], d:"Minulla ei ole aikaa.", wide:1},
+  {q:"5. Translate: I'd like two coffees and a bun.", a:["saisinko kaksi kahvia ja pullan","haluaisin kaksi kahvia ja pullan"], d:"Saisinko kaksi kahvia ja pullan?", wide:1},
+  {q:"6a. Past tense, minä: syödä", a:["söin"]},
+  {q:"6b. Past tense, minä: tavata", a:["tapasin"]},
+  {q:"6c. Past tense, minä: olla", a:["olin"]},
+  {q:"7. Perfect: Have you (ever) been to Finland?", a:["oletko käynyt suomessa","oletko koskaan käynyt suomessa"], d:"Oletko (koskaan) käynyt Suomessa?", wide:1},
+  {q:"8a. Object: I read the book (finished it).", a:["luin kirjan"], d:"Luin kirjan.", wide:1},
+  {q:"8b. Object: I was reading the book.", a:["luin kirjaa"], d:"Luin kirjaa.", wide:1},
+  {q:"9. Make polite: Autatko minua?", a:["auttaisitko minua","voisitko auttaa minua"], d:"Auttaisitko minua?", wide:1},
+  {q:"10a. Imperative sg. of ottaa", a:["ota"], d:"Ota!"},
+  {q:"10b. …and its negative", a:["älä ota"], d:"Älä ota!"},
+  {q:"11. Translate: We have to buy the tickets.", a:["meidän täytyy ostaa liput","meidän pitää ostaa liput"], d:"Meidän täytyy ostaa liput.", wide:1},
+  {q:"12. Spoken → standard: Emmä tiiä, tuuksä mukaan.", a:["minä en tiedä tuletko sinä mukaan","en tiedä tuletko mukaan","en tiedä tuletko sinä mukaan","minä en tiedä tuletko mukaan"], d:"(Minä) en tiedä, tuletko (sinä) mukaan.", wide:1},
+  {q:"13. Passive: In Finland people go to the sauna on Saturdays.", a:["suomessa mennään saunaan lauantaisin"], d:"Suomessa mennään saunaan lauantaisin.", wide:1},
+  {q:"14. Plural inessive of iso kauppa", a:["isoissa kaupoissa"]},
+  {q:"15a. Hän työskentelee (lääkäri)", a:["lääkärinä"]},
+  {q:"15b. Hän opiskelee (lääkäri)", a:["lääkäriksi"]},
+  {q:"16. Join with joka: Talo on vanha. Asun talossa.", a:["talo jossa asun on vanha"], d:"Talo, jossa asun, on vanha.", wide:1},
+  {q:"17. What is puoli kolme in English?", a:["half past two","2 30","two thirty","two-thirty","half two","1430","14 30"], d:"Half past two (2:30) — not 3:30!", wide:1},
+  {q:"18a. Comparative of hyvä", a:["parempi"]},
+  {q:"18b. Superlative of hyvä", a:["paras"]},
+  {q:"19. Translate: I like Helsinki because the sea is near.", a:["tykkään helsingistä koska meri on lähellä","pidän helsingistä koska meri on lähellä"], d:"Tykkään Helsingistä, koska meri on lähellä.", wide:1}]},
+ {id:"23.1b", title:"Final free writing", type:"model", instr:"Write two sentences about what you did last weekend.", model:"Viikonloppuna kävin salilla ja luin hyvää kirjaa. Sunnuntaina en tehnyt mitään erikoista."}]}
+];
+
+function norm(s){
+  return s.toLowerCase().normalize("NFC")
+    .replace(/[\u2019\u2018`\u00B4]/g,"'")
+    .replace(/[\u2014\u2013]/g," ")
+    .replace(/[.,!?\u2026;:"]/g," ")
+    .replace(/\s+/g," ").trim();
+}
+
+var app = document.getElementById("app");
+var nav = document.getElementById("nav");
+var mnav = document.getElementById("mnav");
+var state = {};
+
+DATA.forEach(function(lesson){
+  var h2 = document.createElement("h2");
+  h2.id = lesson.anchor; h2.textContent = lesson.lesson;
+  app.appendChild(h2);
+
+  lesson.ex.forEach(function(ex){
+    var card = document.createElement("section");
+    card.className = "excard" + (ex.type === "model" ? " modelcard" : "");
+    var head = document.createElement("div");
+    head.className = "exhead";
+    head.innerHTML = '<span class="exid">Harjoitus ' + ex.id + ' \u00B7 ' + ex.title + '</span>';
+    card.appendChild(head);
+    var instr = document.createElement("p");
+    instr.className = "instr"; instr.textContent = ex.instr;
+    card.appendChild(instr);
+
+    if(ex.type === "model"){
+      var ta = document.createElement("textarea");
+      ta.className = "free"; ta.placeholder = "Write here (not marked automatically)\u2026";
+      card.appendChild(ta);
+      var det = document.createElement("details");
+      det.className = "model";
+      det.innerHTML = '<summary>Show model answer</summary><div class="modeltext">' + ex.model + '</div>';
+      card.appendChild(det);
+    } else {
+      var score = document.createElement("span");
+      score.className = "score"; score.textContent = "0 / " + ex.items.length;
+      head.appendChild(score);
+      state[ex.id] = {right:new Array(ex.items.length).fill(false), scoreEl:score, total:ex.items.length, navChips:[]};
+
+      ex.items.forEach(function(item, idx){
+        var row = document.createElement("div");
+        row.className = "item" + (item.wide ? " wide" : "");
+        var q = document.createElement("div");
+        q.className = "q"; q.textContent = item.q;
+        row.appendChild(q);
+        var input = document.createElement("input");
+        input.className = "ans"; input.type = "text";
+        input.autocapitalize = "off"; input.autocomplete = "off"; input.spellcheck = false;
+        input.setAttribute("aria-label", "Answer for " + ex.id + " item " + (idx+1));
+        row.appendChild(input);
+        var mark = document.createElement("span");
+        mark.className = "mark"; mark.setAttribute("aria-live","polite");
+        if(!item.wide) row.appendChild(mark);
+        var sol = document.createElement("div");
+        var showBtn = document.createElement("button");
+        showBtn.type = "button"; showBtn.className = "showsol"; showBtn.textContent = "Show answer";
+        showBtn.style.display = "none";
+        showBtn.addEventListener("click", function(){
+          sol.className = "sol";
+          sol.innerHTML = '<span class="lbl">Oikea vastaus:</span>' + (item.d || item.a[0]);
+          showBtn.style.display = "none";
+        });
+        if(item.wide) row.appendChild(mark);
+        row.appendChild(showBtn);
+        row.appendChild(sol);
+
+        function checkItem(){
+          var v = norm(input.value);
+          if(!v){ return; }
+          var ok = item.a.some(function(ans){ return norm(ans) === v; });
+          input.classList.toggle("right", ok);
+          input.classList.toggle("wrong", !ok);
+          mark.textContent = ok ? "\u2713" : "\u2717";
+          mark.className = "mark " + (ok ? "right" : "wrong");
+          showBtn.style.display = ok ? "none" : "inline";
+          if(ok){ sol.className = ""; sol.innerHTML = ""; }
+          state[ex.id].right[idx] = ok;
+          updateScores(ex.id, lesson.anchor);
+        }
+        input.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); checkItem(); } });
+        input.addEventListener("blur", function(){ if(input.value.trim()) checkItem(); });
+        row._check = checkItem;
+        card.appendChild(row);
+      });
+
+      var cr = document.createElement("div");
+      cr.className = "checkrow";
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "check"; btn.textContent = "Check all";
+      btn.addEventListener("click", function(){
+        card.querySelectorAll(".item").forEach(function(r){ if(r._check) r._check(); });
+      });
+      cr.appendChild(btn);
+      var hint = document.createElement("span");
+      hint.className = "hint"; hint.textContent = "Enter checks one answer \u00B7 capitalisation and final punctuation are ignored";
+      cr.appendChild(hint);
+      card.appendChild(cr);
+    }
+    app.appendChild(card);
+  });
+});
+
+// build navigation (sidebar + mobile), with live per-lesson chips
+var lessonTotals = {};
+DATA.forEach(function(lesson){
+  var total = 0;
+  lesson.ex.forEach(function(ex){ if(ex.type === "check") total += ex.items.length; });
+  lessonTotals[lesson.anchor] = total;
+  [nav, mnav].forEach(function(container){
+    var a = document.createElement("a");
+    a.className = "lesson"; a.href = "#" + lesson.anchor;
+    var label = lesson.lesson.replace("Lesson ", "").replace(" \u2014 ", " \u00B7 ");
+    a.innerHTML = '<span>' + label + '</span><span class="chip" data-lesson="' + lesson.anchor + '">' + (total ? "0/" + total : "\u270E") + '</span>';
+    container.appendChild(a);
+  });
+});
+
+function updateScores(exId, anchor){
+  var s = state[exId];
+  var n = s.right.filter(Boolean).length;
+  s.scoreEl.textContent = n + " / " + s.total;
+  // lesson chips
+  DATA.forEach(function(lesson){
+    var got = 0;
+    lesson.ex.forEach(function(ex){
+      if(state[ex.id]) got += state[ex.id].right.filter(Boolean).length;
+    });
+    document.querySelectorAll('[data-lesson="' + lesson.anchor + '"]').forEach(function(chip){
+      if(lessonTotals[lesson.anchor]) chip.textContent = got + "/" + lessonTotals[lesson.anchor];
+    });
+  });
+  // global
+  var g = 0, t = 0;
+  Object.keys(state).forEach(function(k){ g += state[k].right.filter(Boolean).length; t += state[k].total; });
+  document.getElementById("globalscore").textContent = g + " / " + t + " answered correctly";
+}
+// initialise global total
+(function(){ var t = 0; Object.keys(state).forEach(function(k){ t += state[k].total; });
+  document.getElementById("globalscore").textContent = "0 / " + t + " answered correctly"; })();
+
+// special character insertion
+var lastInput = null;
+document.addEventListener("focusin", function(e){
+  if(e.target.matches("input.ans, textarea.free")) lastInput = e.target;
+});
+document.querySelectorAll(".charbar button").forEach(function(b){
+  b.addEventListener("mousedown", function(e){ e.preventDefault(); });
+  b.addEventListener("click", function(){
+    if(!lastInput) return;
+    var ch = b.dataset.ch;
+    var start = lastInput.selectionStart, end = lastInput.selectionEnd;
+    lastInput.value = lastInput.value.slice(0, start) + ch + lastInput.value.slice(end);
+    lastInput.focus();
+    lastInput.setSelectionRange(start + 1, start + 1);
+  });
+});
+</script>
+</body>
+</html>
