@@ -22,6 +22,10 @@ The 🎤 buttons use your browser's built-in speech recognition (Finnish). **Chr
 
 **Bonus:** install the Finnish language pack in Windows and **Win + H** (voice typing) lets you *speak* your side of `/puhutaan` conversations instead of typing.
 
+## Sheets for someone else
+
+`/practice for <name>, lesson <n>` generates a **guest worksheet** — pitched at their level, personalised to their name, published to the site like any other, but completely separate from your progress tracking (marking their answers with `/mark` gives them feedback without touching your error log). Guests can also simply do *your* published sheets — they're static pages, nothing breaks — but a guest sheet fits them properly. And anyone with Claude Code of their own can clone this repo and get the entire tutor, onboarding included.
+
 ## What's in this folder
 
 | Path | What it is |
