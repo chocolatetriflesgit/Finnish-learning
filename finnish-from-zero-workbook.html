@@ -194,7 +194,7 @@ const DATA = [
   {q:"kolme (pulla)", a:["pullaa"]},
   {q:"kymmenen (sentti)", a:["senttiä"]},
   {q:"viisi (olut)", a:["olutta"]}]},
- {id:"4.3", title:"Café dialogue", type:"model", instr:"You want tea and a sandwich. Write your half of the dialogue: order, ask the price, say you'll pay by card.", model:"Hei! Saisinko teen ja voileivän? … Ei muuta, kiitos. Paljonko se tekee? … Käykö kortti? Kiitos, hei hei!"}]},
+ {id:"4.3", title:"Café dialogue", type:"model", instr:"You want tea and a sandwich. Write your half of the dialogue: order, ask the price, say you'll pay by card.", model:"Hei! Saisinko teen ja voileivän? … Ei muuta, kiitos. Paljonko se tekee? (your order's total — for a single item: Paljonko / Kuinka paljon se maksaa?) … Käykö kortti? Kiitos, hei hei!"}]},
 
 {lesson:"Lesson 5 — Consonant gradation", anchor:"l5", ex:[
  {id:"5.1", title:"Genitive with gradation", type:"check", instr:"Give the -n form (weak grade).", items:[
@@ -505,7 +505,30 @@ const DATA = [
   {q:"18a. Comparative of hyvä", a:["parempi"]},
   {q:"18b. Superlative of hyvä", a:["paras"]},
   {q:"19. Translate: I like Helsinki because the sea is near.", a:["tykkään helsingistä koska meri on lähellä","pidän helsingistä koska meri on lähellä"], d:"Tykkään Helsingistä, koska meri on lähellä.", wide:1}]},
- {id:"23.1b", title:"Final free writing", type:"model", instr:"Write two sentences about what you did last weekend.", model:"Viikonloppuna kävin salilla ja luin hyvää kirjaa. Sunnuntaina en tehnyt mitään erikoista."}]}
+ {id:"23.1b", title:"Final free writing", type:"model", instr:"Write two sentences about what you did last weekend.", model:"Viikonloppuna kävin salilla ja luin hyvää kirjaa. Sunnuntaina en tehnyt mitään erikoista."}]},
+
+{lesson:"Extra — Kysymyssanat (question words)", anchor:"lx", ex:[
+ {id:"X.1", title:"Choose the question word", type:"check", instr:"Fill in the question word that fits the answer given.", items:[
+  {q:"___ sinä olet? — Olen Malcolm.", a:["kuka"], d:"Kuka"},
+  {q:"___ tämä on? — Se on kirja.", a:["mikä"], d:"Mikä"},
+  {q:"___ sinä asut? — Asun Helsingissä.", a:["missä"], d:"Missä"},
+  {q:"___ sinä olet kotoisin? — Lontoosta.", a:["mistä"], d:"Mistä"},
+  {q:"___ sinä menet huomenna? — Töihin.", a:["mihin"], d:"Mihin"},
+  {q:"___ kello on? — Puoli kaksi.", a:["paljonko","mitä"], d:"Paljonko / Mitä"},
+  {q:"___ maito maksaa? — Kaksi euroa.", a:["paljonko","kuinka paljon","mitä"], d:"Paljonko / Kuinka paljon"},
+  {q:"___ bussi tulee? — Kello kolme.", a:["milloin","mihin aikaan"], d:"Milloin / Mihin aikaan"},
+  {q:"___ sinä olet väsynyt? — Koska nukuin huonosti.", a:["miksi"], d:"Miksi"},
+  {q:"___ menet töihin — bussilla vai junalla?", a:["millä"], d:"Millä"},
+  {q:"___ on minun avaimeni? — Minulla!", a:["kenellä"], d:"Kenellä"},
+  {q:"___ sää tänään on? — Aurinkoinen.", a:["millainen"], d:"Millainen"}]},
+ {id:"X.2", title:"Build the question", type:"check", instr:"Write the sinä-form question that produces the given answer.", items:[
+  {q:"Vastaus: Asun Kalliossa.", a:["missä sinä asut","missä asut"], d:"Missä (sinä) asut?", wide:1},
+  {q:"Vastaus: Se maksaa viisi euroa.", a:["paljonko se maksaa","kuinka paljon se maksaa","mitä se maksaa"], d:"Paljonko / Kuinka paljon se maksaa?", wide:1},
+  {q:"Vastaus: Olen kotoisin Englannista.", a:["mistä sinä olet kotoisin","mistä olet kotoisin"], d:"Mistä (sinä) olet kotoisin?", wide:1},
+  {q:"Vastaus: Kello on kolme.", a:["paljonko kello on","mitä kello on"], d:"Paljonko / Mitä kello on?", wide:1},
+  {q:"Vastaus: Hän on Sari.", a:["kuka hän on"], d:"Kuka hän on?", wide:1},
+  {q:"Vastaus: Menen kotiin.", a:["mihin sinä menet","mihin menet"], d:"Mihin (sinä) menet?", wide:1}]},
+ {id:"X.3", title:"maksaa vai tekee?", type:"model", instr:"Both price questions are real Finnish. Paljonko se maksaa? (= Kuinka paljon se maksaa?) asks the price of a thing. Paljonko se tekee (yhteensä)? asks what a rung-up total comes to — tehdä here works like English 'that makes ten euros'. Task: write one question asking what a coat costs and one asking for your café total, with answers.", model:"Paljonko tämä takki maksaa? / Kuinka paljon tämä takki maksaa? — Se maksaa kahdeksankymmentä euroa. · Paljonko se tekee yhteensä? — Se tekee yhdeksän euroa."}]}
 ];
 
 function norm(s){

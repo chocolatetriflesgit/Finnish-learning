@@ -4,7 +4,7 @@ Personal Finnish-tutoring system for Malcolm (British, learning from scratch tow
 
 ## How it fits together
 
-- `finnish-from-zero.html` — the 24-lesson course. Source of truth for lesson content. **Never modify.** Same for `finnish-from-zero-workbook.html`.
+- `finnish-from-zero.html` — the 24-lesson course; source of truth for lesson content. Modify only for **verified language corrections** (check real usage first, note the fix in the commit). The workbook (`finnish-from-zero-workbook.html`) may additionally gain new exercise sections when Malcolm asks.
 - `tutor/syllabus.json` — extracted curriculum: per-lesson `grammar` tags + vocab, plus the `error_tags` taxonomy used by all state files. Update only if the course itself changes.
 - `tutor/progress.json`, `tutor/errors.json`, `tutor/vocab.json` — learner state, owned by the skills (/practice creates, /mark and /puhutaan update). Schemas are documented in `.claude/skills/practice/SKILL.md` §1 and `mark/SKILL.md` §4.
 - `tutor/template.html` — worksheet shell. Worksheets are stamped from it by replacing the single `const PAYLOAD = null; // __PAYLOAD__ …` line with a payload object (schema in the template's header comment). Generated worksheets go in `tutor/worksheets/YYYY-MM-DD.html`.

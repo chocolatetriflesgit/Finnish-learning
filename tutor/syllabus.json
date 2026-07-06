@@ -11,7 +11,7 @@
     "verb-type-4": "type 4 conjugation incl. reverse gradation (haluta→haluan, tavata→tapaan)",
     "verb-type-5-6": "type 5 -tse- (tarvita→tarvitsen, valita) and type 6 (vanheta)",
     "negation": "negative verb en/et/ei/emme/ette/eivät + bare stem",
-    "question-formation": "-ko/-kö questions, verb fronting, answering with the verb",
+    "question-formation": "-ko/-kö questions, verb fronting, answering with the verb; question words (kuka, mikä/mitä, missä/mistä/mihin, milloin, miksi, millä, kenellä, millainen, paljonko / kuinka paljon)",
     "numbers": "number formation (-toista, -kymmentä, sata, tuhat)",
     "gradation": "consonant gradation kk/k, pp/p, tt/t, k/–, p/v, t/d, nk/ng, nt/nn, mp/mm, lt/ll, rt/rr; reverse gradation",
     "location-cases": "the six local cases -ssa/-sta/-Vn (illative!), -lla/-lta/-lle; koti/työ idioms; exterior towns (Tampereella)",
@@ -43,6 +43,14 @@
     "vocab-choice": "wrong word or unidiomatic choice",
     "spelling": "spelling errors incl. missing ä/ö"
   },
+  "question_words": [
+    "kuka — who", "mikä — what (thing/subject)", "mitä — what (partitive: Mitä kuuluu? Mitä juot?)",
+    "missä — where (in)", "mistä — where from", "mihin — where to",
+    "milloin / mihin aikaan — when / at what time", "miksi — why", "miten / kuinka — how",
+    "millä — by what (transport, instrument)", "kenellä — who has ('on whom')",
+    "millainen — what kind of", "paljonko / kuinka paljon — how much (price of a thing: maksaa; rung-up total: tekee)",
+    "kumpi — which of two"
+  ],
   "lessons": [
     {
       "id": 0,
@@ -126,7 +134,7 @@
       "phrases": [
         "Saisinko…? — Could I have…?", "Mitä saisi olla? — What would you like?",
         "Tuleeko muuta? — Anything else?", "Ei muuta, kiitos. — Nothing else, thanks.",
-        "Paljonko se maksaa? — How much does it cost?", "Se tekee… — That comes to…",
+        "Paljonko se maksaa? — How much does it cost?", "Kuinka paljon se maksaa? — How much does it cost? (= paljonko)", "Se tekee… — That comes to… (a total; tehdä of sums)",
         "Käykö kortti? — Do you take card?", "Hyvää päivän jatkoa! — Have a good rest of the day!"
       ]
     },
