@@ -18,3 +18,7 @@ Personal Finnish-tutoring system for Malcolm (British, learning from scratch tow
 4. State files are the memory — /mark and /puhutaan must actually write their updates, not just report.
 
 Content themes that land: the gym (kyykky/penkki/maastaveto), office work, café/food, Helsinki, weather, travel.
+
+## Git & publishing
+
+This repo commits **directly to main** and pushes — no branches, no PRs. It's the deliberate exception to Malcolm's global /ship PR workflow (solo repo, generated content, GitHub Pages deploys from main); the project-level `.claude/commands/ship.md` override encodes this and wins over the global one. After /practice generates a worksheet, offer to /ship it so the Pages site stays current. There is no API key anywhere in this system and the published site must stay purely static — generation happens only in Claude Code sessions on this machine.
